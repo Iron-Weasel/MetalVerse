@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Cz17a0WQGl5NjKX8bCcWP37v1RuCYTc1y3SSBZrZ15ZtvxoBgY2LuFTEmMBJlqw6F0YuT1pcSEt0WDhuSK6u6A==",
+  "dgSpecHash": "fCiKHZF4Js3NlHUc9zgGEknCrzjAei0vgG2mgU4m8NHXGdUlwAnnn1bu7jjRUwgfvSCbbNWaARA3KQs83cQ5SA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ini\\Documents\\MetalVerse\\MetalVerseBackend\\MetalVerseBackend.csproj",
+  "projectFilePath": "C:\\Users\\Ini\\Documents\\MetalVerse\\webapi\\MetalVerseBackend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ini\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.11\\microsoft.aspnetcore.openapi.7.0.11.nupkg.sha512",
     "C:\\Users\\Ini\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",

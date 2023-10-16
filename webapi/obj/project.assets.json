@@ -475,11 +475,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ini\\Documents\\MetalVerse\\MetalVerseBackend\\MetalVerseBackend.csproj",
+      "projectUniqueName": "C:\\Users\\Ini\\Documents\\MetalVerse\\webapi\\MetalVerseBackend.csproj",
       "projectName": "MetalVerseBackend",
-      "projectPath": "C:\\Users\\Ini\\Documents\\MetalVerse\\MetalVerseBackend\\MetalVerseBackend.csproj",
+      "projectPath": "C:\\Users\\Ini\\Documents\\MetalVerse\\webapi\\MetalVerseBackend.csproj",
       "packagesPath": "C:\\Users\\Ini\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ini\\Documents\\MetalVerse\\MetalVerseBackend\\obj\\",
+      "outputPath": "C:\\Users\\Ini\\Documents\\MetalVerse\\webapi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

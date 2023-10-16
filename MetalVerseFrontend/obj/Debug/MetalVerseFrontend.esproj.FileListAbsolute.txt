@@ -1,1 +1,2 @@
 C:\Users\Ini\Documents\MetalVerse\angularapp\obj\Debug\MetalVerseFrontend.esproj.CoreCompileInputs.cache
+C:\Users\Ini\Documents\MetalVerse\MetalVerseFrontend\obj\Debug\MetalVerseFrontend.esproj.CoreCompileInputs.cache
