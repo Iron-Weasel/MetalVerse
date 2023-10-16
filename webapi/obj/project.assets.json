@@ -475,9 +475,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ini\\Documents\\MetalVerse\\webapi\\webapi.csproj",
-      "projectName": "webapi",
-      "projectPath": "C:\\Users\\Ini\\Documents\\MetalVerse\\webapi\\webapi.csproj",
+      "projectUniqueName": "C:\\Users\\Ini\\Documents\\MetalVerse\\webapi\\MetalVerseBackend.csproj",
+      "projectName": "MetalVerseBackend",
+      "projectPath": "C:\\Users\\Ini\\Documents\\MetalVerse\\webapi\\MetalVerseBackend.csproj",
       "packagesPath": "C:\\Users\\Ini\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Ini\\Documents\\MetalVerse\\webapi\\obj\\",
       "projectStyle": "PackageReference",

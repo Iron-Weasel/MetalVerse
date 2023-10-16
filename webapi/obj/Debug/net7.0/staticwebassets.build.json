@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "qWIDttiHurVt0W82xiTX0A7xgYJ9/MKKTQaaiKq7axg=",
-  "Source": "webapi",
-  "BasePath": "_content/webapi",
+  "Hash": "8BD+W9kfmjkY3TVr6H5qA4s9/0LOcAzfKqdCvK/dXbE=",
+  "Source": "MetalVerseBackend",
+  "BasePath": "_content/MetalVerseBackend",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
