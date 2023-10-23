@@ -11,5 +11,6 @@
         public int Views;
         public int RockOns;
         public int Comments;
+        public List<Comment> CommentsList;
     }
 }
