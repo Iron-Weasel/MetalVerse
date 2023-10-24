@@ -1,6 +1,6 @@
 ﻿namespace MetalVerseBackend.Models
 {
-    public class Stream
+    public class RockStream
     {
         public Guid Id { get; set; }
         public required string Name { get; set; }
