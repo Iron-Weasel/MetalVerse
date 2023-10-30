@@ -49,5 +49,16 @@ namespace MetalVerseBackend.Controllers
             _announcements.Add(announcement);
             return Ok(_announcements);
         }
+
+        [HttpGet("search_result")]
+        public IActionResult GetResultsBySearch([FromQuery] string search)
+        {
+            var announcementsResult = _announcements.Where(s => s.Title.Contains(search)).ToList();
+            if (announcementsResult.Count != 0)
+            {
+                return Ok(announcementsResult);
+            }
+            else return NotFound();
+        }
     }
 }

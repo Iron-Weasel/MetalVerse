@@ -45,6 +45,17 @@ namespace MetalVerseBackend.Controllers
         {
             _streams.Add(stream);
             return Ok(_streams);
-        }*/
+        }
+
+        [HttpGet("search_result")]
+        public IActionResult GetResultsBySearch([FromQuery] string search)
+        {
+            var streamsResult = _streams.Where(s => s.Name.Contains(search)).ToList();
+            if (streamsResult.Count != 0)
+            {
+                return Ok(streamsResult);
+            }
+            else return NotFound();
+        }
     }
 }
