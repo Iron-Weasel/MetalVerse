@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MetalVerseBackend.Controllers
 {
     [ApiController]
-    [Route("inbox")]
+    [Route("inbox/{userId}")]
     public class InboxController:ControllerBase
     {
         private List<Inbox> _inboxes = new List<Inbox>();
@@ -111,13 +111,13 @@ namespace MetalVerseBackend.Controllers
         }
         
 
-        [HttpGet]
+/*        [HttpGet]
         public IActionResult GetInboxes() 
         {
             return Ok(_inboxes);
-        }
+        }*/
 
-        [HttpGet("{userId}")]
+        [HttpGet]
         public IActionResult GetInbox(Guid userId) { 
             return Ok(_inboxes.FirstOrDefault(x => x.UserId == userId));
         }

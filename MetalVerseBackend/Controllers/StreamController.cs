@@ -40,11 +40,11 @@ namespace MetalVerseBackend.Controllers
             return Ok(_streams.FirstOrDefault(x => x.Id == streamId));
         }
 
-        [HttpPost("add_stream")]
+/*        [HttpPost("add_stream")]
         public IActionResult AddStream(RockStream stream)
         {
             _streams.Add(stream);
             return Ok(_streams);
-        }
+        }*/
     }
 }
