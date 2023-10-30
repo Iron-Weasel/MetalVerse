@@ -1,5 +1,6 @@
 ﻿using MetalVerseBackend.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
 
 namespace MetalVerseBackend.Controllers
 {
@@ -126,6 +127,18 @@ namespace MetalVerseBackend.Controllers
         public IActionResult SendMessage(Message message)
         {
             return Ok();
+        }
+
+        [HttpGet("search_result")]
+        public IActionResult GetResultsBySearch([FromQuery] string search)
+        {
+            var inboxesResult = _inboxes.First().Messages.Where(s => s.Text.Contains(search)).ToList();
+
+            if (inboxesResult.Count != 0)
+            {
+                return Ok(inboxesResult);
+            }
+            else return NotFound();
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using MetalVerseBackend.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
+using System.Linq;
 
 namespace MetalVerseBackend.Controllers
 {
@@ -46,6 +48,18 @@ namespace MetalVerseBackend.Controllers
         {
             _posts.Add(post);
             return Ok(_posts);
+        }
+
+        [HttpGet("search_result")]
+        public IActionResult GetResultsBySearch([FromQuery] string search)
+        {
+            var postsResult = _posts.Where(s => s.Title.Contains(search)).ToList();
+
+            if (postsResult.Count != 0)
+            {
+                return Ok(postsResult);
+            }
+            else return NotFound();
         }
     }
 }

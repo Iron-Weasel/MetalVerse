@@ -58,5 +58,17 @@ namespace MetalVerseBackend.Controllers
             _events.Add(concert);
             return Ok(_events);
         }
+
+        [HttpGet("search_result")]
+        public IActionResult GetResultsBySearch([FromQuery] string search)
+        {
+            var eventsResult = _events.Where(s => s.Title.Contains(search)).ToList();
+
+            if (eventsResult.Count != 0)
+            {
+                return Ok(eventsResult);
+            }
+            else return NotFound();
+        }
     }
 }
