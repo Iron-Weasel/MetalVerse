@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MetalVerseBackend.Models;
+using MetalVerseBackend.Interfaces.Repositories;
 
 namespace MetalVerseBackend.Controllers
 {
@@ -7,11 +8,13 @@ namespace MetalVerseBackend.Controllers
     [Route("stream")]
     public class StreamController : ControllerBase
     {
-        private List<RockStream> _streams = new List<RockStream>();
+        //private List<RockStream> _streams = new List<RockStream>();
 
-        public StreamController()
+        private readonly IRepositoryManager _repository;
+
+        public StreamController(IRepositoryManager repository)
         {
-            _streams.Add(new RockStream()
+            /*_streams.Add(new RockStream()
             {
                 Id = Guid.NewGuid(),
                 Name = "Rock FM",
@@ -25,37 +28,38 @@ namespace MetalVerseBackend.Controllers
                 Name = "Rock Antenne Biker Rock",
                 ApiLink = "My favorite rock api",
                 Image = "Sorry but they will ask for copyrights"
-            });
+            });*/
+            _repository = repository;
         }
 
         [HttpGet]
         public IActionResult GetStreams()
         {
+            var _streams = _repository.Streams.GetRockStreams(false).ToList();
             return Ok(_streams);
         }
 
         [HttpGet("{streamId}")]
         public IActionResult GetStream(Guid streamId)
         {
-            return Ok(_streams.FirstOrDefault(x => x.Id == streamId));
+            var _stream = _repository.Streams.GetRockStream(streamId);
+            return Ok(_stream);
         }
 
-/*        [HttpPost("add_stream")]
+        [HttpPost("add_stream")]
         public IActionResult AddStream(RockStream stream)
         {
-            _streams.Add(stream);
-            return Ok(_streams);
+            _repository.Streams.CreateStream(stream);
+            _repository.Save();
+            return Ok();
         }
+        
 
         [HttpGet("search_result")]
         public IActionResult GetResultsBySearch([FromQuery] string search)
         {
-            var streamsResult = _streams.Where(s => s.Name.Contains(search)).ToList();
-            if (streamsResult.Count != 0)
-            {
-                return Ok(streamsResult);
-            }
-            else return NotFound();
+            var _streams = _repository.Streams.GetRockStreamsByString( search, false).ToList();
+            return _streams.Count != 0 ? Ok(_streams) : NotFound();
         }
     }
 }

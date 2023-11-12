@@ -1,4 +1,6 @@
-﻿using MetalVerseBackend.Models;
+﻿using MetalVerseBackend.Interfaces;
+using MetalVerseBackend.Interfaces.Repositories;
+using MetalVerseBackend.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MetalVerseBackend.Controllers
@@ -7,10 +9,11 @@ namespace MetalVerseBackend.Controllers
     [Route("users")]
     public class UserController : ControllerBase
     {
-        private List<User> _users = new List<User>();
-        public UserController()
+        //private List<User> _users = new List<User>();
+        private readonly IRepositoryManager _repository;
+        public UserController(IRepositoryManager repository)
         {
-            _users.Add(new User()
+            /*_users.Add(new User()
             {
                 Id = Guid.Parse("5d899972-6bfa-413d-bfa7-619fcfcd2706"),
                 FirstName = "A",
@@ -29,27 +32,29 @@ namespace MetalVerseBackend.Controllers
                 Password = "V",
                 UserRole = UserRoles.StudioManager
             });
-
+            */
+            _repository = repository;
         }
         [HttpGet]
         public IActionResult GetUsers()
         {
-            var users = _users.ToList();
-            return Ok(users);
+            var _users = _repository.Users.GetUsers(false);
+            return Ok(_users);
         }
 
         [HttpGet("{userId}")]
         public IActionResult GetUser(Guid userId)
         {
-            var user = _users.FirstOrDefault(x => x.Id == userId);
-            return Ok(user);
+            var _user = _repository.Users.GetUser(userId);
+            return Ok(_user);
         }
 
         [HttpPost("add_user")]
         public IActionResult AdUser(User user)
         {
-            _users.Add(user);
-            return Ok(_users);
+            _repository.Users.CreateUser(user);
+            _repository.Save();
+            return Ok();
         }
     }
 }

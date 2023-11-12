@@ -10,7 +10,7 @@ namespace MetalVerseBackend.Controllers
     public class PostController : ControllerBase
     {
         private List<Post> _posts = new List<Post>();
-        public PostController()
+        /*public PostController()
         {
             _posts.Add(new Post()
             {
@@ -29,7 +29,7 @@ namespace MetalVerseBackend.Controllers
                 Views = 3,
                 RockOns = 4
             });
-        }
+        }*/
 
         [HttpGet]
         public IActionResult GetPosts()

@@ -9,7 +9,7 @@ namespace MetalVerseBackend.Controllers
     public class CommentController : ControllerBase
     {
         private List<Post> _posts = new List<Post>();
-        public CommentController() 
+        /*public CommentController() 
         {
             _posts.Add(new Post()
             {
@@ -44,7 +44,7 @@ namespace MetalVerseBackend.Controllers
                     Id = Guid.Parse("3fa85f64-5717-4562-b3fc-2c963f66afa6"),
                     Text = "BRUH"
                 });
-        }
+        }*/
 
         [HttpGet("comments")]
         public IActionResult GetComments(Guid postId)
