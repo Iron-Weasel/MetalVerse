@@ -1,4 +1,6 @@
-﻿using MetalVerseBackend.Models;
+﻿using MetalVerseBackend.Interfaces;
+using MetalVerseBackend.Interfaces.Repositories;
+using MetalVerseBackend.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Linq;
@@ -9,9 +11,13 @@ namespace MetalVerseBackend.Controllers
     [Route("posts")]
     public class PostController : ControllerBase
     {
-        private List<Post> _posts = new List<Post>();
-        public PostController()
+        private readonly IRepositoryManager _repository;
+        private readonly IPostWithCommentsService _postWithCommentsService;
+        public PostController(IRepositoryManager repository, IPostWithCommentsService service)
         {
+            _repository = repository;
+            _postWithCommentsService = service;
+            /*
             _posts.Add(new Post()
             {
                 Id = Guid.Parse("5d899972-6bfa-413d-bfa7-619fcfcd2706"),
@@ -28,38 +34,36 @@ namespace MetalVerseBackend.Controllers
                 Description = "Y",
                 Views = 3,
                 RockOns = 4
-            });
+            });*/
         }
 
         [HttpGet]
         public IActionResult GetPosts()
         {
+            var _posts = _repository.Posts.GetPosts(false).ToList();
             return Ok(_posts);
         }
 
         [HttpGet("{postId}")]
         public IActionResult GetPost(Guid postId)
         {
-            return Ok(_posts.FirstOrDefault(x => x.Id == postId));
+            var _post = _postWithCommentsService.GetPostWithComments(postId);
+            return Ok(_post);
         }
 
         [HttpPost("add_post")]
         public IActionResult AddPost(Post post)
         {
-            _posts.Add(post);
-            return Ok(_posts);
+            _repository.Posts.CreatePost(post);
+            _repository.Save();
+            return Ok();
         }
 
         [HttpGet("search_result")]
         public IActionResult GetResultsBySearch([FromQuery] string search)
         {
-            var postsResult = _posts.Where(s => s.Title.Contains(search)).ToList();
-
-            if (postsResult.Count != 0)
-            {
-                return Ok(postsResult);
-            }
-            else return NotFound();
+            var _posts = _repository.Posts.GetPostsByString(search, false).ToList();
+            return _posts.Count != 0 ? Ok(_posts) : NotFound();
         }
     }
 }
