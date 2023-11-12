@@ -14,6 +14,6 @@ namespace MetalVerseBackend.Repositories
 
         public IEnumerable<User> GetUsers(bool trackChanges) => FindAll(trackChanges).ToList();
 
-        public IEnumerable<User> GetUsersByString(string search, bool trackChanges) => FindByCondition(x => x.FirstName.Contains(search) || x.LastName.Contains(search), trackChanges).ToList();
+        public IEnumerable<User> GetUsersByString(string search, bool trackChanges) => FindByCondition(x => x.Username.Contains(search), trackChanges).ToList();
     }
 }

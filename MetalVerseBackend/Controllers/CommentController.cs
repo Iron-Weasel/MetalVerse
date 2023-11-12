@@ -1,4 +1,5 @@
-﻿using MetalVerseBackend.Models;
+﻿using MetalVerseBackend.Interfaces.Repositories;
+using MetalVerseBackend.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.Design;
 
@@ -8,9 +9,11 @@ namespace MetalVerseBackend.Controllers
     [Route("posts/{postId}")]
     public class CommentController : ControllerBase
     {
-        private List<Post> _posts = new List<Post>();
-        /*public CommentController() 
+        //private List<Post> _posts = new List<Post>();
+        private readonly IRepositoryManager _repository;
+        public CommentController(IRepositoryManager repository) 
         {
+            /*
             _posts.Add(new Post()
             {
                 Id = Guid.Parse("5d899972-6bfa-413d-bfa7-619fcfcd2706"),
@@ -44,29 +47,32 @@ namespace MetalVerseBackend.Controllers
                     Id = Guid.Parse("3fa85f64-5717-4562-b3fc-2c963f66afa6"),
                     Text = "BRUH"
                 });
-        }*/
+            */
+            _repository = repository;
+        }
 
-        [HttpGet("comments")]
+        /*[HttpGet("comments")]
         public IActionResult GetComments(Guid postId)
         {
-            return Ok(_posts.FirstOrDefault(x => x.Id == postId).CommentsList);
+            //return Ok(_posts.FirstOrDefault(x => x.Id == postId).CommentsList);
         }
 
         [HttpGet("comments/{commentId}")]
         public IActionResult GetPost(Guid postId, Guid commentId)
         {
             var post = _posts.FirstOrDefault(x => x.Id == postId);
-            var comments = post.CommentsList;
+            //var comments = post.CommentsList;
             return Ok(comments.FirstOrDefault(a => a.Id == commentId));
         }
+        */
 
         [HttpPost("comments/add_comment")]
-        public IActionResult AddComment(Guid postId, Comment comment)
+        public IActionResult AddComment(Comment comment)
         {
-            var post = _posts.FirstOrDefault(x => x.Id == postId);
-            var comments = post.CommentsList;
-            comments.Add(comment);
-            return Ok(comments);
+            _repository.Comments.CreateComment(comment);
+            _repository.Save();
+
+            return Ok();
         }
     }
 }

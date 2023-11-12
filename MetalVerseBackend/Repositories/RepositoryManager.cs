@@ -10,6 +10,8 @@ namespace MetalVerseBackend.Repositories
         private IAnnouncementRepository _announcementRepository;
         private IFutureEventRepository _futureEventRepository;
         private IUserRepository _userRepository;
+        private IPostRepository _postRepository;
+        private ICommentRepository _commentRepository;
 
         public RepositoryManager(ApplicationDbContext applicationContext)
         {
@@ -54,6 +56,25 @@ namespace MetalVerseBackend.Repositories
                 if (_userRepository == null)
                     _userRepository = new UserRepository(_applicationContext);
                 return _userRepository;
+            }
+        }
+
+        public IPostRepository Posts
+        {
+            get
+            {
+                if (_postRepository == null)
+                    _postRepository = new PostRepository(_applicationContext);
+                return _postRepository;
+            }
+        }
+        public ICommentRepository Comments
+        {
+            get
+            {
+                if (_commentRepository == null)
+                    _commentRepository = new CommentRepository(_applicationContext);
+                return _commentRepository;
             }
         }
 
