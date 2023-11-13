@@ -1,0 +1,37 @@
+<div class="header">
+  <img class="logo" src="../../../assets/icons/Metalverse2.png">
+</div>
+
+<div class="content">
+    <h2 class="content-text">Forum</h2>
+    <img class="post-button" src="../../../assets/icons/Post.png">
+    <input class="search-bar" placeholder="Search...">
+    <div *ngFor="let post of posts">
+      <div class="card" [routerLink]="['/forum', post.id]">
+        <h4 class="postId"> user ID: {{ post.userId }} </h4>
+        <h2 class="title"> {{ post.title }}   </h2>
+        <p class="description">  {{ post.description }} </p>
+        <p class="createdDate">  {{ post.createdDate }} </p>
+      </div>
+    </div>
+</div>
+
+<div class="footer">
+  <div class="navbar-footer"> 
+      <a class="link-text" routerLink="/events">
+        <img class="events-button" src="../../../assets/icons/Future Events.png">
+      </a>
+      <a class="link-text" routerLink="/stream">
+        <img class="streams-button" src="../../../assets/icons/Streams.png">
+      </a>
+      <a class="link-text" routerLink="/inbox">
+        <img class="inbox-button" src="../../../assets/icons/Inbox.png">
+      </a>
+      <a class="link-text" routerLink="/forum">
+        <img class="forum-button" src="../../../assets/icons/Forum.png">
+      </a>
+      <a class="link-text" routerLink="/announcements">
+        <img class="announcements-button" src="../../../assets/icons/Announcements.png">
+      </a>
+  </div>
+</div>
