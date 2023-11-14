@@ -6,24 +6,31 @@
       <h2 class="content-text">Future Events</h2>
       <img class="post-button" src="../../../assets/icons/Post new event.png">
       <input class="search-bar" placeholder="Search by country...">
+      <div *ngFor="let event of events">
+        <div class="card">
+          <h4 class="eventId"> event ID: {{ event.id }} </h4>
+          <h2 class="title"> {{ event.title }}   </h2>
+          <p class="date">  {{ event.eventTime }} </p>
+        </div>
+      </div>
 </div>
   
 <div class="footer">
-    <div class="navbar-footer"> 
-        <a class="link-text" routerLink="/events">
-          <img class="events-button" src="../../../assets/icons/Future Events.png">
-        </a>
-        <a class="link-text" routerLink="/stream">
-          <img class="streams-button" src="../../../assets/icons/Streams.png">
-        </a>
-        <a class="link-text" routerLink="/inbox">
-          <img class="inbox-button" src="../../../assets/icons/Inbox.png">
-        </a>
-        <a class="link-text" routerLink="/forum">
-          <img class="forum-button" src="../../../assets/icons/Forum.png">
-        </a>
-        <a class="link-text" routerLink="/announcements">
-          <img class="announcements-button" src="../../../assets/icons/Announcements.png">
-        </a>
-    </div>
+  <div class="navbar-footer"> 
+      <a class="link-text" [routerLink]="['/events']">
+        <img class="events-button" src="../../../assets/icons/Future Events.png">
+      </a>
+      <a class="link-text" [routerLink]="['/stream']">
+        <img class="streams-button" src="../../../assets/icons/Streams.png">
+      </a>
+      <a class="link-text" [routerLink]="['/inbox']">
+        <img class="inbox-button" src="../../../assets/icons/Inbox.png">
+      </a>
+      <a class="link-text" [routerLink]="['/forum']">
+        <img class="forum-button" src="../../../assets/icons/Forum.png">
+      </a>
+      <a class="link-text" [routerLink]="['/announcements']">
+        <img class="announcements-button" src="../../../assets/icons/Announcements.png">
+      </a>
+  </div>
 </div>

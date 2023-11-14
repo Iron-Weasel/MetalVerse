@@ -4,7 +4,7 @@
   
 <div class="content">
       <h2 class="content-text">Announcements</h2>
-      <img class="post-button" routerLink="/create-announcement" src="../../../assets/icons/New ann button.png">
+      <img class="post-button" [routerLink]="['/create-announcement']" src="../../../assets/icons/New ann button.png">
       <div *ngFor="let announcment of announcements">
         <div class="card">
           <h4 class="postId"> post ID: {{ announcment.id }} </h4>
@@ -16,19 +16,19 @@
   
 <div class="footer">
     <div class="navbar-footer"> 
-        <a class="link-text" routerLink="/events">
+        <a class="link-text" [routerLink]="['/events']">
           <img class="events-button" src="../../../assets/icons/Future Events.png">
         </a>
-        <a class="link-text" routerLink="/stream">
+        <a class="link-text" [routerLink]="['/stream']">
           <img class="streams-button" src="../../../assets/icons/Streams.png">
         </a>
-        <a class="link-text" routerLink="/inbox">
+        <a class="link-text" [routerLink]="['/inbox']">
           <img class="inbox-button" src="../../../assets/icons/Inbox.png">
         </a>
-        <a class="link-text" routerLink="/forum">
+        <a class="link-text" [routerLink]="['/forum']">
           <img class="forum-button" src="../../../assets/icons/Forum.png">
         </a>
-        <a class="link-text" routerLink="/announcements">
+        <a class="link-text" [routerLink]="['/announcements']">
           <img class="announcements-button" src="../../../assets/icons/Announcements.png">
         </a>
     </div>

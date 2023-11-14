@@ -6,7 +6,7 @@
       <h2 class="content-text">Comments for post with id {{ idPost }}</h2>
       <div *ngFor="let comment of comments">
         <div class="card">
-            <p>{{comment.userName}}</p>
+            <p>@{{comment.userName}}</p>
           <p>{{comment.text}}</p>
         </div>
       </div>
@@ -14,20 +14,20 @@
   
   <div class="footer">
     <div class="navbar-footer"> 
-        <a class="link-text" routerLink="/events">
+        <a class="link-text" [routerLink]="['/events']">
           <img class="events-button" src="../../../assets/icons/Future Events.png">
         </a>
-        <a class="link-text" routerLink="/stream">
+        <a class="link-text" [routerLink]="['/stream']">
           <img class="streams-button" src="../../../assets/icons/Streams.png">
         </a>
-        <a class="link-text" routerLink="/inbox">
+        <a class="link-text" [routerLink]="['/inbox']">
           <img class="inbox-button" src="../../../assets/icons/Inbox.png">
         </a>
-        <a class="link-text" routerLink="/forum">
+        <a class="link-text" [routerLink]="['/forum']">
           <img class="forum-button" src="../../../assets/icons/Forum.png">
         </a>
-        <a class="link-text" routerLink="/announcements">
+        <a class="link-text" [routerLink]="['/announcements']">
           <img class="announcements-button" src="../../../assets/icons/Announcements.png">
         </a>
     </div>
-  </div>
+</div>
