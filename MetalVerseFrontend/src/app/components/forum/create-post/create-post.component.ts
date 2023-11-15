@@ -21,7 +21,6 @@ export class CreatePostComponent {
   // clicking on "Post" will create a new post
   onSavePost(): void {
       //TODO: set posts data from backend, based on frontend input
-      //BUG -> error 400, cannot send post to BE
       const post: Post = {
         id: "57852080-4005-4f39-9463-97ab5874481c",
         userId: "715a5636-51bc-4a12-a961-a425750d398c",

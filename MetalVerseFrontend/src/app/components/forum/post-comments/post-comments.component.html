@@ -3,6 +3,10 @@
   </div>
   
   <div class="content">
+    <div class="bar">
+      <input class="post-bar" placeholder="Add comment..." #commentInput>
+    </div>
+    <img class="post-button" src="../../../assets/icons/Post button.png" (click)="postComment()">
       <h2 class="content-text">Comments for post with id {{ idPost }}</h2>
       <div *ngFor="let comment of comments">
         <div class="card">

@@ -37,6 +37,10 @@ export class BackendHttpService {
         return this.httpService.post<Post>('https://localhost:7206/posts/add_post', postData);
     }
 
+    // post a comment to a post and send data to BE
+    postComment(postId: string, commentData: Comment): Observable<Comment> {
+        return this.httpService.post<Comment>('https://localhost:7206/posts/' + postId + '/comments/add_comment', commentData);
+    }
 
 
     // get all announcements from BE

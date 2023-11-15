@@ -17,7 +17,28 @@
 
 .content-text {
     margin-left: 0.6em;
+    margin-top: 3em;
     color: #4C4C4C;
+}
+
+.bar {
+    margin-top: 1em;
+    float: left;
+}
+
+.post-bar {
+    margin-left: 1.5em;
+    width: 15em;
+    height: 1em;
+    background-color: #2F2F2f;
+    border-radius: 4px;
+}
+
+.post-button {
+    width: 15%;
+    margin-top: 1.3em;
+    margin-right: 2em;
+    float: right;
 }
 
    
