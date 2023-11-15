@@ -1,0 +1,34 @@
+<div class="header">
+    <img class="logo" src="../../../assets/icons/Metalverse2.png">
+</div>
+  
+<div class="content">
+      <h2 class="content-text">Rock & Metal Streams</h2>
+      <input class="search-bar" placeholder="Search...">
+      <div *ngFor="let stream of streams">
+        <div class="card">
+          <h4 class="streamId"> stream ID: {{ stream.id }} </h4>
+          <h2 class="name"> {{ stream.name }}   </h2>
+        </div>
+      </div>
+</div>
+  
+<div class="footer">
+  <div class="navbar-footer"> 
+      <a class="link-text" [routerLink]="['/events']">
+        <img class="events-button" src="../../../assets/icons/Future Events.png">
+      </a>
+      <a class="link-text" [routerLink]="['/stream']">
+        <img class="streams-button" src="../../../assets/icons/Streams.png">
+      </a>
+      <a class="link-text" [routerLink]="['/inbox']">
+        <img class="inbox-button" src="../../../assets/icons/Inbox.png">
+      </a>
+      <a class="link-text" [routerLink]="['/forum']">
+        <img class="forum-button" src="../../../assets/icons/Forum.png">
+      </a>
+      <a class="link-text" [routerLink]="['/announcements']">
+        <img class="announcements-button" src="../../../assets/icons/Announcements.png">
+      </a>
+  </div>
+</div>

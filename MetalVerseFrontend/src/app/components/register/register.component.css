@@ -1,0 +1,67 @@
+.content {
+    height: 630px;
+}
+
+.text {
+    padding-left: 3.5em;
+}
+
+.credential-bar {
+    margin-top: 1em;
+    width: 18em;
+    height: 1em;
+    background-color: #2F2F2F;
+    border-radius: 4px;
+    margin-left: 3em;
+}
+
+::placeholder {
+    color: #A8A8A8;
+    font-size: 10px;
+}
+
+.dropdown {
+    margin-left: 2.5em;
+}
+
+.dropdown-component {
+    margin-top: -2.3em;
+    margin-left: 7em;
+}
+
+.options {
+    border-radius: 4px;
+    background-color: #2F2F2F;
+    color: #A8A8A8;
+    font-size: 10px;
+    width: 13.5em;
+}
+
+option {
+    color: #A8A8A8;
+    font-size: 10px;
+}
+
+.terms {
+    margin-left: 2.5em; 
+    margin-top: 2.5em;
+}
+
+.checkbox {
+    accent-color: #2F2F2F;
+}
+
+.terms-text {
+    margin-left: 2em;
+    margin-right: 2em;
+    margin-top: -1.5em;
+}
+.register-button {
+    margin-top: 3em;
+    margin-left: 7.5em;
+}
+
+.kitty-img {
+    margin-top: -2em;
+    width: 40%;
+}

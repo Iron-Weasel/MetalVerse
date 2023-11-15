@@ -1,0 +1,32 @@
+<div class="content">
+    <img style="width:10%; margin: 1em 0 0 1em" src="../../../assets/icons/back-arrow.png" [routerLink]="['/login']">
+    <h1 class="text">Sign up</h1>
+    <input class="credential-bar" placeholder="First Name" #firstNameInput>
+    <input class="credential-bar" placeholder="Last Name" #lastNameInput>
+    <input class="credential-bar" placeholder="Email" #emailInput>
+    <input class="credential-bar" placeholder="Your new username" #usernameInput>
+    <input class="credential-bar" placeholder="New password" #passwordInput>
+    <input class="credential-bar" placeholder="Confirm new password">
+    <div class="dropdown">
+        <p>Select your role</p>
+        <div class="dropdown-component">
+            <select name="roles" class="options">
+                <option value="Regular user">Regular user</option>
+                <option value="Event Organizer">Event Organizer</option>
+                <option value="Band Member">Band Member</option>
+                <option value="Studio Manager">Studio Manager</option>
+            </select>
+        </div>
+    </div>
+    <div class="terms">
+        <input type="checkbox" class="checkbox" name="terms-of-service" value="">
+        <p class="terms-text">I agree with the Terms of Service and Privacy policy</p>
+    </div>
+    <div class="register-button">
+        <img src="../../../assets/icons/Register button.png" [routerLink]="['/register-success']" (click)="onSaveUser()">
+    </div>
+    <div>
+        <img class="kitty-img" src="../../../assets/images/hihi1.PNG">
+    </div>
+</div>
+
