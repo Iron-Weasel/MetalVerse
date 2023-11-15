@@ -3,15 +3,14 @@
 </div>
   
 <div class="content">
-      <h2 class="content-text">Announcements</h2>
-      <img class="post-button" [routerLink]="['/create-announcement']" src="../../../assets/icons/New ann button.png">
-      <div *ngFor="let announcement of announcements">
-        <div class="card" [routerLink]="['/announcements', announcement.id]">
-          <h4 class="postId"> post ID: {{ announcement.id }} </h4>
-          <h2 class="title"> {{ announcement.title }}   </h2>
-          <p class="description">  {{ announcement.description }} </p>
-        </div>
+    <h2 class="content-text">Announcement with id {{ idAnnouncement }}</h2>
+    <div *ngIf="announcement">
+      <div class="card">
+          <p>user Id: {{announcement.userId}}</p>
+          <p>{{announcement.title}}</p>
+          <p>{{announcement.description}}</p>
       </div>
+    </div>
 </div>
   
 <div class="footer">
@@ -33,4 +32,3 @@
         </a>
     </div>
 </div>
-

@@ -1,11 +1,11 @@
 <div class="content">
     <img style="width:10%; margin: 1em 0 0 1em" src="../../../assets/icons/back-arrow.png" [routerLink]="['/login']">
     <h1 class="text">Sign up</h1>
-    <input class="credential-bar" placeholder="First Name">
-    <input class="credential-bar" placeholder="Last Name">
-    <input class="credential-bar" placeholder="Email">
-    <input class="credential-bar" placeholder="Your new username">
-    <input class="credential-bar" placeholder="New password">
+    <input class="credential-bar" placeholder="First Name" #firstNameInput>
+    <input class="credential-bar" placeholder="Last Name" #lastNameInput>
+    <input class="credential-bar" placeholder="Email" #emailInput>
+    <input class="credential-bar" placeholder="Your new username" #usernameInput>
+    <input class="credential-bar" placeholder="New password" #passwordInput>
     <input class="credential-bar" placeholder="Confirm new password">
     <div class="dropdown">
         <p>Select your role</p>
@@ -23,7 +23,7 @@
         <p class="terms-text">I agree with the Terms of Service and Privacy policy</p>
     </div>
     <div class="register-button">
-        <img src="../../../assets/icons/Register button.png" [routerLink]="['/register-success']">
+        <img src="../../../assets/icons/Register button.png" [routerLink]="['/register-success']" (click)="onSaveUser()">
     </div>
     <div>
         <img class="kitty-img" src="../../../assets/images/hihi1.PNG">

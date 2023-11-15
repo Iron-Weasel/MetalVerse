@@ -3,11 +3,11 @@
 </div>
 
 <div class="content">
-    <h2 class="content-text">Create new announcement</h2>
-    <input class="title" placeholder="Announcement title">
-    <input class="description" placeholder="Description">
+    <h2 class="content-text">Create new post</h2>
+    <input class="title" placeholder="Post title" #titleInput>
+    <input class="description" placeholder="Description" #descriptionInput>
     <img class="add-img" src="../../../assets/icons/Add image button.png">
-    <img class="post" src="../../../assets/icons/Post button.png" routerLink="/announcements">
+    <img class="post" src="../../../assets/icons/Post button.png" [routerLink]="['/forum']" (click)="onSavePost()">
 </div>
 
 <div class="footer">
