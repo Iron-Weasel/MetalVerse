@@ -29,7 +29,8 @@ export class PostCommentsComponent{
   postComment(): void {
     //TODO: set posts data from backend, based on frontend input
       const comment: Comment = {
-        id:"c96448d7-b267-45be-99ad-112b6444e164",
+        id:"06fdd421-ec08-48e2-8ee4-806edc18a354",
+        postId: this.idPost,
         userName: "morgan", // shall be replaced with the logged in username
         text: this.commentInputRef.nativeElement.value,
         postedDate: "2023-11-15T19:57:14.693Z",
