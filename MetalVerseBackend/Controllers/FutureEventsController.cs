@@ -1,4 +1,5 @@
-﻿using MetalVerseBackend.Interfaces.Repositories;
+﻿using MetalVerseBackend.Interfaces;
+using MetalVerseBackend.Interfaces.Repositories;
 using MetalVerseBackend.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,8 +10,8 @@ namespace MetalVerseBackend.Controllers
     public class FutureEventsController : ControllerBase
     {
         //private List<FutureEvent> _events = new List<FutureEvent>();
-        private readonly IRepositoryManager _repository;
-        public FutureEventsController(IRepositoryManager repository) 
+        private readonly IEventsService _service;
+        public FutureEventsController(IEventsService service) 
         {
         /*    _events.Add(new FutureEvent()
             {
@@ -41,34 +42,33 @@ namespace MetalVerseBackend.Controllers
                 TicketPurchasePage = ""
 
             });*/
-            _repository = repository;
+            _service = service;
         }
         [HttpGet]
         public IActionResult GetEvents()
         {
-            var _events = _repository.FutureEvents.GetFutureEvents(false).ToList();
+            var _events = _service.GetEvents();
             return Ok(_events);
         }
 
         [HttpGet("{eventId}")]
         public IActionResult GetEvent(Guid eventId)
         {
-            var _event = _repository.FutureEvents.GetFutureEvent(eventId);
+            var _event = _service.GetEvent(eventId);
             return Ok(_event);
         }
 
         [HttpPost("add_event")]
         public IActionResult AddEvent(FutureEvent concert)
         {
-            _repository.FutureEvents.CreateFutureEvent(concert);
-            _repository.Save();
+            _service.AddEvent(concert);
             return Ok();
         }
 
         [HttpGet("search_result")]
         public IActionResult GetResultsBySearch([FromQuery] string search)
         {
-            var _events = _repository.FutureEvents.GetFutureEventsByString(search, false).ToList();
+            var _events = _service.GetFutureEventsBySearch(search);
             return _events.Count != 0 ? Ok(_events) : NotFound();
         }
     }

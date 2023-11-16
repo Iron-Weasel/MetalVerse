@@ -1,4 +1,5 @@
-﻿using MetalVerseBackend.Interfaces.Repositories;
+﻿using MetalVerseBackend.Interfaces;
+using MetalVerseBackend.Interfaces.Repositories;
 using MetalVerseBackend.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.Design;
@@ -10,8 +11,8 @@ namespace MetalVerseBackend.Controllers
     public class CommentController : ControllerBase
     {
         //private List<Post> _posts = new List<Post>();
-        private readonly IRepositoryManager _repository;
-        public CommentController(IRepositoryManager repository) 
+        private readonly ICommentService _service;
+        public CommentController(ICommentService service) 
         {
             /*
             _posts.Add(new Post()
@@ -48,7 +49,7 @@ namespace MetalVerseBackend.Controllers
                     Text = "BRUH"
                 });
             */
-            _repository = repository;
+            _service = service;
         }
 
         /*[HttpGet("comments")]
@@ -69,9 +70,7 @@ namespace MetalVerseBackend.Controllers
         [HttpPost("comments/add_comment")]
         public IActionResult AddComment(Comment comment)
         {
-            _repository.Comments.CreateComment(comment);
-            _repository.Save();
-
+            _service.AddComment(comment);
             return Ok();
         }
     }

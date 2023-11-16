@@ -10,8 +10,8 @@ namespace MetalVerseBackend.Controllers
     public class UserController : ControllerBase
     {
         //private List<User> _users = new List<User>();
-        private readonly IRepositoryManager _repository;
-        public UserController(IRepositoryManager repository)
+        private readonly IUserService _service;
+        public UserController(IUserService service)
         {
             /*_users.Add(new User()
             {
@@ -33,27 +33,26 @@ namespace MetalVerseBackend.Controllers
                 UserRole = UserRoles.StudioManager
             });
             */
-            _repository = repository;
+            _service = service;
         }
         [HttpGet]
         public IActionResult GetUsers()
         {
-            var _users = _repository.Users.GetUsers(false);
+            var _users = _service.GetUsers();
             return Ok(_users);
         }
 
         [HttpGet("{userId}")]
         public IActionResult GetUser(Guid userId)
         {
-            var _user = _repository.Users.GetUser(userId);
+            var _user = _service.GetUser(userId);
             return Ok(_user);
         }
 
         [HttpPost("add_user")]
         public IActionResult AdUser(User user)
         {
-            _repository.Users.CreateUser(user);
-            _repository.Save();
+            _service.AddUser(user);
             return Ok();
         }
     }

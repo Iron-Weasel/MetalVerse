@@ -1,13 +1,21 @@
 ﻿using MetalVerseBackend.Interfaces;
+using MetalVerseBackend.Interfaces.Repositories;
+using MetalVerseBackend.Models;
 
 namespace MetalVerseBackend.Services
 {
     public class CommentService : ICommentService
     {
-        public CommentService() { }
-        public void AddComment(Guid postId, string Text)
+        private readonly IRepositoryManager _repository;
+        public CommentService(IRepositoryManager repository) 
         {
-            throw new NotImplementedException();
+            _repository = repository;
+        }
+
+        public void AddComment(Comment comment)
+        {
+            _repository.Comments.CreateComment(comment);
+            _repository.Save();
         }
 
         public int ComputeRockOns()
