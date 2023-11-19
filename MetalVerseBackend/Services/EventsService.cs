@@ -15,6 +15,8 @@ namespace MetalVerseBackend.Services
         
         public void AddEvent(FutureEvent concert)
         {
+            concert.Id = Guid.NewGuid();
+
             _repository.FutureEvents.CreateFutureEvent(concert);
             _repository.Save();
         }

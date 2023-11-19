@@ -14,6 +14,7 @@ namespace MetalVerseBackend.Services
         }
         public void AddUser(User user)
         {
+            user.Id = Guid.NewGuid();
             _repository.Users.CreateUser(user);
             _repository.Save();
         }

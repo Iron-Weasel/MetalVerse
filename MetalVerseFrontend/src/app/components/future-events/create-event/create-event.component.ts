@@ -25,10 +25,7 @@ export class CreateEventComponent {
 
   // clicking on "Post" will create a new event
   onSaveEvent(): void {
-      //TODO: set event data from backend, based on frontend input
-      //for now, change the ID each time
       const futureEvent: FutureEvent = {
-        id: "345bf360-aef9-4641-a21b-38b452972a14",
         title: this.titleInputRef.nativeElement.value,
         bandCountry: this.bandCountryInputRef.nativeElement.value,
         bandGenre: this.bandGenreInputRef.nativeElement.value,

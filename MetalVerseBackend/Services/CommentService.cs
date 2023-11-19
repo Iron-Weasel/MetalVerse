@@ -14,6 +14,10 @@ namespace MetalVerseBackend.Services
 
         public void AddComment(Comment comment)
         {
+            comment.Id = Guid.NewGuid();
+            comment.RockOns = 0;
+            comment.PostedDate= DateTime.UtcNow;
+
             _repository.Comments.CreateComment(comment);
             _repository.Save();
         }

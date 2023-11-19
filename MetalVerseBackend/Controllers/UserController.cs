@@ -50,7 +50,7 @@ namespace MetalVerseBackend.Controllers
         }
 
         [HttpPost("add_user")]
-        public IActionResult AdUser(User user)
+        public IActionResult AddUser(User user)
         {
             _service.AddUser(user);
             return Ok();

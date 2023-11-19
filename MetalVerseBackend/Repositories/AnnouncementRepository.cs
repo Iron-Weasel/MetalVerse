@@ -1,5 +1,6 @@
 ﻿using MetalVerseBackend.Data;
 using MetalVerseBackend.Interfaces.Repositories;
+using MetalVerseBackend.Models;
 
 namespace MetalVerseBackend.Repositories
 {

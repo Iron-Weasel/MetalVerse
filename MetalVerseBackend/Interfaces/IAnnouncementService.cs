@@ -1,4 +1,6 @@
-﻿namespace MetalVerseBackend.Interfaces
+﻿using MetalVerseBackend.Models;
+
+namespace MetalVerseBackend.Interfaces
 {
     public interface IAnnouncementService
     {

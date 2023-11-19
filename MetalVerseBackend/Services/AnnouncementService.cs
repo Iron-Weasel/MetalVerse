@@ -1,5 +1,6 @@
 ﻿using MetalVerseBackend.Interfaces;
 using MetalVerseBackend.Interfaces.Repositories;
+using MetalVerseBackend.Models;
 
 namespace MetalVerseBackend.Services
 {
@@ -14,6 +15,8 @@ namespace MetalVerseBackend.Services
 
         public void AddAnnouncement(Announcement announcement)
         {
+            announcement.Id = Guid.NewGuid();
+
             _repository.Announcements.CreateAnnouncement(announcement);
             _repository.Save();
         }

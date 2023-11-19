@@ -19,6 +19,12 @@ namespace MetalVerseBackend.Services
 
         public void AddPost(Post post)
         {
+            post.Id = Guid.NewGuid();
+            post.Views = 0;
+            post.RockOns = 0;
+            post.Comments = 0;
+            post.CreatedDate = DateTime.UtcNow;
+
             _repository.Posts.CreatePost(post);
             _repository.Save();
         }
