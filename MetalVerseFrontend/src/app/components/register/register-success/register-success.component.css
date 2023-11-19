@@ -1,0 +1,20 @@
+.image {
+    width: 100%;
+}
+
+.content {
+    background-color: #CDCDCD;
+    height: 430px;
+}
+
+.text {
+    margin-top: 3em;
+    margin-left: 3em; 
+    font-size: 20px;
+}
+
+.login-route {
+    margin-left: 3em;
+    font-size: 20px;
+    color: blue;
+}

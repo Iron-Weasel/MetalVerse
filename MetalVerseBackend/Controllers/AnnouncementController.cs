@@ -47,7 +47,7 @@ namespace MetalVerseBackend.Controllers
             return Ok(_announcements);
         }
 
-        [HttpGet("annoucementId")]
+        [HttpGet("{announcementId}")]
         public IActionResult GetAnnouncement(Guid announcementId)
         {
             var _announcement = _service.GetAnnouncement(announcementId); 
