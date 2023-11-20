@@ -1,5 +1,5 @@
 export interface FutureEvent {
-    id: string;
+    id?: string;
     title: string;
     imageURL?: string;
     bandCountry: string;

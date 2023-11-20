@@ -364,3 +364,4 @@ FodyWeavers.xsd
 
 #File with sensitive data
 appsettings.json
+appsettings.Development.json

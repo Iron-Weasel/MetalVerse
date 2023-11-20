@@ -27,14 +27,10 @@ export class PostCommentsComponent{
 
   // clicking on "Post" will post a comment
   postComment(): void {
-    //TODO: set posts data from backend, based on frontend input
       const comment: Comment = {
-        id:"06fdd421-ec08-48e2-8ee4-806edc18a354",
         postId: this.idPost,
         userName: "morgan", // shall be replaced with the logged in username
-        text: this.commentInputRef.nativeElement.value,
-        postedDate: "2023-11-15T19:57:14.693Z",
-        rockOns: 0
+        text: this.commentInputRef.nativeElement.value
       };
       this.httpService.postComment(this.idPost, comment).subscribe((data:Comment) => { });
   }

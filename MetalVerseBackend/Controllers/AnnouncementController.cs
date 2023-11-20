@@ -1,4 +1,5 @@
-﻿using MetalVerseBackend.Interfaces.Repositories;
+﻿using MetalVerseBackend.Interfaces;
+using MetalVerseBackend.Interfaces.Repositories;
 using MetalVerseBackend.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,9 +10,8 @@ namespace MetalVerseBackend.Controllers
     [Route("announcements")]
     public class AnnouncementController : ControllerBase
     {
-        //private List<Announcement> _announcements = new List<Announcement>();
-        private readonly IRepositoryManager _repository;
-        /*        public AnnouncementController()
+        /*private List<Announcement> _announcements = new List<Announcement>();
+                public AnnouncementController()
                 {
                     _announcements.Add(new Announcement()
                     {
@@ -33,30 +33,31 @@ namespace MetalVerseBackend.Controllers
                     );
                 }*/
 
-        public AnnouncementController(IRepositoryManager repository)
+        private readonly IAnnouncementService _service;
+
+        public AnnouncementController( IAnnouncementService service)
         {
-            _repository = repository;
+            _service = service;
         }
 
         [HttpGet]
         public IActionResult GetAnnouncements()
         {
-            var _announcements = _repository.Announcements.GetAnnouncements(false);
+            var _announcements = _service.GetAnnouncements();
             return Ok(_announcements);
         }
 
         [HttpGet("{announcementId}")]
         public IActionResult GetAnnouncement(Guid announcementId)
         {
-            var _announcement = _repository.Announcements.GetAnnouncement(announcementId); 
+            var _announcement = _service.GetAnnouncement(announcementId); 
             return Ok(_announcement);
         }
 
         [HttpPost("add_announcement")]
         public IActionResult AddAnnouncement(Announcement announcement)
         {
-            _repository.Announcements.CreateAnnouncement(announcement);
-            _repository.Save();
+            _service.AddAnnouncement(announcement);
             return Ok();
         }
 
@@ -64,7 +65,7 @@ namespace MetalVerseBackend.Controllers
         [HttpGet("search_result")]
         public IActionResult GetResultsBySearch([FromQuery] string search)
         {
-            var _announcements = _repository.Announcements.GetAnnouncementsByString(search, false).ToList();
+            var _announcements = _service.GetAnnouncementsBySearch(search);
             return _announcements.Count !=0 ? Ok(_announcements) : NotFound();
         }
     }

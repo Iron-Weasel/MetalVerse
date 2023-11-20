@@ -23,11 +23,8 @@ export class RegisterComponent {
 
     // clicking on "Register" will create a new user
     onSaveUser(): void {
-        //TODO: set user data from backend, based on frontend input
-        //for now, change the ID
-        //there is also an issue with the model on BE (user role)
+        //there is an issue with the model on BE (user role)
         const user: User = {
-          id: "3ae9ce44-1631-4dfb-b1bc-b5a11051c9b6",
           username: this.usernameInputRef.nativeElement.value,
           firstName: this.firstNameInputRef.nativeElement.value,
           lastName: this.lastNameInputRef.nativeElement.value,
