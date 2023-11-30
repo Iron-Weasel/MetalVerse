@@ -32,6 +32,11 @@ export class BackendHttpService {
         return this.httpService.get<Post>('https://localhost:7206/posts/' + postId);
     }
 
+    // search a post by a string from BE
+    searchPost(keyword: string): Observable<Post[]> {
+        return this.httpService.get<Post[]>('https://localhost:7206/posts/search_result?search=' + keyword);
+    }
+
     // write a new post and send data to BE
     savePost(postData: Post): Observable<Post> {
         return this.httpService.post<Post>('https://localhost:7206/posts/add_post', postData);
@@ -53,6 +58,11 @@ export class BackendHttpService {
         return this.httpService.get<Announcement>('https://localhost:7206/announcements/' + announcementId);
     }
 
+    // search an announcement by a string from BE
+    searchAnnouncement(keyword: string): Observable<Announcement> {
+        return this.httpService.get<Announcement>('https://localhost:7206/announcements/search_result?search=' + keyword);
+    }
+
     // create a new announcement and send data to BE
     saveAnnouncement(announcementData: Announcement): Observable<Announcement> {
         return this.httpService.post<Announcement>('https://localhost:7206/announcements/add_announcement', announcementData);
@@ -70,6 +80,11 @@ export class BackendHttpService {
         return this.httpService.get<FutureEvent>('https://localhost:7206/events/' + eventId);
     }
 
+    // search an event by a string from BE
+    searchEvent(keyword: string): Observable<FutureEvent[]> {
+        return this.httpService.get<FutureEvent[]>('https://localhost:7206/events/search_result?search=' + keyword);
+    }
+
     // create a new event and send data to BE
     saveEvent(eventData: FutureEvent): Observable<FutureEvent> {
         return this.httpService.post<FutureEvent>('https://localhost:7206/events/add_event', eventData);
@@ -80,6 +95,11 @@ export class BackendHttpService {
     // get all streams from BE
     getStreams(): Observable<RockStream[]> {
         return this.httpService.get<RockStream[]>('https://localhost:7206/stream');
+    }
+
+    // search a stream by a string from BE
+    searchStream(keyword: string): Observable<RockStream[]> {
+        return this.httpService.get<RockStream[]>('https://localhost:7206/stream/search_result?search=' + keyword);
     }
  
 }

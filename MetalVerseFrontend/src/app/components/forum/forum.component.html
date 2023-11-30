@@ -5,7 +5,7 @@
 <div class="content">
     <h2 class="content-text">Forum</h2>
     <img class="post-button" src="../../../assets/icons/Post.png" [routerLink]="['/create-post']">
-    <input class="search-bar" placeholder="Search...">
+    <input class="search-bar" placeholder="Search..." #searchInput (keyup.enter)="searchPost()">
     <div *ngFor="let post of posts">
       <div class="card" [routerLink]="['/forum', post.id]">
         <h4 class="postId"> user ID: {{ post.userId }} </h4>

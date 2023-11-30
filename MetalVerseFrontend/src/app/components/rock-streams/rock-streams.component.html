@@ -4,7 +4,7 @@
   
 <div class="content">
       <h2 class="content-text">Rock & Metal Streams</h2>
-      <input class="search-bar" placeholder="Search...">
+      <input class="search-bar" placeholder="Search..." #searchInput (keyup.enter)="searchStream()">
       <div *ngFor="let stream of streams">
         <div class="card">
           <h4 class="streamId"> stream ID: {{ stream.id }} </h4>
