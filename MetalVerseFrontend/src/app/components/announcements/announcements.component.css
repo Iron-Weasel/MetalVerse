@@ -20,6 +20,20 @@
     color: #4C4C4C;
 }
 
+.search-bar {
+    margin-left: 1.5em;
+    margin-top: 0.9em;
+    width: 15em;
+    height: 1em;
+    background-color: #2F2F2f;
+    border-radius: 4px;
+}
+
+::placeholder {
+    color: #A8A8A8;
+    font-size: 10px;
+}
+
 .post-button {
     margin-left: 0.8em;
     width: 40%;

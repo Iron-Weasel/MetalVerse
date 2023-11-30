@@ -59,8 +59,8 @@ export class BackendHttpService {
     }
 
     // search an announcement by a string from BE
-    searchAnnouncement(keyword: string): Observable<Announcement> {
-        return this.httpService.get<Announcement>('https://localhost:7206/announcements/search_result?search=' + keyword);
+    searchAnnouncement(keyword: string): Observable<Announcement[]> {
+        return this.httpService.get<Announcement[]>('https://localhost:7206/announcements/search_result?search=' + keyword);
     }
 
     // create a new announcement and send data to BE

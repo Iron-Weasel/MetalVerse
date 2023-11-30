@@ -4,6 +4,7 @@
   
 <div class="content">
       <h2 class="content-text">Announcements</h2>
+      <input class="search-bar" placeholder="Search..." #searchInput (keyup.enter)="searchAnnouncement()">
       <img class="post-button" [routerLink]="['/create-announcement']" src="../../../assets/icons/New ann button.png">
       <div *ngFor="let announcement of announcements">
         <div class="card" [routerLink]="['/announcements', announcement.id]">

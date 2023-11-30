@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Announcement } from 'src/app/models/announcement';
 import { BackendHttpService } from 'src/app/services/backend.service';
 
@@ -10,9 +10,19 @@ import { BackendHttpService } from 'src/app/services/backend.service';
 export class AnnouncementsComponent {
   public announcements: Announcement[];
 
+  @ViewChild('searchInput') searchInputRef: ElementRef;
+  private httpService: BackendHttpService;
+
   constructor(httpService: BackendHttpService) { 
-      httpService.getAnnouncements().subscribe((data:Announcement[]) => {
+      this.httpService = httpService;
+      this.httpService.getAnnouncements().subscribe((data:Announcement[]) => {
           this.announcements = data;
       });
+  }
+
+  searchAnnouncement(): void {
+    this.httpService.searchAnnouncement(this.searchInputRef.nativeElement.value).subscribe((data:Announcement[]) => {
+      this.announcements = data;
+    });
   }
 }
