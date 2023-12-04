@@ -44,5 +44,19 @@ namespace MetalVerseBackend.Controllers
             var _posts = _postService.GetPostsBySearch(search);
             return _posts.Count != 0 ? Ok(_posts) : NotFound();
         }
+
+        [HttpGet("sort_newest")]
+        public IActionResult GetNewestPosts()
+        {
+            var _posts = _postService.GetPosts().OrderByDescending(x => x.CreatedDate);
+            return Ok(_posts);
+        }
+
+        [HttpGet("sort_popular")]
+        public IActionResult GetPopularPosts()
+        {
+            var _posts = _postService.GetPosts().OrderByDescending(x => x.RockOns);
+            return Ok(_posts);
+        }
     }
 }

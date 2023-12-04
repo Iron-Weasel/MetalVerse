@@ -17,14 +17,28 @@ export class BackendHttpService {
         this.httpService = httpService;
     }
 
+
+    // USER
     // register user
     saveUser(userData: User): Observable<User> {
         return this.httpService.post<User>('https://localhost:7206/users/add_user', userData);
     }
 
+
+    // FORUM
     // get all posts from BE
     getPosts(): Observable<Post[]> {
         return this.httpService.get<Post[]>('https://localhost:7206/posts');
+    }
+
+    // sort by newest posts
+    getNewestPosts(): Observable<Post[]> {
+        return this.httpService.get<Post[]>('https://localhost:7206/posts/sort_newest');
+    }
+
+    // sort by most popular posts
+    getPopularPosts(): Observable<Post[]> {
+        return this.httpService.get<Post[]>('https://localhost:7206/posts/sort_popular');
     }
 
     // get a post by its Id from BE
@@ -48,6 +62,7 @@ export class BackendHttpService {
     }
 
 
+    // ANNOUCEMENTS
     // get all announcements from BE
     getAnnouncements(): Observable<Announcement[]> {
         return this.httpService.get<Announcement[]>('https://localhost:7206/announcements');
@@ -70,6 +85,7 @@ export class BackendHttpService {
 
 
 
+    //FUTURE EVENTS
     // get all events from BE
     getEvents(): Observable<FutureEvent[]> {
         return this.httpService.get<FutureEvent[]>('https://localhost:7206/events');
@@ -91,7 +107,7 @@ export class BackendHttpService {
     }
 
 
-
+    // STREAM
     // get all streams from BE
     getStreams(): Observable<RockStream[]> {
         return this.httpService.get<RockStream[]>('https://localhost:7206/stream');

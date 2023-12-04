@@ -38,6 +38,17 @@
     width: 12%;
     float: right;
 }
+
+.new-sort-button {
+    margin-left: 1em;
+    margin-right: 0.5em;
+    margin-top: 1em;
+    width: 15%;
+}
+
+.top-sort-button {
+    width: 15%;
+}
    
 .card {
     box-shadow: 2px 2px 4px 0 #b4b4b4;

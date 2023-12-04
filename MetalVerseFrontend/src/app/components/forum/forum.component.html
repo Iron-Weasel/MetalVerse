@@ -6,6 +6,8 @@
     <h2 class="content-text">Forum</h2>
     <img class="post-button" src="../../../assets/icons/Post.png" [routerLink]="['/create-post']">
     <input class="search-bar" placeholder="Search..." #searchInput (keyup.enter)="searchPost()">
+    <img class="new-sort-button" src="../../../assets/icons/New button.png" (click)="sortByNewest()">
+    <img class="top-sort-button" src="../../../assets/icons/Top button.png" (click)="sortByPopularity()">
     <div *ngFor="let post of posts">
       <div class="card" [routerLink]="['/forum', post.id]">
         <h4 class="postId"> user ID: {{ post.userId }} </h4>

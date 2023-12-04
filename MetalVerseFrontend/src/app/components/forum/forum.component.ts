@@ -25,4 +25,16 @@ export class ForumComponent {
             this.posts = data;
        });
     }
+
+    sortByNewest(): void {
+        this.httpService.getNewestPosts().subscribe((data:Post[]) => {
+            this.posts = data;
+        });
+    }
+
+    sortByPopularity(): void {
+        this.httpService.getPopularPosts().subscribe((data:Post[]) => {
+            this.posts = data;
+        });
+    }
 }
