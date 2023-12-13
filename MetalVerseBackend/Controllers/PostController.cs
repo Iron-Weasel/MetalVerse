@@ -42,7 +42,7 @@ namespace MetalVerseBackend.Controllers
         public IActionResult GetResultsBySearch([FromQuery] string search)
         {
             var _posts = _postService.GetPostsBySearch(search);
-            return _posts.Count != 0 ? Ok(_posts) : NotFound();
+            return _posts.Count != 0 ? Ok(_posts) : Ok();
         }
 
         [HttpGet("sort_newest")]

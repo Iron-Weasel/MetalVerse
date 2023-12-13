@@ -69,7 +69,7 @@ namespace MetalVerseBackend.Controllers
         public IActionResult GetResultsBySearch([FromQuery] string search)
         {
             var _events = _service.GetFutureEventsBySearch(search);
-            return _events.Count != 0 ? Ok(_events) : NotFound();
+            return _events.Count != 0 ? Ok(_events) : Ok();
         }
     }
 }
