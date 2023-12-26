@@ -6,13 +6,15 @@
       <h2 class="content-text">Future Events</h2>
       <img class="post-button" src="../../../assets/icons/Post new event.png" [routerLink]="['/create-event']">
       <input class="search-bar" placeholder="Search by country..." #searchInput (keyup.enter)="searchEvent()">
-      <div *ngFor="let event of events">
-        <div class="card" [routerLink]="['/events', event.id]">
-          <h4 class="eventId"> event ID: {{ event.id }} </h4>
-          <h2 class="title"> {{ event.title }}   </h2>
-          <p class="date">  {{ event.eventTime }} </p>
+      <div *ngIf="eventsObs$ | async as events">
+        <div *ngFor="let event of events">
+          <div class="card" [routerLink]="['/events', event.id]">
+            <h4 class="eventId"> event ID: {{ event.id }} </h4>
+            <h2 class="title"> {{ event.title }}   </h2>
+            <p class="date">  {{ event.eventTime }} </p>
+          </div>
         </div>
-      </div>
+      </div> 
 </div>
   
 <div class="footer">

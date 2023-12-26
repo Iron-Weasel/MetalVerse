@@ -5,10 +5,12 @@
 <div class="content">
       <h2 class="content-text">Rock & Metal Streams</h2>
       <input class="search-bar" placeholder="Search..." #searchInput (keyup.enter)="searchStream()">
-      <div *ngFor="let stream of streams">
-        <div class="card">
-          <h4 class="streamId"> stream ID: {{ stream.id }} </h4>
-          <h2 class="name"> {{ stream.name }}   </h2>
+      <div *ngIf="streamsObs$ | async as streams">
+        <div *ngFor="let stream of streams">
+          <div class="card">
+            <h4 class="streamId"> stream ID: {{ stream.id }} </h4>
+            <h2 class="name"> {{ stream.name }}   </h2>
+          </div>
         </div>
       </div>
 </div>

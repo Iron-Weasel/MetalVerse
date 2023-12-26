@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Post } from "../models/post";
-import { Observable } from "rxjs";
+import { Observable, ReplaySubject, Subject, tap } from "rxjs";
 import { Announcement } from "../models/announcement";
 import { FutureEvent } from "../models/future-event";
 import { RockStream } from "../models/rock-stream";
@@ -16,6 +16,24 @@ export class BackendHttpService {
     constructor(httpService: HttpClient) {
         this.httpService = httpService;
     }
+
+    // OBSERVABLES
+    // notify about a newly created post
+    private postCreatedSource = new Subject<void>();
+    postCreated$ = this.postCreatedSource.asObservable();
+
+    // notify about a posted comment
+    private commentCreatedSource = new Subject<void>();
+    commentCreated$ = this.commentCreatedSource.asObservable();
+
+    // notify about a newly created announcement
+    private announcementCreatedSource = new Subject<void>();
+    announcementCreated$ = this.announcementCreatedSource.asObservable();
+
+    // notify about a newly created event
+    private eventCreatedSource = new Subject<void>();
+    eventCreated$ = this.eventCreatedSource.asObservable();
+
 
 
     // USER
@@ -53,12 +71,20 @@ export class BackendHttpService {
 
     // write a new post and send data to BE
     savePost(postData: Post): Observable<Post> {
-        return this.httpService.post<Post>('https://localhost:7206/posts/add_post', postData);
+        return this.httpService.post<Post>('https://localhost:7206/posts/add_post', postData).pipe(
+            tap(() => {
+                this.postCreatedSource.next();
+            })
+        );
     }
 
     // post a comment to a post and send data to BE
     postComment(postId: string, commentData: Comment): Observable<Comment> {
-        return this.httpService.post<Comment>('https://localhost:7206/posts/' + postId + '/comments/add_comment', commentData);
+        return this.httpService.post<Comment>('https://localhost:7206/posts/' + postId + '/comments/add_comment', commentData).pipe(
+            tap(() => {
+                this.commentCreatedSource.next();
+            })
+        );
     }
 
 
@@ -80,7 +106,11 @@ export class BackendHttpService {
 
     // create a new announcement and send data to BE
     saveAnnouncement(announcementData: Announcement): Observable<Announcement> {
-        return this.httpService.post<Announcement>('https://localhost:7206/announcements/add_announcement', announcementData);
+        return this.httpService.post<Announcement>('https://localhost:7206/announcements/add_announcement', announcementData).pipe(
+            tap(() => {
+                this.announcementCreatedSource.next();
+            })
+        );
     }
 
 
@@ -103,7 +133,11 @@ export class BackendHttpService {
 
     // create a new event and send data to BE
     saveEvent(eventData: FutureEvent): Observable<FutureEvent> {
-        return this.httpService.post<FutureEvent>('https://localhost:7206/events/add_event', eventData);
+        return this.httpService.post<FutureEvent>('https://localhost:7206/events/add_event', eventData).pipe(
+            tap(() => {
+                this.eventCreatedSource.next();
+            })
+        );
     }
 
 

@@ -8,10 +8,12 @@
     </div>
     <img class="post-button" src="../../../assets/icons/Post button.png" (click)="postComment()">
       <h2 class="content-text">Comments for post with id {{ idPost }}</h2>
-      <div *ngFor="let comment of comments">
-        <div class="card">
-            <p>@{{comment.userName}}</p>
-          <p>{{comment.text}}</p>
+      <div *ngIf="postComments$ | async as comments">
+        <div *ngFor="let comment of comments">
+          <div class="card">
+              <p>@{{comment.userName}}</p>
+              <p>{{comment.text}}</p>
+          </div>
         </div>
       </div>
   </div>
