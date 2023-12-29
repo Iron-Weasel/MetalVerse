@@ -17,6 +17,7 @@ export class ForumComponent {
     public postsObs$ = this.postsObs.asObservable();  // receive data
 
     @ViewChild('searchInput') searchInputRef: ElementRef;
+    rockedOnMap: { [postId: string]: boolean } = {};
     
 
     constructor(httpService: BackendHttpService) { 
@@ -32,6 +33,12 @@ export class ForumComponent {
       this.httpService.getPosts().subscribe((data:Post[]) => {
         this.postsObs.next(data);
         this.posts = data;
+        this.posts.forEach((post:Post) => {
+          if(post.id != undefined){
+            this.rockedOnMap[post.id] = false;
+          }
+          
+        });
       });
     }
 
@@ -58,5 +65,19 @@ export class ForumComponent {
         this.postsObs.next(data);
         this.posts = data;
       });
+    }
+
+    increaseRockOn(postId: string): void {
+      if(postId) {
+        this.rockedOnMap[postId] = true;
+        this.httpService.increasePostRockOns(postId).subscribe();
+      }
+    }
+
+    decreaseRockOn(postId: string): void {
+      if(postId) {
+        this.rockedOnMap[postId] = false;
+        this.httpService.decreasePostRockOns(postId).subscribe();
+      }
     }
 }

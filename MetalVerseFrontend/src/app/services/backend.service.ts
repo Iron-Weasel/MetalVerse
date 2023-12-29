@@ -78,6 +78,21 @@ export class BackendHttpService {
         );
     }
 
+    // increment number of views each time a post is visited
+    increasePostViews(postId: string): Observable<Post> {
+        return this.httpService.post<Post>('https://localhost:7206/posts/post_visited/' + postId, postId);
+    }
+
+    // increment number of rock-ons for a post
+    increasePostRockOns(postId: string): Observable<Post> {
+        return this.httpService.post<Post>('https://localhost:7206/posts/post_liked/' + postId, postId);
+    }
+
+    // decrement number of rock-ons for a post
+    decreasePostRockOns(postId: string): Observable<Post> {
+        return this.httpService.post<Post>('https://localhost:7206/posts/post_disliked/' + postId, postId);
+    }
+
     // post a comment to a post and send data to BE
     postComment(postId: string, commentData: Comment): Observable<Comment> {
         return this.httpService.post<Comment>('https://localhost:7206/posts/' + postId + '/comments/add_comment', commentData).pipe(
@@ -85,6 +100,16 @@ export class BackendHttpService {
                 this.commentCreatedSource.next();
             })
         );
+    }
+
+    // increment number of rock-ons for a comment
+    increaseCommentRockOns(postId: string, commentId: string): Observable<Comment> {
+        return this.httpService.post<Comment>('https://localhost:7206/posts/' + postId + '/comment_liked/' + commentId, commentId);
+    }
+
+    // decrement number of rock-ons for a comment
+    decreaseCommentRockOns(postId: string, commentId: string): Observable<Comment> {
+        return this.httpService.post<Comment>('https://localhost:7206/posts/' + postId + '/comment_disliked/' + commentId, commentId);
     }
 
 

@@ -10,11 +10,16 @@
     <img class="top-sort-button" src="../../../assets/icons/Top button.png" (click)="sortByPopularity()">
     <div *ngIf="postsObs$ | async as posts">
       <div *ngFor="let post of posts">
-        <div class="card" [routerLink]="['/forum', post.id]">
-          <h4 class="postId"> user ID: {{ post.userId }} </h4>
-          <h2 class="title"> {{ post.title }}   </h2>
-          <p class="description">  {{ post.description }} </p>
-          <p class="createdDate">  {{ post.createdDate }} </p>
+        <div class="card">
+          <img class="rock-on" *ngIf="post.id && !rockedOnMap[post.id]" src="../../../assets/icons/unrocked.png" (click)="increaseRockOn(post.id)">
+          <img class="rock-on" *ngIf="post.id && rockedOnMap[post.id]" src="../../../assets/icons/rocked.png" (click)="decreaseRockOn(post.id)">
+          <div [routerLink]="['/forum', post.id]">
+            <h4 class="postId"> user ID: {{ post.userId }} </h4>
+            <h2 class="title"> {{ post.title }}   </h2>
+            <p class="description">  {{ post.description }} </p>
+            <p class="createdDate">  {{ post.createdDate }} </p>
+            <p class="createdDate">  {{ post.views }} views  {{ post.rockOns }} rock-ons</p>
+          </div>
         </div>
       </div>
     </div>

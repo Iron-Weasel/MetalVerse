@@ -1,6 +1,7 @@
 ﻿using MetalVerseBackend.Interfaces;
 using MetalVerseBackend.Interfaces.Repositories;
 using MetalVerseBackend.Models;
+using MetalVerseBackend.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.Design;
 
@@ -71,6 +72,20 @@ namespace MetalVerseBackend.Controllers
         public IActionResult AddComment(Comment comment)
         {
             _service.AddComment(comment);
+            return Ok();
+        }
+
+        [HttpPost("comment_liked/{commentId}")]
+        public IActionResult IncreaseCommentRockOns(Guid commentId)
+        {
+            _service.ComputeRockOns(commentId, true);
+            return Ok();
+        }
+
+        [HttpPost("comment_disliked/{commentId}")]
+        public IActionResult DecreaseCommentRockOns(Guid commentId)
+        {
+            _service.ComputeRockOns(commentId, false);
             return Ok();
         }
     }

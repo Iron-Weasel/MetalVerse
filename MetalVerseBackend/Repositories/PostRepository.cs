@@ -9,7 +9,7 @@ namespace MetalVerseBackend.Repositories
         public PostRepository(ApplicationDbContext _ApplicationDbContext) : base(_ApplicationDbContext) { }
         public void CreatePost(Post post) => Create(post);
 
-        public Post GetPost(Guid postId) => FindByCondition(x => x.Id == postId, false).First();
+        public Post GetPost(Guid postId) => FindByCondition(x => x.Id == postId, true).First();
 
         public IEnumerable<Post> GetPosts(bool trackChanges) => FindAll(trackChanges).ToList();
 

@@ -54,6 +54,11 @@
     font-size: 10px;
 }
 
+.rock-on {
+    float: right;
+    margin-top: 2em;
+}
+
 .commId {
     padding-top: 1em;
 }

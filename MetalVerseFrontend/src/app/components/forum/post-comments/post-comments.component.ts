@@ -13,18 +13,21 @@ import { ReplaySubject } from 'rxjs';
 
 export class PostCommentsComponent{
     private httpService: BackendHttpService;
-    public comments: Comment[];
+    public post: Post;
     public idPost: string;
 
     private postComments: ReplaySubject<Comment[]> = new ReplaySubject<Comment[]>(1);  // send data
     public postComments$ = this.postComments.asObservable();  // receive data
 
     @ViewChild('commentInput') commentInputRef: ElementRef;
+    rockedOnPost: boolean = false;
+    rockedOnMap: { [commentId: string]: boolean } = {};
 
     
     constructor(private route: ActivatedRoute, httpService: BackendHttpService) {
       this.httpService = httpService;
       this.idPost = String(this.route.snapshot.paramMap.get('id'));
+      this.increasePostViews(this.idPost);
       this.loadComments();
 
       this.httpService.commentCreated$.subscribe(() => {
@@ -35,8 +38,45 @@ export class PostCommentsComponent{
     loadComments(): void {
       this.httpService.getPost(this.idPost).subscribe((data:Post) => {
         this.postComments.next(data.comments);
-        this.comments = data.comments;
+        this.post = data;
+        data.comments.forEach((comment: Comment) => {
+          if(comment.id != undefined){
+            this.rockedOnMap[comment.id] = false;
+          }
+        });
       });
+    }
+
+    increasePostViews(postId: string): void {
+      this.httpService.increasePostViews(postId).subscribe();
+    }
+
+    increaseRockOnPost(): void {
+      if(this.idPost) {
+        this.rockedOnPost = true;
+        this.httpService.increasePostRockOns(this.idPost).subscribe();
+      }
+    }
+
+    decreaseRockOnPost(): void {
+      if(this.idPost) {
+        this.rockedOnPost = false;
+        this.httpService.decreasePostRockOns(this.idPost).subscribe();
+      }
+    }
+
+    increaseRockOnComments(commentId: string): void {
+      if(commentId) {
+        this.rockedOnMap[commentId] = true;
+        this.httpService.increaseCommentRockOns(this.idPost, commentId).subscribe();
+      }
+    }
+
+    decreaseRockOnComments(commentId: string): void {
+      if(commentId) {
+        this.rockedOnMap[commentId] = false;
+        this.httpService.decreaseCommentRockOns(this.idPost, commentId).subscribe();
+      }
     }
 
     // clicking on "Post" will post a comment

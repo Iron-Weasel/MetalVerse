@@ -5,6 +5,6 @@ namespace MetalVerseBackend.Interfaces
     public interface ICommentService
     {
         void AddComment(Comment comment);
-        int ComputeRockOns();
+        void ComputeRockOns(Guid commentId, bool toIncrease);
     }
 }
