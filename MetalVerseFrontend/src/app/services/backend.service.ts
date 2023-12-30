@@ -34,6 +34,14 @@ export class BackendHttpService {
     private eventCreatedSource = new Subject<void>();
     eventCreated$ = this.eventCreatedSource.asObservable();
 
+    // notify about an updated rock-ons count for a comment
+    private commentUpdatedSource = new Subject<void>();
+    commentUpdatedSource$ = this.commentUpdatedSource.asObservable();
+
+    // notify about an updated rock-ons count for a post
+    private postUpdatedSource = new Subject<void>();
+    postUpdatedSource$ = this.postUpdatedSource.asObservable();
+
 
 
     // USER
@@ -80,17 +88,29 @@ export class BackendHttpService {
 
     // increment number of views each time a post is visited
     increasePostViews(postId: string): Observable<Post> {
-        return this.httpService.post<Post>('https://localhost:7206/posts/post_visited/' + postId, postId);
+        return this.httpService.post<Post>('https://localhost:7206/posts/post_visited/' + postId, postId).pipe(
+            tap(() => {
+                this.postUpdatedSource.next();
+            })
+        );
     }
 
     // increment number of rock-ons for a post
     increasePostRockOns(postId: string): Observable<Post> {
-        return this.httpService.post<Post>('https://localhost:7206/posts/post_liked/' + postId, postId);
+        return this.httpService.post<Post>('https://localhost:7206/posts/post_liked/' + postId, postId).pipe(
+            tap(() => {
+                this.postUpdatedSource.next();
+            })
+        );
     }
 
     // decrement number of rock-ons for a post
     decreasePostRockOns(postId: string): Observable<Post> {
-        return this.httpService.post<Post>('https://localhost:7206/posts/post_disliked/' + postId, postId);
+        return this.httpService.post<Post>('https://localhost:7206/posts/post_disliked/' + postId, postId).pipe(
+            tap(() => {
+                this.postUpdatedSource.next();
+            })
+        );
     }
 
     // post a comment to a post and send data to BE
@@ -104,12 +124,20 @@ export class BackendHttpService {
 
     // increment number of rock-ons for a comment
     increaseCommentRockOns(postId: string, commentId: string): Observable<Comment> {
-        return this.httpService.post<Comment>('https://localhost:7206/posts/' + postId + '/comment_liked/' + commentId, commentId);
+        return this.httpService.post<Comment>('https://localhost:7206/posts/' + postId + '/comment_liked/' + commentId, commentId).pipe(
+            tap(() => {
+                this.commentUpdatedSource.next();
+            })
+        );
     }
 
     // decrement number of rock-ons for a comment
     decreaseCommentRockOns(postId: string, commentId: string): Observable<Comment> {
-        return this.httpService.post<Comment>('https://localhost:7206/posts/' + postId + '/comment_disliked/' + commentId, commentId);
+        return this.httpService.post<Comment>('https://localhost:7206/posts/' + postId + '/comment_disliked/' + commentId, commentId).pipe(
+            tap(() => {
+                this.commentUpdatedSource.next();
+            })
+        );
     }
 
 

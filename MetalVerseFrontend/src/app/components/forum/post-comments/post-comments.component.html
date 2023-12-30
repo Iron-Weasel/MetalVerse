@@ -13,7 +13,7 @@
       <h2 class="content-text">Comments for post with id {{ idPost }}</h2>
       <p *ngIf="post">{{ post.views }} views {{ post.rockOns }} rock-ons {{ post.comments.length }} comments</p>
     </div>
-      <div *ngIf="postComments$ | async as comments">
+      <div *ngIf="commentsObs$ | async as comments">
         <div *ngFor="let comment of comments">
           <div class="card">
               <img class="rock-on" *ngIf="comment.id && !rockedOnMap[comment.id]" src="../../../assets/icons/unrocked.png" (click)="increaseRockOnComments(comment.id)">

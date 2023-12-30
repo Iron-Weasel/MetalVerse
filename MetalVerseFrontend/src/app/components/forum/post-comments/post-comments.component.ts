@@ -16,8 +16,17 @@ export class PostCommentsComponent{
     public post: Post;
     public idPost: string;
 
-    private postComments: ReplaySubject<Comment[]> = new ReplaySubject<Comment[]>(1);  // send data
-    public postComments$ = this.postComments.asObservable();  // receive data
+    private commentsObs: ReplaySubject<Comment[]> = new ReplaySubject<Comment[]>(1);  // send data
+    public commentsObs$ = this.commentsObs.asObservable();  // receive data
+
+    private rockOnsPost: ReplaySubject<Post> = new ReplaySubject<Post>(1);  // send data
+    public rockOnsPost$ = this.rockOnsPost.asObservable();  // receive data
+
+    private viewsPost: ReplaySubject<Post> = new ReplaySubject<Post>(1);  // send data
+    public viewsPost$ = this.viewsPost.asObservable();  // receive data
+
+    private rockOnsComment: ReplaySubject<Comment> = new ReplaySubject<Comment>(1);  // send data
+    public rockOnsComment$ = this.rockOnsComment.asObservable();  // receive data
 
     @ViewChild('commentInput') commentInputRef: ElementRef;
     rockedOnPost: boolean = false;
@@ -30,17 +39,19 @@ export class PostCommentsComponent{
       this.increasePostViews(this.idPost);
       this.loadComments();
 
+      // once a new comment has been posted, reload the comments along with the new one
       this.httpService.commentCreated$.subscribe(() => {
         this.loadComments();
       });
     }
 
-    loadComments(): void {
+    // get initial data about comments
+    private loadComments(): void {
       this.httpService.getPost(this.idPost).subscribe((data:Post) => {
-        this.postComments.next(data.comments);
+        this.commentsObs.next(data.comments);
         this.post = data;
         data.comments.forEach((comment: Comment) => {
-          if(comment.id != undefined){
+          if(comment.id != undefined) {
             this.rockedOnMap[comment.id] = false;
           }
         });
@@ -49,12 +60,18 @@ export class PostCommentsComponent{
 
     increasePostViews(postId: string): void {
       this.httpService.increasePostViews(postId).subscribe();
+      this.httpService.postUpdatedSource$.subscribe(() => {
+        this.updatePost();
+      });
     }
 
     increaseRockOnPost(): void {
       if(this.idPost) {
         this.rockedOnPost = true;
         this.httpService.increasePostRockOns(this.idPost).subscribe();
+        this.httpService.postUpdatedSource$.subscribe(() => {
+          this.updatePost();
+        });
       }
     }
 
@@ -62,6 +79,9 @@ export class PostCommentsComponent{
       if(this.idPost) {
         this.rockedOnPost = false;
         this.httpService.decreasePostRockOns(this.idPost).subscribe();
+        this.httpService.postUpdatedSource$.subscribe(() => {
+          this.updatePost();
+        });
       }
     }
 
@@ -69,6 +89,9 @@ export class PostCommentsComponent{
       if(commentId) {
         this.rockedOnMap[commentId] = true;
         this.httpService.increaseCommentRockOns(this.idPost, commentId).subscribe();
+        this.httpService.commentUpdatedSource$.subscribe(() => {
+          this.updateComment(commentId);
+        });
       }
     }
 
@@ -76,7 +99,26 @@ export class PostCommentsComponent{
       if(commentId) {
         this.rockedOnMap[commentId] = false;
         this.httpService.decreaseCommentRockOns(this.idPost, commentId).subscribe();
+        this.httpService.commentUpdatedSource$.subscribe(() => {
+          this.updateComment(commentId);
+        });
       }
+    }
+
+    private updatePost(): void {
+      this.httpService.getPost(this.idPost).subscribe((data:Post) => {
+          this.rockOnsPost.next(data);
+          this.viewsPost.next(data);
+          this.post = data;
+      });
+    }
+
+    private updateComment(commentId: string): void {
+      this.httpService.getPost(this.idPost).subscribe((data:Post) => {
+        const commentIndex = this.post.comments.findIndex(c => c.id === commentId);
+        this.commentsObs.next(data.comments);
+        this.post.comments[commentIndex] = data.comments[commentIndex];
+      });
     }
 
     // clicking on "Post" will post a comment
