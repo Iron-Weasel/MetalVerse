@@ -11,7 +11,7 @@
           <div class="card" [routerLink]="['/events', event.id]">
             <h4 class="eventId"> event ID: {{ event.id }} </h4>
             <h2 class="title"> {{ event.title }}   </h2>
-            <p class="date">  {{ event.eventTime }} </p>
+            <p class="date" *ngIf="event.id">  {{ dateEventMapText[event.id] }} </p>
           </div>
         </div>
       </div> 

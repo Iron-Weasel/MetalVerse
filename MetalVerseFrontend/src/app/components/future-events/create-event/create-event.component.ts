@@ -25,6 +25,8 @@ export class CreateEventComponent {
 
   // clicking on "Post" will create a new event
   onSaveEvent(): void {
+      const newEventTime = this.eventTimeToBeSent(this.timeInputRef.nativeElement.value);
+
       const futureEvent: FutureEvent = {
         title: this.titleInputRef.nativeElement.value,
         bandCountry: this.bandCountryInputRef.nativeElement.value,
@@ -32,8 +34,18 @@ export class CreateEventComponent {
         country: this.countryInputRef.nativeElement.value,
         city: this.cityInputRef.nativeElement.value,
         venueName: this.venueInputRef.nativeElement.value,
-        eventTime: "2023-11-15T19:57:14.693Z"
+        eventTime: newEventTime
       }
       this.httpService.saveEvent(futureEvent).subscribe((data:FutureEvent) => { });
+  }
+
+  // format the eventTime string, so it can be stored and processed on backend & database
+  private eventTimeToBeSent(dateTime: string): string {
+    const formatString = dateTime.split(",");
+    const date = formatString[0].split(".");
+    const time = formatString[1].trim();
+
+    const newEventTime = `${date[2]}-${date[1]}-${date[0]}T${time}:00.600Z`;
+    return newEventTime;
   }
 }
