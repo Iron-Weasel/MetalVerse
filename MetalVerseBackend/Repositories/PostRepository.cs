@@ -11,7 +11,7 @@ namespace MetalVerseBackend.Repositories
 
         public Post GetPost(Guid postId) => FindByCondition(x => x.Id == postId, true).First();
 
-        public IEnumerable<Post> GetPosts(bool trackChanges) => FindAll(trackChanges).ToList();
+        public IEnumerable<Post> GetPosts(bool trackChanges) => FindAll(trackChanges).OrderByDescending(c => c.CreatedDate).ToList();
 
         public IEnumerable<Post> GetPostsByString(string search, bool trackChanges) => FindByCondition(x => x.Title.Contains(search), trackChanges).ToList();
     }

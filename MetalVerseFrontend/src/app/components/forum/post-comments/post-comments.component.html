@@ -7,10 +7,12 @@
       <input class="post-bar" placeholder="Add comment..." #commentInput>
     </div>
     <img class="post-button" src="../../../assets/icons/Post button.png" (click)="postComment()">
-    <div class="card">
+    <div class="card" *ngIf="post">
       <img class="rock-on" *ngIf="idPost && !rockedOnPost" src="../../../assets/icons/unrocked.png" (click)="increaseRockOnPost()">
       <img class="rock-on" *ngIf="idPost && rockedOnPost" src="../../../assets/icons/rocked.png" (click)="decreaseRockOnPost()">
-      <h2 class="content-text">Comments for post with id {{ idPost }}</h2>
+      <h2 class="content-text">{{post.title}}</h2>
+      <p>{{dateCreatedPostText}}</p>
+      <p>{{post.description}}</p>
       <p *ngIf="post">{{ post.views }} views {{ post.rockOns }} rock-ons {{ post.comments.length }} comments</p>
     </div>
       <div *ngIf="commentsObs$ | async as comments">
@@ -19,6 +21,9 @@
               <img class="rock-on" *ngIf="comment.id && !rockedOnMap[comment.id]" src="../../../assets/icons/unrocked.png" (click)="increaseRockOnComments(comment.id)">
               <img class="rock-on" *ngIf="comment.id && rockedOnMap[comment.id]" src="../../../assets/icons/rocked.png" (click)="decreaseRockOnComments(comment.id)">
               <p>@{{comment.userName}}</p>
+              <div *ngIf="comment.id">
+                <p *ngIf="dateCreatedMapText[comment.id]">{{dateCreatedMapText[comment.id]}}</p>
+              </div>
               <p>{{comment.text}}</p>
               <p>{{comment.rockOns}} rock-ons</p>
           </div>

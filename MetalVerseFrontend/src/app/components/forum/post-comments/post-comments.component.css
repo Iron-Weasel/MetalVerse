@@ -9,15 +9,14 @@
 }
 
 .content {
-    line-height: 2rem;
+    line-height: 1.5rem;
     font-size: 1.2em;
     overflow-x: hidden;
     height: 570px;
 }
 
 .content-text {
-    margin-left: 0.6em;
-    margin-top: 3em;
+    margin-top: 5em;
     color: #4C4C4C;
 }
 
@@ -56,6 +55,7 @@
 
 .rock-on {
     float: right;
+    margin-left: 0.5em;
     margin-top: 2em;
 }
 

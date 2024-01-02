@@ -15,9 +15,9 @@
           <img class="rock-on" *ngIf="post.id && rockedOnMap[post.id]" src="../../../assets/icons/rocked.png" (click)="decreaseRockOn(post.id)">
           <div [routerLink]="['/forum', post.id]">
             <h4 class="postId"> user ID: {{ post.userId }} </h4>
+            <p class="createdDate" *ngIf="post.id">{{dateCreatedMapText[post.id]}}</p>
             <h2 class="title"> {{ post.title }}   </h2>
             <p class="description">  {{ post.description }} </p>
-            <p class="createdDate">  {{ post.createdDate }} </p>
             <p class="createdDate">  {{ post.views }} views  {{ post.rockOns }} rock-ons</p>
           </div>
         </div>
