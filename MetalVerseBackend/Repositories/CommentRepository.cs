@@ -9,10 +9,10 @@ namespace MetalVerseBackend.Repositories
         public CommentRepository(ApplicationDbContext _ApplicationDbContext) : base(_ApplicationDbContext) { }
         public void CreateComment(Comment comment) => Create(comment);
 
-        public Comment GetComment(Guid commentId) => FindByCondition(x => x.Id == commentId, false).First();
+        public Comment GetComment(Guid commentId) => FindByCondition(x => x.Id == commentId, true).First();
 
         public IEnumerable<Comment> GetComments(bool trackChanges) => FindAll(trackChanges).ToList();
 
-        public IEnumerable<Comment> GetCommentsByPost(Guid postId, bool trackChanges) => FindByCondition(x => x.PostId == postId, trackChanges).ToList();
+        public IEnumerable<Comment> GetCommentsByPost(Guid postId, bool trackChanges) => FindByCondition(x => x.PostId == postId, trackChanges).OrderByDescending(c => c.PostedDate).ToList();
     }
 }

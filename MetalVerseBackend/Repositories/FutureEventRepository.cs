@@ -12,7 +12,7 @@ namespace MetalVerseBackend.Repositories
 
         public FutureEvent GetFutureEvent(Guid futureEventId) => FindByCondition(x => x.Id == futureEventId, false).First();
 
-        public IEnumerable<FutureEvent> GetFutureEvents(bool trackChanges) => FindAll(trackChanges).ToList();
+        public IEnumerable<FutureEvent> GetFutureEvents(bool trackChanges) => FindAll(trackChanges).OrderBy(c => c.EventTime).ToList();
 
         public IEnumerable<FutureEvent> GetFutureEventsByString(string search, bool trackChanges) => FindByCondition(x => x.Title.Contains(search), trackChanges).ToList();
 

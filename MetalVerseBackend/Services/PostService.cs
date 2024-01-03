@@ -3,6 +3,9 @@ using MetalVerseBackend.Interfaces;
 using MetalVerseBackend.Interfaces.Repositories;
 using MetalVerseBackend.Models;
 using MetalVerseBackend.Models.Dtos;
+using MetalVerseBackend.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 
 namespace MetalVerseBackend.Services
 {
@@ -29,14 +32,25 @@ namespace MetalVerseBackend.Services
             _repository.Save();
         }
 
-        public int ComputeRockOns()
+        public void ComputeViews(Guid postId)
         {
-            throw new NotImplementedException();
+            var _post = _repository.Posts.GetPost(postId);
+            if (_post != null)
+            {
+                _post.Views += 1;
+                _repository.Save();
+            }
         }
 
-        public int ComputeViews()
+        public void ComputeRockOns(Guid postId, bool toIncrease)
         {
-            throw new NotImplementedException();
+            var _post = _repository.Posts.GetPost(postId);
+            if (_post != null)
+            {
+                if (toIncrease == true) _post.RockOns += 1;
+                else _post.RockOns -= 1;
+                _repository.Save();
+            };
         }
 
         public PostWithCommentsDto GetPost(Guid postId)

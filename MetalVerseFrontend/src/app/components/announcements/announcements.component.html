@@ -4,12 +4,15 @@
   
 <div class="content">
       <h2 class="content-text">Announcements</h2>
+      <input class="search-bar" placeholder="Search..." #searchInput (keyup.enter)="searchAnnouncement()">
       <img class="post-button" [routerLink]="['/create-announcement']" src="../../../assets/icons/New ann button.png">
-      <div *ngFor="let announcement of announcements">
-        <div class="card" [routerLink]="['/announcements', announcement.id]">
-          <h4 class="postId"> post ID: {{ announcement.id }} </h4>
-          <h2 class="title"> {{ announcement.title }}   </h2>
-          <p class="description">  {{ announcement.description }} </p>
+      <div *ngIf = "announcementsObs$ | async as announcements">
+        <div *ngFor="let announcement of announcements">
+          <div class="card" [routerLink]="['/announcements', announcement.id]">
+            <h4 class="postId"> post ID: {{ announcement.id }} </h4>
+            <h2 class="title"> {{ announcement.title }}   </h2>
+            <p class="description">  {{ announcement.description }} </p>
+          </div>
         </div>
       </div>
 </div>

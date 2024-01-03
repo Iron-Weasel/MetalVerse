@@ -38,11 +38,46 @@ namespace MetalVerseBackend.Controllers
             return Ok();
         }
 
+        [HttpPost("post_visited/{postId}")]
+        public IActionResult IncreasePostViews(Guid postId)
+        {
+            _postService.ComputeViews(postId);
+            return Ok();
+        }
+
+        [HttpPost("post_liked/{postId}")]
+        public IActionResult IncreasePostRockOns(Guid postId)
+        {
+            _postService.ComputeRockOns(postId, true);
+            return Ok();
+        }
+
+        [HttpPost("post_disliked/{postId}")]
+        public IActionResult DecreasePostRockOns(Guid postId)
+        {
+            _postService.ComputeRockOns(postId, false);
+            return Ok();
+        }
+
         [HttpGet("search_result")]
         public IActionResult GetResultsBySearch([FromQuery] string search)
         {
             var _posts = _postService.GetPostsBySearch(search);
-            return _posts.Count != 0 ? Ok(_posts) : NotFound();
+            return _posts.Count != 0 ? Ok(_posts) : Ok();
+        }
+
+        [HttpGet("sort_newest")]
+        public IActionResult GetNewestPosts()
+        {
+            var _posts = _postService.GetPosts().OrderByDescending(x => x.CreatedDate);
+            return Ok(_posts);
+        }
+
+        [HttpGet("sort_popular")]
+        public IActionResult GetPopularPosts()
+        {
+            var _posts = _postService.GetPosts().OrderByDescending(x => x.Views);
+            return Ok(_posts);
         }
     }
 }

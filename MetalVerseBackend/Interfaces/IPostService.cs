@@ -9,7 +9,7 @@ namespace MetalVerseBackend.Interfaces
         PostWithCommentsDto GetPost(Guid postId);
         List<Post> GetPostsBySearch(string search);
         void AddPost(Post post);
-        int ComputeViews();
-        int ComputeRockOns();
+        void ComputeViews(Guid postId);
+        void ComputeRockOns(Guid postId, bool toIncrease);
     }
 }

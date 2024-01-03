@@ -38,17 +38,33 @@
     width: 12%;
     float: right;
 }
+
+.new-sort-button {
+    margin-left: 1em;
+    margin-right: 0.5em;
+    margin-top: 1em;
+    width: 15%;
+}
+
+.top-sort-button {
+    width: 15%;
+}
    
 .card {
     box-shadow: 2px 2px 4px 0 #b4b4b4;
     border-radius: 3px;
     width: 27em;
-    height: 12em;
+    height: 14em;
     padding: 0 1em 3em 2em;
     margin: 5em 5em 5em 2em;
     background-color: #E3E3E3;
     font-family: sans-serif;
     font-size: 10px;
+}
+
+.rock-on {
+    float: right;
+    margin-top: 2em;
 }
 
 .postId {

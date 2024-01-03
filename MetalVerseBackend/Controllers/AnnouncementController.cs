@@ -66,7 +66,7 @@ namespace MetalVerseBackend.Controllers
         public IActionResult GetResultsBySearch([FromQuery] string search)
         {
             var _announcements = _service.GetAnnouncementsBySearch(search);
-            return _announcements.Count !=0 ? Ok(_announcements) : NotFound();
+            return _announcements.Count !=0 ? Ok(_announcements) : Ok();
         }
     }
 }

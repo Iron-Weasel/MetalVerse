@@ -22,9 +22,15 @@ namespace MetalVerseBackend.Services
             _repository.Save();
         }
 
-        public int ComputeRockOns()
+        public void ComputeRockOns(Guid commentId, bool toIncrease)
         {
-            throw new NotImplementedException();
+            var _comment = _repository.Comments.GetComment(commentId);
+            if (_comment != null)
+            {
+                if (toIncrease == true) _comment.RockOns += 1;
+                else _comment.RockOns -= 1;
+                _repository.Save();
+            };
         }
     }
 }

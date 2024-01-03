@@ -7,6 +7,6 @@
         public string UserName { get; set; }   // a certain comment is linked to only one user
         public required string Text { get; set; }
         public DateTime PostedDate { get; set; }
-        public int RockOns;
+        public int RockOns { get; set; }
     }
 }

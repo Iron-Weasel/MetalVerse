@@ -11,7 +11,7 @@
           <p>{{event.bandCountry}}</p>
           <p>{{event.bandGenre}}</p>
           <p>{{event.venueName}}</p>
-          <p>{{event.eventTime}}</p>
+          <p *ngIf="event.id">  {{ dateEventMapText[event.id] }} </p>
       </div>
     </div>
 </div>

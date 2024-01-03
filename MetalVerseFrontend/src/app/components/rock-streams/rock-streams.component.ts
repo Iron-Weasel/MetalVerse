@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ReplaySubject } from 'rxjs';
 import { RockStream } from 'src/app/models/rock-stream';
 import { BackendHttpService } from 'src/app/services/backend.service';
 
@@ -7,12 +8,37 @@ import { BackendHttpService } from 'src/app/services/backend.service';
   templateUrl: './rock-streams.component.html',
   styleUrls: ['./rock-streams.component.css']
 })
+
 export class RockStreamsComponent {
+    private httpService: BackendHttpService;
     public streams: RockStream[];
 
+    private streamsObs: ReplaySubject<RockStream[]> = new ReplaySubject<RockStream[]>(1);  // send data
+    public streamsObs$ = this.streamsObs.asObservable();  // receive data
+
+    @ViewChild('searchInput') searchInputRef: ElementRef;
+    
+
     constructor(httpService: BackendHttpService) { 
-      httpService.getStreams().subscribe((data:RockStream[]) => {
-         this.streams= data;
+      this.httpService = httpService;
+      this.loadStreams();
+    }
+    
+    loadStreams(): void {
+      this.httpService.getStreams().subscribe((data:RockStream[]) => {
+          this.streamsObs.next(data);
+          this.streams= data;
       });
+    }
+
+    searchStream(): void {
+      if(this.searchInputRef.nativeElement.value == '') this.loadStreams();
+      else {
+        this.httpService.searchStream(this.searchInputRef.nativeElement.value).subscribe((data:RockStream[]) => {
+          this.streamsObs.next(data);
+          this.streams = data;
+        });
+        this.searchInputRef.nativeElement.value = '';
+      }
     }
 }

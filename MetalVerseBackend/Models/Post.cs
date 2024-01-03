@@ -8,8 +8,8 @@
         public required string Description { get; set; }
         public string? ImageURL;
         public DateTime CreatedDate { get; set; }
-        public int Views;
-        public int RockOns;
+        public int Views { get; set; }
+        public int RockOns { get; set; }
         public int Comments;
     }
 }

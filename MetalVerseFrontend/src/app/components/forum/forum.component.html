@@ -5,13 +5,22 @@
 <div class="content">
     <h2 class="content-text">Forum</h2>
     <img class="post-button" src="../../../assets/icons/Post.png" [routerLink]="['/create-post']">
-    <input class="search-bar" placeholder="Search...">
-    <div *ngFor="let post of posts">
-      <div class="card" [routerLink]="['/forum', post.id]">
-        <h4 class="postId"> user ID: {{ post.userId }} </h4>
-        <h2 class="title"> {{ post.title }}   </h2>
-        <p class="description">  {{ post.description }} </p>
-        <p class="createdDate">  {{ post.createdDate }} </p>
+    <input class="search-bar" placeholder="Search..." #searchInput (keyup.enter)="searchPost()">
+    <img class="new-sort-button" src="../../../assets/icons/New button.png" (click)="sortByNewest()">
+    <img class="top-sort-button" src="../../../assets/icons/Top button.png" (click)="sortByPopularity()">
+    <div *ngIf="postsObs$ | async as posts">
+      <div *ngFor="let post of posts">
+        <div class="card">
+          <img class="rock-on" *ngIf="post.id && !rockedOnMap[post.id]" src="../../../assets/icons/unrocked.png" (click)="increaseRockOn(post.id)">
+          <img class="rock-on" *ngIf="post.id && rockedOnMap[post.id]" src="../../../assets/icons/rocked.png" (click)="decreaseRockOn(post.id)">
+          <div [routerLink]="['/forum', post.id]">
+            <h4 class="postId"> user ID: {{ post.userId }} </h4>
+            <p class="createdDate" *ngIf="post.id">{{dateCreatedMapText[post.id]}}</p>
+            <h2 class="title"> {{ post.title }}   </h2>
+            <p class="description">  {{ post.description }} </p>
+            <p class="createdDate">  {{ post.views }} views  {{ post.rockOns }} rock-ons</p>
+          </div>
+        </div>
       </div>
     </div>
 </div>
