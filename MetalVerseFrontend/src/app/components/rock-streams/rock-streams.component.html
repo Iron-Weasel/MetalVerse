@@ -10,6 +10,18 @@
           <div class="card">
             <h4 class="streamId"> stream ID: {{ stream.id }} </h4>
             <h2 class="name"> {{ stream.name }}   </h2>
+            <button (click)="playStream(stream.id)">
+              Play
+              <audio [src]="stream.apiLink" controls hidden></audio>
+            </button>
+            <button (click)="pauseStream(stream.id)">
+              Pause
+              <audio [src]="stream.apiLink" controls hidden></audio>
+            </button>
+            <button (click)="stopStream(stream.id)">
+              Stop
+              <audio [src]="stream.apiLink" controls hidden></audio>
+            </button>
           </div>
         </div>
       </div>

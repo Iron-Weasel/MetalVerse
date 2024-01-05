@@ -10,35 +10,58 @@ import { BackendHttpService } from 'src/app/services/backend.service';
 })
 
 export class RockStreamsComponent {
-    private httpService: BackendHttpService;
-    public streams: RockStream[];
+  private httpService: BackendHttpService;
+  public streams: RockStream[];
+  audioPlayer = new Audio();
 
-    private streamsObs: ReplaySubject<RockStream[]> = new ReplaySubject<RockStream[]>(1);  // send data
-    public streamsObs$ = this.streamsObs.asObservable();  // receive data
+  private streamsObs: ReplaySubject<RockStream[]> = new ReplaySubject<RockStream[]>(1);  // send data
+  public streamsObs$ = this.streamsObs.asObservable();  // receive data
 
-    @ViewChild('searchInput') searchInputRef: ElementRef;
-    
+  @ViewChild('searchInput') searchInputRef: ElementRef;
+  
 
-    constructor(httpService: BackendHttpService) { 
-      this.httpService = httpService;
-      this.loadStreams();
-    }
-    
-    loadStreams(): void {
-      this.httpService.getStreams().subscribe((data:RockStream[]) => {
-          this.streamsObs.next(data);
-          this.streams= data;
+  constructor(httpService: BackendHttpService) { 
+    this.httpService = httpService;
+    this.loadStreams();
+  }
+  
+  loadStreams(): void {
+    this.httpService.getStreams().subscribe((data:RockStream[]) => {
+        this.streamsObs.next(data);
+        this.streams= data;
+    });
+  }
+
+  searchStream(): void {
+    if(this.searchInputRef.nativeElement.value == '') this.loadStreams();
+    else {
+      this.httpService.searchStream(this.searchInputRef.nativeElement.value).subscribe((data:RockStream[]) => {
+        this.streamsObs.next(data);
+        this.streams = data;
       });
+      this.searchInputRef.nativeElement.value = '';
     }
+  }
 
-    searchStream(): void {
-      if(this.searchInputRef.nativeElement.value == '') this.loadStreams();
-      else {
-        this.httpService.searchStream(this.searchInputRef.nativeElement.value).subscribe((data:RockStream[]) => {
-          this.streamsObs.next(data);
-          this.streams = data;
-        });
-        this.searchInputRef.nativeElement.value = '';
-      }
-    }
+  playStream(streamId: string): void {
+    this.httpService.getStream(streamId).subscribe((data:RockStream) => {
+      this.audioPlayer.src = data.apiLink;
+      this.audioPlayer.play();
+    });
+  }
+
+  pauseStream(streamId: string): void {
+    this.httpService.getStream(streamId).subscribe((data:RockStream) => {
+      this.audioPlayer.src = data.apiLink;
+      this.audioPlayer.pause();
+    });
+  }
+
+  stopStream(streamId: string): void {
+    this.httpService.getStream(streamId).subscribe((data:RockStream) => {
+      this.audioPlayer.src = data.apiLink;
+      this.audioPlayer.pause();
+      this.audioPlayer.currentTime = 0;
+    });
+  }
 }

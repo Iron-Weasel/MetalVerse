@@ -200,6 +200,10 @@ export class BackendHttpService {
         return this.httpService.get<RockStream[]>('https://localhost:7206/stream');
     }
 
+    getStream(streamId: string): Observable<RockStream> {
+        return this.httpService.get<RockStream>('https://localhost:7206/stream/' + streamId);
+    }
+
     // search a stream by a string from BE
     searchStream(keyword: string): Observable<RockStream[]> {
         return this.httpService.get<RockStream[]>('https://localhost:7206/stream/search_result?search=' + keyword);
