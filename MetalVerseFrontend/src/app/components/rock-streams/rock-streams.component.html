@@ -7,28 +7,40 @@
       <input class="search-bar" placeholder="Search..." #searchInput (keyup.enter)="searchStream()">
       <div *ngIf="streamsObs$ | async as streams">
         <div *ngFor="let stream of streams">
-          <div class="card">
+          <div class="card" (click)="playStream(stream.id)">
             <h4 class="streamId"> stream ID: {{ stream.id }} </h4>
             <h2 class="name"> {{ stream.name }}   </h2>
-            <button (click)="playStream(stream.id)">
-              Play
-              <audio [src]="stream.apiLink" controls hidden></audio>
-            </button>
-            <button (click)="pauseStream(stream.id)">
-              Pause
-              <audio [src]="stream.apiLink" controls hidden></audio>
-            </button>
-            <button (click)="stopStream(stream.id)">
-              Stop
-              <audio [src]="stream.apiLink" controls hidden></audio>
-            </button>
           </div>
         </div>
-        <div *ngIf="metadata"> 
-          {{ metadata.songTitle }} - {{ metadata.artist }}
-          <img [src]="metadata.albumCover">
-        </div>
       </div>
+</div>
+
+<div class="player" *ngIf="playerService.isPlayerOpen">
+  <div *ngIf="playerService.metadata as metadata" class="metadata">
+    <img [src]="metadata.albumCover" class="albumCover">
+
+    <div *ngIf="playerService.currentStream as currentStream">
+      <div class="info">
+        <p>  {{ currentStream.name }} </p>
+        <p class="songDetails"> {{ metadata.artist }} - {{ metadata.songTitle }} </p>
+      </div>
+  
+      <button (click)="pauseStream(currentStream.id)" class="control" *ngIf="playerService.isPlaying">
+        <img class="pause" src="../../../assets/icons/5683591.png">
+        <audio [src]="currentStream.apiLink" controls hidden></audio>
+      </button>
+  
+      <button (click)="playStream(currentStream.id)" class="control" *ngIf="!playerService.isPlaying">
+        <img class="play" src="../../../assets/icons/play.png">
+        <audio [src]="currentStream.apiLink" controls hidden></audio>
+      </button>
+  
+      <button (click)="stopStream(currentStream.id)" class="control">
+        <img class="stop" src="../../../assets/icons/stop_square_icon_2063051.png">
+        <audio [src]="currentStream.apiLink" controls hidden></audio>
+      </button>
+    </div>
+  </div>
 </div>
   
 <div class="footer">

@@ -3,6 +3,7 @@ import { ReplaySubject, Subscription, interval } from 'rxjs';
 import { RockStream } from 'src/app/models/rock-stream';
 import { StreamMetadata } from 'src/app/models/streamMetadata';
 import { BackendHttpService } from 'src/app/services/backend.service';
+import { PlayerService } from 'src/app/services/player.service';
 
 @Component({
   selector: 'app-rock-streams',
@@ -12,10 +13,9 @@ import { BackendHttpService } from 'src/app/services/backend.service';
 
 export class RockStreamsComponent {
   private httpService: BackendHttpService;
+  protected playerService: PlayerService;
   public streams: RockStream[];
-  public metadata: StreamMetadata | null;
   private metadataUpdateSubscription: Subscription;
-  audioPlayer = new Audio();
 
   private streamsObs: ReplaySubject<RockStream[]> = new ReplaySubject<RockStream[]>(1);  // send data
   public streamsObs$ = this.streamsObs.asObservable();  // receive data
@@ -23,8 +23,9 @@ export class RockStreamsComponent {
   @ViewChild('searchInput') searchInputRef: ElementRef;
   
 
-  constructor(httpService: BackendHttpService) { 
+  constructor(httpService: BackendHttpService, playerService: PlayerService) { 
     this.httpService = httpService;
+    this.playerService = playerService;
     this.loadStreams();
   }
   
@@ -47,34 +48,38 @@ export class RockStreamsComponent {
   }
 
   playStream(streamId: string): void {
+    this.playerService.isPlayerOpen = true;
+    this.playerService.isPlaying = true;
+
     this.httpService.getStream(streamId).subscribe((data:RockStream) => {
-      this.audioPlayer.src = data.apiLink;
-      this.audioPlayer.play();
+      this.playerService.play(data);
       this.getStreamMetadata(data.id);
       this.startMetadataPolling(data);
     });
   }
 
   pauseStream(streamId: string): void {
+    this.playerService.isPlayerOpen = true;
+    this.playerService.isPlaying = false;
+
     this.httpService.getStream(streamId).subscribe((data:RockStream) => {
-      this.audioPlayer.src = data.apiLink;
-      this.audioPlayer.pause();
+      this.playerService.pause(data);
     });
   }
 
   stopStream(streamId: string): void {
+    this.playerService.isPlayerOpen = false;
+    this.playerService.isPlaying = false;
+
     this.httpService.getStream(streamId).subscribe((data:RockStream) => {
-      this.audioPlayer.src = data.apiLink;
-      this.audioPlayer.pause();
-      this.audioPlayer.currentTime = 0;
+      this.playerService.stop(data);
       this.stopMetadataPolling();
-      this.metadata = null;
     });
   }
 
   getStreamMetadata(streamId: string): void {
     this.httpService.getStreamMetadata(streamId).subscribe((data:StreamMetadata) => {
-      this.metadata = data;
+      this.playerService.metadata = data;
     });
   }
 
