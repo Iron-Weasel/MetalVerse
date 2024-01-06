@@ -40,8 +40,7 @@ namespace MetalVerseBackend.Services
         public async Task<StreamMetadata> GetStreamMetadata(Guid streamId)
         {
             var _stream = _repository.Streams.GetRockStream(streamId);
-            var streamName = HandleStreamNames(_stream.Name);
-            var metadataUrl = $"https://www.rockantenne.de/api/metadata/now/{streamName}";
+            var metadataUrl = $"https://www.rockantenne.de/api/metadata/now/{_stream.StreamKeyword}";
 
             var _httpClient = new HttpClient();
             try
@@ -56,7 +55,7 @@ namespace MetalVerseBackend.Services
                 var metadata = JsonConvert.DeserializeObject<StreamMetadata>(content);
                 var songTitle = metadata.data.title;
                 var artist = metadata.data.artist;
-                var albumCover = metadata.data.cover.GetCoverImageUrl();
+                var albumCover = metadata.data.cover != null ? metadata.data.cover.GetCoverImageUrl() : "https://fastly.picsum.photos/id/548/200/200.jpg?hmac=OSCQ-YL2a-5iYm7-5vVwigtt78bNIZFxNRaWP8pZ_bw";
 
                 return new StreamMetadata 
                 { 
@@ -69,22 +68,6 @@ namespace MetalVerseBackend.Services
             {
                 return null;
             }
-        }
-
-        private string HandleStreamNames(string streamName)
-        {
-            streamName = streamName.ToLower();
-            if (streamName.Contains(" "))
-            {
-                streamName = streamName.Replace(" ", "-");
-            }
-
-            if(streamName.Contains("hard-rock"))
-            {
-                streamName = "rock-antenne-" + streamName;
-            }
-
-            return streamName;
         }
     }
 }

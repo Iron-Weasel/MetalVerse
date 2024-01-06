@@ -53,7 +53,7 @@ export class RockStreamsComponent {
 
     this.httpService.getStream(streamId).subscribe((data:RockStream) => {
       this.playerService.play(data);
-      this.getStreamMetadata(data.id);
+      this.getStreamMetadata(data.id); // instantly show metadata when first playing
       this.startMetadataPolling(data);
     });
   }
@@ -77,16 +77,16 @@ export class RockStreamsComponent {
     });
   }
 
-  getStreamMetadata(streamId: string): void {
+  private getStreamMetadata(streamId: string): void {
     this.httpService.getStreamMetadata(streamId).subscribe((data:StreamMetadata) => {
-      this.playerService.metadata = data;
+      this.playerService.metadataMap[streamId] = data;
     });
   }
 
 
   private startMetadataPolling(stream: RockStream): void {
     this.stopMetadataPolling(); 
-    this.metadataUpdateSubscription = interval(60000).subscribe(() => {
+    this.metadataUpdateSubscription = interval(35000).subscribe(() => {
       this.getStreamMetadata(stream.id);
     });
   }

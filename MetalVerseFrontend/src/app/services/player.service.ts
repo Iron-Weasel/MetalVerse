@@ -9,7 +9,7 @@ import { RockStream } from "../models/rock-stream";
 export class PlayerService {
     isPlayerOpen: boolean = false;
     isPlaying: boolean = false;
-    public metadata: StreamMetadata | null;
+    public metadataMap: { [streamId: string]: StreamMetadata} = {};  // for each stream, update it regularly
     public currentStream: RockStream;
     audioPlayer = new Audio();
 
@@ -22,6 +22,7 @@ export class PlayerService {
     }
 
     pause(stream: RockStream): void {
+        this.currentStream = stream;
         this.audioPlayer.src = stream.apiLink;
         this.audioPlayer.pause();
     }
@@ -30,6 +31,5 @@ export class PlayerService {
         this.audioPlayer.src = stream.apiLink;
         this.audioPlayer.pause();
         this.audioPlayer.currentTime = 0;
-        this.metadata = null;
     }
 }

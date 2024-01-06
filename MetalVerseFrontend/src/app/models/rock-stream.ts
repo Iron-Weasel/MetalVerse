@@ -3,4 +3,5 @@ export interface RockStream {
     name: string;
     image: string;
     apiLink: string;
+    streamKeyword?: string;
 }

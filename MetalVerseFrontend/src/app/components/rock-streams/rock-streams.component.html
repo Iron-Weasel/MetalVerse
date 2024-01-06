@@ -15,11 +15,11 @@
       </div>
 </div>
 
-<div class="player" *ngIf="playerService.isPlayerOpen">
-  <div *ngIf="playerService.metadata as metadata" class="metadata">
+<div class="player" *ngIf="playerService.isPlayerOpen && playerService.currentStream as currentStream">
+  <div *ngIf="playerService.metadataMap[currentStream.id] as metadata" class="metadata">
     <img [src]="metadata.albumCover" class="albumCover">
 
-    <div *ngIf="playerService.currentStream as currentStream">
+    <div>
       <div class="info">
         <p>  {{ currentStream.name }} </p>
         <p class="songDetails"> {{ metadata.artist }} - {{ metadata.songTitle }} </p>
