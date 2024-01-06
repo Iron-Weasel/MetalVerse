@@ -24,6 +24,10 @@
             </button>
           </div>
         </div>
+        <div *ngIf="metadata"> 
+          {{ metadata.songTitle }} - {{ metadata.artist }}
+          <img [src]="metadata.albumCover">
+        </div>
       </div>
 </div>
   

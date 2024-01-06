@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { RockStream } from 'src/app/models/rock-stream';
+import { StreamMetadata } from 'src/app/models/streamMetadata';
 import { BackendHttpService } from 'src/app/services/backend.service';
 
 @Component({
@@ -12,6 +13,7 @@ import { BackendHttpService } from 'src/app/services/backend.service';
 export class RockStreamsComponent {
   private httpService: BackendHttpService;
   public streams: RockStream[];
+  public metadata: StreamMetadata | null;
   audioPlayer = new Audio();
 
   private streamsObs: ReplaySubject<RockStream[]> = new ReplaySubject<RockStream[]>(1);  // send data
@@ -47,6 +49,7 @@ export class RockStreamsComponent {
     this.httpService.getStream(streamId).subscribe((data:RockStream) => {
       this.audioPlayer.src = data.apiLink;
       this.audioPlayer.play();
+      this.getStreamMetadata(data.id);
     });
   }
 
@@ -54,6 +57,7 @@ export class RockStreamsComponent {
     this.httpService.getStream(streamId).subscribe((data:RockStream) => {
       this.audioPlayer.src = data.apiLink;
       this.audioPlayer.pause();
+      this.getStreamMetadata(data.id);
     });
   }
 
@@ -62,6 +66,13 @@ export class RockStreamsComponent {
       this.audioPlayer.src = data.apiLink;
       this.audioPlayer.pause();
       this.audioPlayer.currentTime = 0;
+      this.metadata = null;
     });
+  }
+
+  getStreamMetadata(streamId: string): void {
+    this.httpService.getStreamMetadata(streamId).subscribe((data:StreamMetadata) => {
+      this.metadata = data;
+    })
   }
 }

@@ -7,6 +7,7 @@ import { FutureEvent } from "../models/future-event";
 import { RockStream } from "../models/rock-stream";
 import { Comment } from "../models/comment";
 import { User } from "../models/user";
+import { StreamMetadata } from "../models/streamMetadata";
 
 @Injectable({providedIn: 'root'})
 
@@ -207,6 +208,10 @@ export class BackendHttpService {
     // search a stream by a string from BE
     searchStream(keyword: string): Observable<RockStream[]> {
         return this.httpService.get<RockStream[]>('https://localhost:7206/stream/search_result?search=' + keyword);
+    }
+
+    getStreamMetadata(streamId: string): Observable<StreamMetadata> {
+        return this.httpService.get<StreamMetadata>('https://localhost:7206/stream/metadata?streamId=' + streamId);
     }
  
 }
