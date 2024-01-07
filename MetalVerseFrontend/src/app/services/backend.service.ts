@@ -50,6 +50,10 @@ export class BackendHttpService {
     saveUser(userData: User): Observable<User> {
         return this.httpService.post<User>('https://localhost:7206/users/add_user', userData);
     }
+    //get a specific user
+    getUser(userId: string): Observable<User> {
+        return this.httpService.get<User>('https://localhost:7206/users/' + userId);
+    }
 
 
     // FORUM

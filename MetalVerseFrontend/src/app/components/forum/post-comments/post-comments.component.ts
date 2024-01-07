@@ -94,7 +94,10 @@ export class PostCommentsComponent{
         case (differenceInSeconds >= 7200 && differenceInSeconds < 84000): 
               dateCreatedString =  Math.floor(differenceInSeconds / 3600) + ' hours ago';
               break;
-        case (differenceInSeconds >= 84000 && differenceInSeconds < 588000): 
+        case (differenceInSeconds >= 84000 && differenceInSeconds < 168000): 
+              dateCreatedString =  Math.floor(differenceInSeconds / 84000) + ' day ago';
+              break;
+        case (differenceInSeconds >= 168000 && differenceInSeconds < 588000): 
               dateCreatedString =  Math.floor(differenceInSeconds / 84000) + ' days ago';
               break;
         case (differenceInSeconds >= 588000 && differenceInSeconds < 1176000): 
