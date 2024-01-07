@@ -12,6 +12,7 @@
     line-height: 2rem;
     font-size: 1.2em;
     overflow-x: hidden;
+    height: 660px;
 }
 
 .content-text {
@@ -20,21 +21,31 @@
 }
 
 .search-bar {
-    margin-left: 1.5em;
+    margin-left: 1.7em;
     margin-top: 0.9em;
-    width: 15em;
-    height: 1em;
+    width: 17em;
+    height: 1.3em;
     background-color: #2F2F2f;
+    border: solid 2px #2F2F2f;
     border-radius: 4px;
+    color: #A8A8A8;
+    font-size: 12px;
+    font-family: 'Balthazar', serif;
 }
 
 ::placeholder {
     color: #A8A8A8;
-    font-size: 10px;
+    font-size: 12px;
+    font-family: 'Balthazar', serif;
 }
 
-.post-button {
-    margin-right: 1em;
+input:focus {
+    outline: none !important;
+    border: solid 2px #740000;
+}
+
+.event-button {
+    margin-right: 1.1em;
     width: 12%;
     float: right;
 }
@@ -43,23 +54,33 @@
     padding-top: 1em;
 }
 .title {
+    font-size: 18px;
     margin-top: -13px;
 }
 .eventDate {
+    color: #4C4C4C;
     margin-top: -13px;
-    font-size: 8px;
+    font-size: 12px;
+    margin-left: 0.1em;
+    margin-bottom: -2.5em;
 }
 
 .card {
-    box-shadow: 2px 2px 4px 0 #b4b4b4;
+    box-shadow: 2px 2px 4px 0 #353535;
     border-radius: 3px;
     width: 27em;
-    height: 12em;
+    height: auto;
     padding: 0 1em 3em 2em;
-    margin: 5em 5em 5em 2em;
+    margin: 3em 5em 5em 2em;
     background-color: #E3E3E3;
-    font-family: sans-serif;
+    font-family: 'Balthazar', serif;
     font-size: 10px;
+}
+
+.eventImage {
+    margin-top: 1em;
+    width: 95%;
+    border-radius: 3px;
 }
 
 .navbar {
