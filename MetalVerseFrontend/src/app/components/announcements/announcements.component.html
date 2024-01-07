@@ -9,9 +9,9 @@
       <div *ngIf = "announcementsObs$ | async as announcements">
         <div *ngFor="let announcement of announcements">
           <div class="card" [routerLink]="['/announcements', announcement.id]">
-            <h4 class="postId"> post ID: {{ announcement.id }} </h4>
+            <!-- to be replaced when storing images in DB in the near future -->
+            <img class="announcementImage" src="https://fastly.picsum.photos/id/6/300/150.jpg?hmac=c914-eRIjIpx5sAwpgtoqE7GHJcrgVi9wGZV58c_N0o">
             <h2 class="title"> {{ announcement.title }}   </h2>
-            <p class="description">  {{ announcement.description }} </p>
           </div>
         </div>
       </div>

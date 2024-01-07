@@ -21,7 +21,7 @@ export class CreateAnnouncementsComponent {
   // clicking on "Post" will create a new announcement
   onSaveAnnouncement(): void {
       const announcement: Announcement = {
-        userId: "ed519956-e527-415b-8c29-e8ee76f4bca6",
+        userId: "715a5636-51bc-4a12-a961-a425750d398c",
         title: this.titleInputRef.nativeElement.value,
         description: this.descriptionInputRef.nativeElement.value,
         image: "some image"

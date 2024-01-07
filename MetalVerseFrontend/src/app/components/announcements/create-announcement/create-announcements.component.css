@@ -12,7 +12,7 @@
     line-height: 2rem;
     font-size: 1.2em;
     overflow-x: hidden;
-    height: 580px;
+    height: 655px;
 }
 
 .content-text {
@@ -22,26 +22,48 @@
 }
 
 .title {
-    margin-left: 1.5em;
+    margin-left: 1.3em;
     margin-top: 0.9em;
-    width: 15em;
+    width: 18em;
     height: 1em;
     background-color: #2F2F2f;
+    border: solid 2px #2F2F2f;
     border-radius: 4px;
+    font-family: 'Balthazar', serif;
+    font-size: 15px;
+    color: #A8A8A8;
 }
 
 ::placeholder {
+    display: block;
     color: #A8A8A8;
-    font-size: 10px;
+    font-size: 12px;
+    margin-top: -10em;
+    font-family: 'Balthazar', serif;
+}
+
+input:focus {
+    outline: none !important;
+    border: solid 2px #740000;
+}
+
+textarea:focus {
+    outline: none !important;
+    border: solid 2px #740000;
 }
 
 .description {
-    margin-left: 1.5em;
+    margin-left: 1.3em;
     margin-top: 0.9em;
-    width: 15em;
-    height: 5em;
+    width: 18em;
+    height: 8em;
+    resize: none;
     background-color: #2F2F2f;
+    border: solid 2px #2F2F2f;
     border-radius: 4px;
+    font-family: 'Balthazar', serif;
+    font-size: 15px;
+    color: #A8A8A8;
 }
 
 .add-img {

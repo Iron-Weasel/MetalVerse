@@ -17,7 +17,7 @@
             <h4 class="postId" *ngIf="usernameMap[post.userId]"> @{{ usernameMap[post.userId] }} </h4>
             <p class="createdDate" *ngIf="post.id"> {{dateCreatedMapText[post.id]}} </p>
             <h2 class="title"> {{ post.title }}   </h2>
-            <p class="description">  {{ (post.description.length > 40) ? (post.description | slice:0:40)+'...':(post.description) }} </p>
+            <p class="description">  {{ (post.description.length > 40) ? (post.description | slice:0:40)+'...' : (post.description) }} </p>
             <div class="postInfo">  
                 <p class="views"> {{ post.views }} views</p>  
                 <p class="rockOnNumbers"> {{ post.rockOns }} rock-ons </p>
