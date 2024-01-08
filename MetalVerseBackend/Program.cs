@@ -19,15 +19,18 @@ builder.Services.AddAuthentication(opt => {
 })
     .AddJwtBearer(options =>
     {
-        options.TokenValidationParameters = new TokenValidationParameters
+        options.SaveToken = true;
+
+        options.TokenValidationParameters = new TokenValidationParameters()
         {
-            ValidateIssuer = true,
-            ValidateAudience = true,
+            ValidIssuer = builder.Configuration["JWT:Issuer"],
+            ValidAudience = builder.Configuration["JWT:Audience"],
+            RequireExpirationTime = true,
             ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = "https://localhost:7206",
-            ValidAudience = "https://localhost:7206",
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
+            IssuerSigningKey =
+                new SymmetricSecurityKey(
+                    Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"])),
+            ClockSkew = TimeSpan.Zero
         };
     });
 
@@ -49,6 +52,7 @@ builder.Services.AddScoped<IEventsService, EventsService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IStreamService, StreamService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ISigningService, SigningService>();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 

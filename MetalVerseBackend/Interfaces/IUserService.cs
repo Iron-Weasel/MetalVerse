@@ -7,7 +7,6 @@ namespace MetalVerseBackend.Interfaces
     {
         List<User> GetUsers();
         User GetUser(Guid userId);
-        Task AddUser(User user);
-        bool ValidateUser(LoginUser attempt);
+        User GetUserByString(string username);
     }
 }

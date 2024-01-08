@@ -1,10 +1,12 @@
-﻿using MetalVerseBackend.Models;
+﻿using MetalVerseBackend.Interfaces.Repositories;
+using MetalVerseBackend.Models;
+using MetalVerseBackend.Models.Dtos;
 
 namespace MetalVerseBackend.Interfaces
 {
     public interface ISigningService
     {
-        void RegisterUser(User user); // add a new user
-        void LoginUser(string username, string password);
+        Task RegisterUser(User user);
+        bool ValidateUser(LoginUser attempt);
     }
 }

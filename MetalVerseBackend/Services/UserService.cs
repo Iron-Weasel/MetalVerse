@@ -30,21 +30,9 @@ namespace MetalVerseBackend.Services
             return _repository.Users.GetUsers(false).ToList();
         }
 
-        public bool ValidateUser(LoginUser attempt)
+        public User GetUserByString(string username)
         {
-            var found = _repository.Users.GetUsersByString(attempt.Username, false).FirstOrDefault();
-            if (found == null)
-            {
-                return false;
-            }
-
-            var passwordCheck = found.Password == attempt.Password;
-            if (!passwordCheck) 
-            {
-                return false;
-            }
-
-            return true;
+            return _repository.Users.GetUsersByString(username, false).FirstOrDefault();
         }
     }
 }

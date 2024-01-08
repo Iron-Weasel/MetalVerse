@@ -3,6 +3,7 @@ using MetalVerseBackend.Interfaces.Repositories;
 using MetalVerseBackend.Models;
 using MetalVerseBackend.Models.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -16,7 +17,11 @@ namespace MetalVerseBackend.Controllers
     {
         //private List<User> _users = new List<User>();
         private readonly IUserService _service;
-        public UserController(IUserService service)
+        private readonly ISigningService _signing;
+        private readonly IConfiguration _configuration;
+        private readonly SecurityKey key;
+
+        public UserController(IUserService service, ISigningService signing, IConfiguration configuration)
         {
             /*_users.Add(new User()
             {
@@ -39,6 +44,10 @@ namespace MetalVerseBackend.Controllers
             });
             */
             _service = service;
+            _signing = signing;
+            _configuration = configuration;
+
+            key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Key"]));
         }
         [HttpGet]
         public IActionResult GetUsers()
@@ -57,7 +66,7 @@ namespace MetalVerseBackend.Controllers
         [HttpPost("add_user")]
         public async Task<IActionResult> AddUser(User user)
         {
-            await _service.AddUser(user);
+            await _signing.RegisterUser(user);
             return Ok();
         }
 
@@ -68,17 +77,23 @@ namespace MetalVerseBackend.Controllers
             {
                 return BadRequest("Invalid client request");
             }
-            if (_service.ValidateUser(user))
+            if (_signing.ValidateUser(user))
             {
-                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("KE1Z94B4i0N9mK/FvFDOZbOYHRNnWXLAq8vSIPbnxEzk/0ax109JdlwmEO6bQK2iUf+Dk7Mu2J4RZSryzhZHw8dKf2jQnq2G1h/Qbynz0Iyne72iio0UXGTGdAQz/EX0wYWv/mzlmwIASHlJB1i7IaQSTaE3SlH0h609Rs1IdOg8GC8zGfnk+LNbnVBzQWFBYMIoaOFp5AL8iggVrsLk2SoSQS6a1XJQJjDlg/XhswCZ03cs0nKn6c6B03QLR6hzupAQ/9VOBQCO9xtlwLt9n7s7mWUBTB8UBNescnE53Rqc/QJ4SvcN2ToDysRfrTRndiSajwWI4HqhTa/BmQO/NhOoioWYuMOoc3CZduOAA1U=\r\n"));
-                var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
-                var tokeOptions = new JwtSecurityToken(
-                    issuer: "https://localhost:5001",
-                    audience: "https://localhost:5001",
-                    claims: new List<Claim>(),
+                var _secret = _service.GetUserByString(user.Username);
+                var claims = new[]
+                {
+                    new Claim(JwtRegisteredClaimNames.UniqueName, _secret.Username),
+                    new Claim(JwtRegisteredClaimNames.NameId , _secret.Id.ToString()),
+                };
+
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+                var tokeOptions = new JwtSecurityToken(_configuration["JWT:Issuer"],
+                    _configuration["JWT:Audience"],
+                    claims,
                     expires: DateTime.Now.AddHours(1),
-                    signingCredentials: signinCredentials
-                );
+                    signingCredentials: creds);
+
                 var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
                 return Ok(new AuthenticatedResponse { Token = tokenString });
             }
