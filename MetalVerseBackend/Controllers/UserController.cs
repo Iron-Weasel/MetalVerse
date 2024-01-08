@@ -71,7 +71,7 @@ namespace MetalVerseBackend.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromForm] LoginUser user)
+        public IActionResult Login(LoginUser user)
         {
             if (user is null)
             {

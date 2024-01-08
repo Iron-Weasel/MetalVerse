@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Post } from "../models/post";
 import { Observable, ReplaySubject, Subject, tap } from "rxjs";
@@ -8,6 +8,7 @@ import { RockStream } from "../models/rock-stream";
 import { Comment } from "../models/comment";
 import { User } from "../models/user";
 import { StreamMetadata } from "../models/streamMetadata";
+import { AuthenticatedResponse } from "../models/authenticatedResponse";
 
 @Injectable({providedIn: 'root'})
 
@@ -53,6 +54,11 @@ export class BackendHttpService {
     //get a specific user
     getUser(userId: string): Observable<User> {
         return this.httpService.get<User>('https://localhost:7206/users/' + userId);
+    }
+    //authenticate a user and obtain token
+    authUser(userLogin: User): Observable<AuthenticatedResponse> {
+        return this.httpService.post<AuthenticatedResponse>('https://localhost:7206/users/login', userLogin, 
+               { headers: new HttpHeaders({ "Content-Type": "application/json"}) });
     }
 
 

@@ -1,26 +1,16 @@
 <img class="login-image" src="../../../assets/images/Login image.png">
 <div class="content">
     <img class="logo" src="../../../assets/icons/Metalverse11.png">
-    <input class="credential-bar" placeholder="Username">
-    <input class="credential-bar" placeholder="Password">
-    <p class="register-text">Don't have an account?</p>
-    <p class="register-route" [routerLink]="['/register']">Register now</p>
-    <div [ngSwitch]="userRole">
-        <div class="login-button" *ngSwitchCase="'regular'">
-            <img src="../../../assets/icons/Login button.png" [routerLink]="['/forum']">
+    <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+        <input class="credential-bar" type="email" id="username" name="username" [(ngModel)]="credentials.username" placeholder="Username" required>
+        <input class="credential-bar" type="password" id="password" name="password" [(ngModel)]="credentials.password"  placeholder="Password" required>
+        <p class="register-text">Don't have an account?</p>
+        <p class="register-route" [routerLink]="['/register']">Register now</p>
+        <div class="login-button">
+            <button style="border: none; background-color: transparent" type="submit" [disabled]="!loginForm.valid">
+                <img src="../../../assets/icons/Login button.png">
+            </button>
         </div>
-        <div class="login-button" *ngSwitchCase="'band member'">
-            <img src="../../../assets/icons/Login button.png" [routerLink]="['/announcements']">
-        </div>
-        <div class="login-button" *ngSwitchCase="'event planner'">
-            <img src="../../../assets/icons/Login button.png" [routerLink]="['/events']">
-        </div>
-        <div class="login-button" *ngSwitchCase="'manager'">
-            <img src="../../../assets/icons/Login button.png" [routerLink]="['/announcements']">
-        </div>
-        <div class="login-button" *ngSwitchDefault>
-            <img src="../../../assets/icons/Login button.png" [routerLink]="['/']">
-        </div>
-    </div>
+    </form>
 </div>
 
