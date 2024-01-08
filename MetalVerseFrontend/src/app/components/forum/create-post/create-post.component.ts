@@ -1,4 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Post } from 'src/app/models/post';
 import { BackendHttpService } from 'src/app/services/backend.service';
 
@@ -8,20 +9,27 @@ import { BackendHttpService } from 'src/app/services/backend.service';
   styleUrls: ['./create-post.component.css']
 })
 export class CreatePostComponent {
-  //TODO: would be nicer to use FormsModel next time
   @ViewChild('titleInput') titleInputRef: ElementRef;
   @ViewChild('descriptionInput') descriptionInputRef: ElementRef;
 
   private httpService: BackendHttpService;
+  userIdLoggedIn: string;
 
-  constructor(httpService: BackendHttpService) { 
+  constructor(httpService: BackendHttpService, private jwtHelper: JwtHelperService) { 
     this.httpService  = httpService;
+    this.getUserLoggedIn();
+  }
+
+  getUserLoggedIn() {
+    const token = localStorage.getItem("jwt");
+    if(token) var decodedToken = this.jwtHelper.decodeToken(token);
+    this.userIdLoggedIn = decodedToken['nameid'];
   }
 
   // clicking on "Post" will create a new post
   onSavePost(): void {
       const post: Post = {
-        userId: "715a5636-51bc-4a12-a961-a425750d398c",
+        userId: this.userIdLoggedIn,
         title: this.titleInputRef.nativeElement.value,
         description: this.descriptionInputRef.nativeElement.value,
         imageURL: "some image",

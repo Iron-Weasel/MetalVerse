@@ -84,6 +84,7 @@ namespace MetalVerseBackend.Controllers
                 {
                     new Claim(JwtRegisteredClaimNames.UniqueName, _secret.Username),
                     new Claim(JwtRegisteredClaimNames.NameId , _secret.Id.ToString()),
+                    new Claim(ClaimTypes.Role, _secret.UserRole),
                 };
 
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

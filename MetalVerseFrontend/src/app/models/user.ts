@@ -5,5 +5,5 @@ export interface User {
     lastName?: string;
     email?: string;
     password: string;
-    //TODO: add user role as well
+    userRole?: string;
 }

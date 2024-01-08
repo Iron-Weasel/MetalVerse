@@ -8,7 +8,6 @@ import { BackendHttpService } from 'src/app/services/backend.service';
   styleUrls: ['./create-event.component.css']
 })
 export class CreateEventComponent {
-  //TODO: would be nicer to use FormsModel next time
   @ViewChild('titleInput') titleInputRef: ElementRef;
   @ViewChild('bandCountryInput') bandCountryInputRef: ElementRef;
   @ViewChild('bandGenreInput') bandGenreInputRef: ElementRef;

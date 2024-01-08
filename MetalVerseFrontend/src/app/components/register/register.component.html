@@ -6,24 +6,25 @@
     <input class="credential-bar" placeholder="Email" #emailInput>
     <input class="credential-bar" placeholder="Your new username" #usernameInput>
     <input class="credential-bar" placeholder="New password" #passwordInput>
-    <input class="credential-bar" placeholder="Confirm new password">
+    <input class="credential-bar" placeholder="Confirm new password" #confirmInput>
     <div class="dropdown">
         <p>Select your role</p>
         <div class="dropdown-component">
-            <select name="roles" class="options">
-                <option value="Regular user">Regular user</option>
-                <option value="Event Organizer">Event Organizer</option>
-                <option value="Band Member">Band Member</option>
-                <option value="Studio Manager">Studio Manager</option>
+            <select #roles (change)="onSelected(roles.value)" name="roles" class="options">
+                <option>Regular user</option>
+                <option>Event Organizer</option>
+                <option>Band Member</option>
+                <option>Studio Manager</option>
             </select>
         </div>
     </div>
     <div class="terms">
-        <input type="checkbox" class="checkbox" name="terms-of-service" value="">
+        <input type="checkbox" class="checkbox" name="terms-of-service" value="" (click)="acceptTerms()">
         <p class="terms-text">I agree with the Terms of Service and Privacy policy</p>
+        <p class="error"> {{ errorMessage }}</p>
     </div>
-    <div class="register-button">
-        <img src="../../../assets/icons/Register button.png" [routerLink]="['/register-success']" (click)="onSaveUser()">
+    <div class="register-button" (click)="onSaveUser()">
+        <img src="../../../assets/icons/Register button.png" [routerLink]="routeCheck == true ? ['/register-success'] : ['/register']">
     </div>
     <div>
         <img class="kitty-img" src="../../../assets/images/hihi1.PNG">

@@ -61,6 +61,11 @@ option {
     margin-top: 2.5em;
 }
 
+.error {
+    color:#740000;
+    height: 5px;
+}
+
 .checkbox {
     accent-color: #2F2F2F;
 }

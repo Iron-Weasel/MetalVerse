@@ -5,6 +5,7 @@ import { Comment } from 'src/app/models/comment';
 import { BackendHttpService } from 'src/app/services/backend.service';
 import { ReplaySubject } from 'rxjs';
 import { User } from 'src/app/models/user';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-post-comments',
@@ -16,6 +17,7 @@ export class PostCommentsComponent{
     private httpService: BackendHttpService;
     public post: Post;
     public idPost: string;
+    usernameLoggedIn: string;
 
     private commentsObs: ReplaySubject<Comment[]> = new ReplaySubject<Comment[]>(1);  // send data
     public commentsObs$ = this.commentsObs.asObservable();  // receive data
@@ -39,7 +41,7 @@ export class PostCommentsComponent{
     usernamePost: string;
 
     
-    constructor(private route: ActivatedRoute, httpService: BackendHttpService) {
+    constructor(private route: ActivatedRoute, httpService: BackendHttpService, private jwtHelper: JwtHelperService) {
       this.httpService = httpService;
       this.idPost = String(this.route.snapshot.paramMap.get('id'));
       this.increasePostViews(this.idPost);
@@ -49,6 +51,13 @@ export class PostCommentsComponent{
       this.httpService.commentCreated$.subscribe(() => {
         this.loadComments();
       });
+      this.getUserLoggedIn();
+    }
+
+    private getUserLoggedIn() {
+      const token = localStorage.getItem("jwt");
+      if(token) var decodedToken = this.jwtHelper.decodeToken(token);
+      this.usernameLoggedIn = decodedToken['unique_name'];
     }
 
     // get initial data about comments
@@ -184,7 +193,7 @@ export class PostCommentsComponent{
     postComment(): void {
       const comment: Comment = {
         postId: this.idPost,
-        userName: "morgan", // shall be replaced with the logged in username
+        userName: this.usernameLoggedIn,
         text: this.commentInputRef.nativeElement.value
       };
       this.httpService.postComment(this.idPost, comment).subscribe((data:Comment) => { });
