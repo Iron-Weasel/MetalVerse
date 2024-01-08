@@ -13,13 +13,6 @@ namespace MetalVerseBackend.Services
         {
             _repository = repository;
         }
-        public async Task AddUser(User user)
-        {
-            user.Id = Guid.NewGuid();
-            _repository.Users.CreateUser(user);
-            await _repository.Save();
-        }
-
         public User GetUser(Guid userId)
         {
             return _repository.Users.GetUser(userId);

@@ -15,7 +15,9 @@ namespace MetalVerseBackend.Services
 
         public async Task RegisterUser(User user)
         {
-            throw new NotImplementedException();
+            user.Id = Guid.NewGuid();
+            _repository.Users.CreateUser(user);
+            await _repository.Save();
         }
 
         public bool ValidateUser(LoginUser attempt)
