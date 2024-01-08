@@ -55,9 +55,9 @@ namespace MetalVerseBackend.Controllers
         }
 
         [HttpPost("add_announcement")]
-        public IActionResult AddAnnouncement(Announcement announcement)
+        public async Task<IActionResult> AddAnnouncement(Announcement announcement)
         {
-            _service.AddAnnouncement(announcement);
+            await _service.AddAnnouncement(announcement);
             return Ok();
         }
 

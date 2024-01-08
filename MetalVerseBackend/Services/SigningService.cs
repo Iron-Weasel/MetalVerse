@@ -12,7 +12,7 @@ namespace MetalVerseBackend.Services
             throw new NotImplementedException();
         }
 
-        public void RegiserUser(User user)
+        public void RegisterUser(User user)
         {
             throw new NotImplementedException();
         }

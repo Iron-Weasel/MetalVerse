@@ -7,6 +7,6 @@ namespace MetalVerseBackend.Interfaces
         List<Announcement> GetAnnouncements();
         Announcement GetAnnouncement(Guid announcementId);
         List<Announcement> GetAnnouncementsBySearch(string search);
-        void AddAnnouncement(Announcement announcement);
+        Task AddAnnouncement(Announcement announcement);
     }
 }

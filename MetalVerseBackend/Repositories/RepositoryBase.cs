@@ -25,7 +25,7 @@ namespace MetalVerseBackend.Repositories
               ApplicationDbContext.Set<T>().Where(expression).AsNoTracking() :
               ApplicationDbContext.Set<T>().Where(expression);
 
-        public void Create(T entity) => ApplicationDbContext.Set<T>().Add(entity);
+        public async Task Create(T entity) => await ApplicationDbContext.Set<T>().AddAsync(entity);
 
         public void Update(T entity) => ApplicationDbContext.Set<T>().Update(entity);
 

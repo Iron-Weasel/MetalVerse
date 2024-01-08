@@ -48,9 +48,9 @@ namespace MetalVerseBackend.Controllers
         }
 
         [HttpPost("add_stream")]
-        public IActionResult AddStream(RockStream stream)
+        public async Task<IActionResult> AddStream(RockStream stream)
         {
-            _service.AddStream(stream);
+            await _service.AddStream(stream);
             return Ok();
         }
         

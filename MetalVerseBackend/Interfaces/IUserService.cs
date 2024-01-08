@@ -1,4 +1,5 @@
 ﻿using MetalVerseBackend.Models;
+using MetalVerseBackend.Models.Dtos;
 
 namespace MetalVerseBackend.Interfaces
 {
@@ -6,6 +7,7 @@ namespace MetalVerseBackend.Interfaces
     {
         List<User> GetUsers();
         User GetUser(Guid userId);
-        void AddUser(User user);
+        Task AddUser(User user);
+        bool ValidateUser(LoginUser attempt);
     }
 }

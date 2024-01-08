@@ -16,10 +16,10 @@ namespace MetalVerseBackend.Services
             _repository = repository;
         }
 
-        public void AddStream(RockStream stream)
+        public async Task AddStream(RockStream stream)
         {
             _repository.Streams.CreateStream(stream);
-            _repository.Save();
+            await _repository.Save();
         }
 
         public RockStream GetStream(Guid streamId)

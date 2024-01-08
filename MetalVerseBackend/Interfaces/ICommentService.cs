@@ -4,7 +4,7 @@ namespace MetalVerseBackend.Interfaces
 {
     public interface ICommentService
     {
-        void AddComment(Comment comment);
-        void ComputeRockOns(Guid commentId, bool toIncrease);
+        Task AddComment(Comment comment);
+        Task ComputeRockOns(Guid commentId, bool toIncrease);
     }
 }

@@ -13,12 +13,12 @@ namespace MetalVerseBackend.Services
             _repository = repository;
         }
 
-        public void AddAnnouncement(Announcement announcement)
+        public async Task AddAnnouncement(Announcement announcement)
         {
             announcement.Id = Guid.NewGuid();
 
             _repository.Announcements.CreateAnnouncement(announcement);
-            _repository.Save();
+            await _repository.Save();
         }
 
         public Announcement GetAnnouncement(Guid announcementId)
