@@ -5,7 +5,7 @@
 <div class="content">
     <h2 class="content-text">Create new post</h2>
     <input class="title" placeholder="Post title" #titleInput>
-    <input class="description" placeholder="Description" #descriptionInput>
+    <textarea class="description" placeholder="Description" #descriptionInput></textarea>
     <img class="add-img" src="../../../assets/icons/Add image button.png">
     <img class="post" src="../../../assets/icons/Post button.png" [routerLink]="['/forum']" (click)="onSavePost()">
 </div>

@@ -12,35 +12,54 @@
     line-height: 2rem;
     font-size: 1.2em;
     overflow-x: hidden;
-    height: 570px;
+    height: 655px;
 }
 
-.content-text {
-    margin-left: 0.6em;
-    color: #4C4C4C;
-}
-
-   
 .card {
-    box-shadow: 2px 2px 4px 0 #b4b4b4;
+    box-shadow: 2px 2px 4px 0 #353535;
     border-radius: 3px;
     width: 27em;
-    height: 12em;
+    height: auto;
     padding: 0 1em 3em 2em;
-    margin: 5em 5em 5em 2em;
+    margin: 2em 5em 5em 2em;
     background-color: #E3E3E3;
-    font-family: sans-serif;
+    font-family: 'Balthazar', serif;
     font-size: 10px;
 }
 
-.commId {
-    padding-top: 1em;
+.title {
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
+    font-family: 'Balthazar', serif;
+    font-size: 20px;
+    word-break: break-all;
+    line-height: 1em;
+    width: 12.9em;
 }
+
+.description {
+    margin-left: 0.1em;
+    width: 17em;
+    word-break: break-all;
+    font-family: 'Balthazar', serif;
+    font-size: 15px;
+    color: rgb(106, 106, 106);
+}
+
 .username {
-    margin-top: -13px;
+    font-family: 'Balthazar', serif;
+    font-size: 15px;
+    color: #4C4C4C;
 }
-.text {
-    margin-top: -13px;
+
+.announcementImage {
+    width: 95%;
+    border-radius: 3px;
+    margin-top: 1em;
+}
+.button {
+    margin-top: 3em;
+    width: 40%;
 }
 
 .navbar {

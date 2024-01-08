@@ -4,6 +4,7 @@ import { Post } from 'src/app/models/post';
 import { Comment } from 'src/app/models/comment';
 import { BackendHttpService } from 'src/app/services/backend.service';
 import { ReplaySubject } from 'rxjs';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-post-comments',
@@ -35,6 +36,7 @@ export class PostCommentsComponent{
     // variables related to the comments
     rockedOnMap: { [commentId: string]: boolean } = {};
     dateCreatedMapText: { [commentId: string]: string} = {};
+    usernamePost: string;
 
     
     constructor(private route: ActivatedRoute, httpService: BackendHttpService) {
@@ -55,6 +57,9 @@ export class PostCommentsComponent{
         this.commentsObs.next(data.comments);
 
         this.post = data;
+        this.httpService.getUser(data.userId).subscribe((data: User) => {
+            if(data.id != undefined) this.usernamePost = data.username;
+        });
         if(data.createdDate != undefined) {
           this.dateCreatedPostText = this.getTimeDifference(data.createdDate);
         }
@@ -94,7 +99,10 @@ export class PostCommentsComponent{
         case (differenceInSeconds >= 7200 && differenceInSeconds < 84000): 
               dateCreatedString =  Math.floor(differenceInSeconds / 3600) + ' hours ago';
               break;
-        case (differenceInSeconds >= 84000 && differenceInSeconds < 588000): 
+        case (differenceInSeconds >= 84000 && differenceInSeconds < 168000): 
+              dateCreatedString =  Math.floor(differenceInSeconds / 84000) + ' day ago';
+              break;
+        case (differenceInSeconds >= 168000 && differenceInSeconds < 588000): 
               dateCreatedString =  Math.floor(differenceInSeconds / 84000) + ' days ago';
               break;
         case (differenceInSeconds >= 588000 && differenceInSeconds < 1176000): 

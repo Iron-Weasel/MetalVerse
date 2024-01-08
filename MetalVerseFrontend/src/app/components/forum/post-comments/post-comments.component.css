@@ -12,40 +12,129 @@
     line-height: 1.5rem;
     font-size: 1.2em;
     overflow-x: hidden;
-    height: 570px;
+    height: 655px;
 }
 
-.content-text {
-    margin-top: 5em;
+.cardPost {
+    box-shadow: 2px 2px 4px 0 #353535;
+    border-radius: 3px;
+    width: 27em;
+    height: auto;
+    padding: 0 1em 3em 2em;
+    margin: 5em 5em 5em 2em;
+    background-color: #E3E3E3;
+    font-family: sans-serif;
+    font-size: 10px;
+}
+
+.postTitle {
+    margin-top: -13px;
+    font-family: 'Balthazar', serif;
+    font-size: 20px;
+    margin-left: -0.3em;
+}
+
+.username {
+    margin-left: -0.5em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    font-family: 'Balthazar', serif;
+    font-size: 15px;
     color: #4C4C4C;
 }
 
+.description {
+    margin-top: -1.5em;
+    margin-left: -0.3em;
+    width: 17em;
+    word-break: break-all;
+    font-family: 'Balthazar', serif;
+    font-size: 15px;
+    color: rgb(106, 106, 106);
+}
+.createdDate {
+    padding-bottom: 2em;
+    margin-top: -1.5em;
+    margin-left: -0.5em;
+    font-size: 10px;
+    color: rgb(127, 127, 127);
+}
+.postInfo {
+    display: flex;
+    color: #4C4C4C;
+    margin-top: 1.5em;
+    margin-bottom: -2.5em;
+    margin-left: -0.3em;
+    font-family: 'Balthazar', serif;
+    font-size: 12px;
+}
+
+.rockOnNumbers {
+    margin-left: 1.5em;
+}
+.commentNumbers {
+    margin-left: 1.5em;
+}
+
 .bar {
-    margin-top: 1em;
     float: left;
+}
+.commentText {
+    margin-top: -1em;
+    float: left;
+    margin-left: 6.5em;
+    color: #4C4C4C;
+    font-family: 'Balthazar', serif;
+}
+.postedDate {
+    padding-bottom: 2em;
+    margin-top: -3em;
+    margin-left: -0.5em;
+    font-size: 10px;
+    color: rgb(127, 127, 127);
 }
 
 .post-bar {
-    margin-left: 1.5em;
-    width: 15em;
-    height: 1em;
+    margin-left: 1.7em;
+    width: 17em;
+    height: 1.3em;
+    resize: none;
+    overflow: hidden;
     background-color: #2F2F2f;
+    border: solid 2px #2F2F2f;
     border-radius: 4px;
+    color: #A8A8A8;
+    font-size: 12px;
+    font-family: 'Balthazar', serif;
+}
+
+::placeholder {
+    color: #A8A8A8;
+    font-size: 12px;
+    font-family: 'Balthazar', serif;
+}
+
+textarea:focus {
+    outline: none !important;
+    border: solid 2px #740000;
 }
 
 .post-button {
     width: 15%;
-    margin-top: 1.3em;
-    margin-right: 2em;
+    margin-top: -1.35em;
+    margin-right: 1.1em;
     float: right;
 }
 
-   
-.card {
-    box-shadow: 2px 2px 4px 0 #b4b4b4;
+.commentSection {
+    padding-top: 2em;
+}
+
+.cardComments {
+    box-shadow: 2px 2px 4px 0 #353535;
     border-radius: 3px;
     width: 27em;
-    height: 12em;
+    height: auto;
     padding: 0 1em 3em 2em;
     margin: 5em 5em 5em 2em;
     background-color: #E3E3E3;
@@ -67,8 +156,22 @@
 }
 .text {
     margin-top: -13px;
+    margin-left: -0.3em;
+    width: 16em;
+    word-break: break-all;
+    font-family: 'Balthazar', serif;
+    font-size: 15px;
+    color: rgb(72, 72, 72);
 }
-
+.commRockOn {
+    display: flex;
+    color: #4C4C4C;
+    margin-top: 1.5em;
+    margin-bottom: -2em;
+    margin-left: -0.3em;
+    font-family: 'Balthazar', serif;
+    font-size: 12px;
+}
 .navbar {
     background-color: rgb(152, 22, 22);
     padding: 30px 50px;
