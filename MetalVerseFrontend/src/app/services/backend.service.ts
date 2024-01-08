@@ -7,6 +7,7 @@ import { FutureEvent } from "../models/future-event";
 import { RockStream } from "../models/rock-stream";
 import { Comment } from "../models/comment";
 import { User } from "../models/user";
+import { StreamMetadata } from "../models/streamMetadata";
 
 @Injectable({providedIn: 'root'})
 
@@ -48,6 +49,10 @@ export class BackendHttpService {
     // register user
     saveUser(userData: User): Observable<User> {
         return this.httpService.post<User>('https://localhost:7206/users/add_user', userData);
+    }
+    //get a specific user
+    getUser(userId: string): Observable<User> {
+        return this.httpService.get<User>('https://localhost:7206/users/' + userId);
     }
 
 
@@ -200,9 +205,17 @@ export class BackendHttpService {
         return this.httpService.get<RockStream[]>('https://localhost:7206/stream');
     }
 
+    getStream(streamId: string): Observable<RockStream> {
+        return this.httpService.get<RockStream>('https://localhost:7206/stream/' + streamId);
+    }
+
     // search a stream by a string from BE
     searchStream(keyword: string): Observable<RockStream[]> {
         return this.httpService.get<RockStream[]>('https://localhost:7206/stream/search_result?search=' + keyword);
+    }
+
+    getStreamMetadata(streamId: string): Observable<StreamMetadata> {
+        return this.httpService.get<StreamMetadata>('https://localhost:7206/stream/metadata?streamId=' + streamId);
     }
  
 }

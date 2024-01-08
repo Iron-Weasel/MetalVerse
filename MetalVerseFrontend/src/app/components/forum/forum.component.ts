@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { Post } from 'src/app/models/post';
+import { User } from 'src/app/models/user';
 import { BackendHttpService } from 'src/app/services/backend.service';
 
 @Component({
@@ -22,6 +23,8 @@ export class ForumComponent {
     @ViewChild('searchInput') searchInputRef: ElementRef;
     rockedOnMap: { [postId: string]: boolean } = {};
     dateCreatedMapText: { [commentId: string]: string} = {};
+    usernameMap: { [userId: string]: string } = {};
+    commentsNumberMap: { [postId: string]: number } = {};
     
 
     constructor(httpService: BackendHttpService) { 
@@ -43,8 +46,18 @@ export class ForumComponent {
             if(post.createdDate != undefined) {
               this.dateCreatedMapText[post.id] = this.getTimeDifference(post.createdDate);
             }
+            this.getCommentsNumber(post.id);
           }
+          this.httpService.getUser(post.userId).subscribe((data: User) => {
+              this.usernameMap[post.userId] = data.username;
+          });
         });
+      });
+    }
+
+    private getCommentsNumber(postId: string) {
+      this.httpService.getPost(postId).subscribe((data: Post) => {
+        this.commentsNumberMap[postId] = data.comments.length;
       });
     }
 
@@ -72,7 +85,10 @@ export class ForumComponent {
         case (differenceInSeconds >= 7200 && differenceInSeconds < 84000): 
               dateCreatedString =  Math.floor(differenceInSeconds / 3600) + ' hours ago';
               break;
-        case (differenceInSeconds >= 84000 && differenceInSeconds < 588000): 
+        case (differenceInSeconds >= 84000 && differenceInSeconds < 168000): 
+              dateCreatedString =  Math.floor(differenceInSeconds / 84000) + ' day ago';
+              break;
+        case (differenceInSeconds >= 168000 && differenceInSeconds < 588000): 
               dateCreatedString =  Math.floor(differenceInSeconds / 84000) + ' days ago';
               break;
         case (differenceInSeconds >= 588000 && differenceInSeconds < 1176000): 

@@ -14,11 +14,19 @@
           <img class="rock-on" *ngIf="post.id && !rockedOnMap[post.id]" src="../../../assets/icons/unrocked.png" (click)="increaseRockOn(post.id)">
           <img class="rock-on" *ngIf="post.id && rockedOnMap[post.id]" src="../../../assets/icons/rocked.png" (click)="decreaseRockOn(post.id)">
           <div [routerLink]="['/forum', post.id]">
-            <h4 class="postId"> user ID: {{ post.userId }} </h4>
-            <p class="createdDate" *ngIf="post.id">{{dateCreatedMapText[post.id]}}</p>
+            <h4 class="postId" *ngIf="usernameMap[post.userId]"> @{{ usernameMap[post.userId] }} </h4>
+            <p class="createdDate" *ngIf="post.id"> {{dateCreatedMapText[post.id]}} </p>
             <h2 class="title"> {{ post.title }}   </h2>
-            <p class="description">  {{ post.description }} </p>
-            <p class="createdDate">  {{ post.views }} views  {{ post.rockOns }} rock-ons</p>
+            <p class="description">  {{ (post.description.length > 40) ? (post.description | slice:0:40)+'...' : (post.description) }} </p>
+            <div class="postInfo">  
+                <p class="views"> {{ post.views }} views</p>  
+                <p class="rockOnNumbers"> {{ post.rockOns }} rock-ons </p>
+                <div class="commentNumbers" *ngIf="post.id"> 
+                  <p *ngIf="commentsNumberMap[post.id] == 0"> 0 comments </p>
+                  <p *ngIf="commentsNumberMap[post.id] == 1"> {{ commentsNumberMap[post.id] }} comment </p>
+                  <p *ngIf="commentsNumberMap[post.id] > 1"> {{ commentsNumberMap[post.id] }} comments </p>
+                </div>
+            </div>
           </div>
         </div>
       </div>

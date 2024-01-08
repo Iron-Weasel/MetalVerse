@@ -3,12 +3,14 @@
 </div>
   
 <div class="content">
-    <h2 class="content-text">Announcement with id {{ idAnnouncement }}</h2>
     <div *ngIf="announcement">
       <div class="card">
-          <p>user Id: {{announcement.userId}}</p>
-          <p>{{announcement.title}}</p>
-          <p>{{announcement.description}}</p>
+        <!-- to be replaced when storing images in DB in the near future -->
+          <img class="announcementImage" src="https://fastly.picsum.photos/id/6/300/150.jpg?hmac=c914-eRIjIpx5sAwpgtoqE7GHJcrgVi9wGZV58c_N0o">
+          <h2 class="title"> {{ announcement.title }} </h2>
+          <i *ngIf="usernameMap[announcement.userId]"class="username"> Posted by @{{ usernameMap[announcement.userId] }} </i>
+          <p class="description"> {{ announcement.description }} </p>
+          <img class="button" src="../../../assets/icons/message OP.png">
       </div>
     </div>
 </div>

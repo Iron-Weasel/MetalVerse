@@ -4,7 +4,7 @@
 
 .content {
     background-color: #CDCDCD;
-    height: 430px;
+    height: 500px;
 }
 
 .logo {
@@ -18,13 +18,25 @@
     width: 12em;
     height: 1em;
     background-color: #2F2F2f;
+    border: solid 2px #2F2F2f;
     border-radius: 4px;
-    margin-left: 6.5em;
+    font-family: 'Balthazar', serif;
+    font-size: 15px;
+    color: #A8A8A8;
+    margin-left: 5em;
 }
 
 ::placeholder {
+    display: block;
     color: #A8A8A8;
-    font-size: 10px;
+    font-size: 12px;
+    margin-top: -10em;
+    font-family: 'Balthazar', serif;
+}
+
+input:focus {
+    outline: none !important;
+    border: solid 2px #740000;
 }
 
 .login-button {
@@ -35,13 +47,13 @@
 
 .register-text {
     margin-top: 3em;
-    margin-left: 6em;
-    font-size: 12px;
+    margin-left: 3.5em;
+    font-size: 15px;
 }
 
 .register-route {
-    margin-top: -2.2em;
-    margin-left: 16em;
-    font-size: 12px;
+    margin-top: -2em;
+    margin-left: 13.5em;
+    font-size: 15px;
     color: blue;
 }

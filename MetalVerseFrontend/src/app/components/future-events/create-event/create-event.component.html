@@ -4,13 +4,19 @@
 
 <div class="content">
     <h2 class="content-text">Create new event</h2>
-    <input class="title" placeholder="Event title" #titleInput>
-    <input class="title" placeholder="Band country" #bandCountryInput>
-    <input class="title" placeholder="Band genre" #bandGenreInput>
-    <input class="title" placeholder="Country" #countryInput>
-    <input class="title" placeholder="City" #cityInput>
-    <input class="title" placeholder="Venue name" #venueInput>
-    <input class="title" placeholder="Time of the event" #timeInput>
+    <input class="inputField" placeholder="Event title" #titleInput>
+    <input class="inputFieldLeft" placeholder="Band country" #bandCountryInput>
+    <input class="inputFieldRight" placeholder="Band genre" #bandGenreInput>
+    <input class="inputField" placeholder="Facebook page" #fbInput>
+    <input class="inputField" placeholder="Band wiki" #wikiInput>
+    <input class="inputField" placeholder="Band page" #bandPageInput>
+    <input class="inputField" placeholder="Ticket purchase website" #ticketInput>
+    <input class="inputFieldLeft" placeholder="Country" #countryInput>
+    <input class="inputFieldRight" placeholder="State" #stateInput>
+    <input class="inputFieldLeft" placeholder="County" #countyInput>
+    <input class="inputFieldRight" placeholder="City" #cityInput>
+    <input class="inputField" placeholder="Venue name" #venueInput>
+    <input class="inputField" placeholder="Time of the event" #timeInput>
     <img class="add-img" src="../../../assets/icons/Add image button.png">
     <img class="post" src="../../../assets/icons/Post button.png" [routerLink]="['/events']" (click)="onSaveEvent()">
     

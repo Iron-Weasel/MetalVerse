@@ -60,5 +60,12 @@ namespace MetalVerseBackend.Controllers
             var _streams = _service.GetStreamsBySearch(search);
             return _streams.Count != 0 ? Ok(_streams) : Ok();
         }
+
+        [HttpGet("metadata")]
+        public async Task<IActionResult> GetMetadata(Guid streamId)
+        {
+            var _streamMetadata = await _service.GetStreamMetadata(streamId);
+            return Ok(_streamMetadata);
+        }
     }
 }

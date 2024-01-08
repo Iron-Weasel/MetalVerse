@@ -8,5 +8,6 @@ namespace MetalVerseBackend.Interfaces
         RockStream GetStream(Guid streamId);
         List<RockStream> GetStreamsBySearch(string search);
         void AddStream(RockStream concert);
+        Task<StreamMetadata> GetStreamMetadata(Guid streamId);
     }
 }

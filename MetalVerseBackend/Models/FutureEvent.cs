@@ -13,9 +13,9 @@
         public required string City { get; set; }
         public required string VenueName { get; set; }
         public DateTime EventTime { get; set; }
-        public required string FacebookPage;
-        public string? WikiPage;
-        public string? BandPage;
-        public required string TicketPurchasePage;
+        public required string FacebookPage { get; set; }
+        public string? WikiPage { get; set; }
+        public string? BandPage { get; set; }
+        public required string TicketPurchasePage { get; set; }
     }
 }
