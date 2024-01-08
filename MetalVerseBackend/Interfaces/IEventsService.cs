@@ -8,6 +8,6 @@ namespace MetalVerseBackend.Interfaces
         List<FutureEvent> GetEvents();
         FutureEvent GetEvent(Guid postId);
         List<FutureEvent> GetFutureEventsBySearch(string search);
-        void AddEvent(FutureEvent concert);
+        Task AddEvent(FutureEvent concert);
     }
 }

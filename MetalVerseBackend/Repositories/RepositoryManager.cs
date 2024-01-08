@@ -78,6 +78,6 @@ namespace MetalVerseBackend.Repositories
             }
         }
 
-        public void Save() => _applicationContext.SaveChanges();
+        public Task Save() => _applicationContext.SaveChangesAsync();
     }
 }

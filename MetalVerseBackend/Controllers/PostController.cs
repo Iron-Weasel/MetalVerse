@@ -18,66 +18,68 @@ namespace MetalVerseBackend.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetPosts()
+        public async Task<IActionResult> GetPosts()
         {
-            var _posts = _postService.GetPosts();
+            var _posts = await _postService.GetPosts();
             return Ok(_posts);
         }
 
         [HttpGet("{postId}")]
-        public IActionResult GetPost(Guid postId)
+        public async Task<IActionResult> GetPost(Guid postId)
         {
-            var _post = _postService.GetPost(postId);
+            var _post = await _postService.GetPost(postId);
             return Ok(_post);
         }
 
         [HttpPost("add_post")]
-        public IActionResult AddPost(Post post)
+        public async Task<IActionResult> AddPost(Post post)
         {
-            _postService.AddPost(post);
+            await _postService.AddPost(post);
             return Ok();
         }
 
         [HttpPost("post_visited/{postId}")]
-        public IActionResult IncreasePostViews(Guid postId)
+        public async Task<IActionResult> IncreasePostViews(Guid postId)
         {
-            _postService.ComputeViews(postId);
+            await _postService.ComputeViews(postId);
             return Ok();
         }
 
         [HttpPost("post_liked/{postId}")]
-        public IActionResult IncreasePostRockOns(Guid postId)
+        public async Task<IActionResult> IncreasePostRockOns(Guid postId)
         {
-            _postService.ComputeRockOns(postId, true);
+            await _postService.ComputeRockOns(postId, true);
             return Ok();
         }
 
         [HttpPost("post_disliked/{postId}")]
-        public IActionResult DecreasePostRockOns(Guid postId)
+        public async Task<IActionResult> DecreasePostRockOns(Guid postId)
         {
-            _postService.ComputeRockOns(postId, false);
+            await _postService.ComputeRockOns(postId, false);
             return Ok();
         }
 
         [HttpGet("search_result")]
-        public IActionResult GetResultsBySearch([FromQuery] string search)
+        public async Task<IActionResult> GetResultsBySearch([FromQuery] string search)
         {
-            var _posts = _postService.GetPostsBySearch(search);
+            var _posts = await _postService.GetPostsBySearch(search);
             return _posts.Count != 0 ? Ok(_posts) : Ok();
         }
 
         [HttpGet("sort_newest")]
-        public IActionResult GetNewestPosts()
+        public async Task<IActionResult> GetNewestPosts()
         {
-            var _posts = _postService.GetPosts().OrderByDescending(x => x.CreatedDate);
-            return Ok(_posts);
+            var _posts = await _postService.GetPosts();
+            var _ordered_posts = _posts.OrderByDescending(x => x.CreatedDate);
+            return Ok(_ordered_posts);
         }
 
         [HttpGet("sort_popular")]
-        public IActionResult GetPopularPosts()
+        public async Task<IActionResult> GetPopularPosts()
         {
-            var _posts = _postService.GetPosts().OrderByDescending(x => x.Views);
-            return Ok(_posts);
+            var _posts = await _postService.GetPosts();
+            var _ordered_posts = _posts.OrderByDescending(x => x.Views);
+            return Ok(_ordered_posts);
         }
     }
 }

@@ -59,9 +59,9 @@ namespace MetalVerseBackend.Controllers
         }
 
         [HttpPost("add_event")]
-        public IActionResult AddEvent(FutureEvent concert)
+        public async Task<IActionResult> AddEvent(FutureEvent concert)
         {
-            _service.AddEvent(concert);
+            await _service.AddEvent(concert);
             return Ok();
         }
 

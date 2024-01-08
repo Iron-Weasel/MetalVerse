@@ -1,20 +1,40 @@
 ﻿using MetalVerseBackend.Interfaces;
+using MetalVerseBackend.Interfaces.Repositories;
 using MetalVerseBackend.Models;
+using MetalVerseBackend.Models.Dtos;
 
 namespace MetalVerseBackend.Services
 {
     public class SigningService : ISigningService
     {
-        public SigningService() { }
-
-        public void LoginUser(string username, string password)
-        {
-            throw new NotImplementedException();
+        private readonly IRepositoryManager _repository;
+        public SigningService(IRepositoryManager repository) 
+        { 
+            _repository = repository;
         }
 
-        public void RegiserUser(User user)
+        public async Task RegisterUser(User user)
         {
-            throw new NotImplementedException();
+            user.Id = Guid.NewGuid();
+            _repository.Users.CreateUser(user);
+            await _repository.Save();
+        }
+
+        public bool ValidateUser(LoginUser attempt)
+        {
+            var found = _repository.Users.GetUsersByString(attempt.Username, false).FirstOrDefault();
+            if (found == null)
+            {
+                return false;
+            }
+
+            var passwordCheck = found.Password == attempt.Password;
+            if (!passwordCheck)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

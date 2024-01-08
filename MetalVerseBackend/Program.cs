@@ -5,10 +5,34 @@ using MetalVerseBackend.Repositories;
 using Microsoft.EntityFrameworkCore;
 using MetalVerseBackend.Interfaces;
 using MetalVerseBackend.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddAuthentication(opt => {
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(options =>
+    {
+        options.SaveToken = true;
+
+        options.TokenValidationParameters = new TokenValidationParameters()
+        {
+            ValidIssuer = builder.Configuration["JWT:Issuer"],
+            ValidAudience = builder.Configuration["JWT:Audience"],
+            RequireExpirationTime = true,
+            ValidateLifetime = true,
+            IssuerSigningKey =
+                new SymmetricSecurityKey(
+                    Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"])),
+            ClockSkew = TimeSpan.Zero
+        };
+    });
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -28,6 +52,7 @@ builder.Services.AddScoped<IEventsService, EventsService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IStreamService, StreamService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ISigningService, SigningService>();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
@@ -44,6 +69,7 @@ app.UseHttpsRedirection();
 
 app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader());
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

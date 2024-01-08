@@ -1,6 +1,7 @@
 ﻿using MetalVerseBackend.Interfaces;
 using MetalVerseBackend.Interfaces.Repositories;
 using MetalVerseBackend.Models;
+using MetalVerseBackend.Models.Dtos;
 
 namespace MetalVerseBackend.Services
 {
@@ -12,13 +13,6 @@ namespace MetalVerseBackend.Services
         {
             _repository = repository;
         }
-        public void AddUser(User user)
-        {
-            user.Id = Guid.NewGuid();
-            _repository.Users.CreateUser(user);
-            _repository.Save();
-        }
-
         public User GetUser(Guid userId)
         {
             return _repository.Users.GetUser(userId);
@@ -27,6 +21,11 @@ namespace MetalVerseBackend.Services
         public List<User> GetUsers()
         {
             return _repository.Users.GetUsers(false).ToList();
+        }
+
+        public User GetUserByString(string username)
+        {
+            return _repository.Users.GetUsersByString(username, false).FirstOrDefault();
         }
     }
 }

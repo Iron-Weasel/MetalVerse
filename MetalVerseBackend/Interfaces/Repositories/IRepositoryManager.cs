@@ -8,6 +8,6 @@
         IUserRepository Users { get; }
         IPostRepository Posts { get; }
         ICommentRepository Comments { get; }
-        void Save();
+        Task Save();
     }
 }

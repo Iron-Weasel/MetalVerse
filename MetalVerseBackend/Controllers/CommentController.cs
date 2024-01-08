@@ -69,23 +69,23 @@ namespace MetalVerseBackend.Controllers
         */
 
         [HttpPost("comments/add_comment")]
-        public IActionResult AddComment(Comment comment)
+        public async Task<IActionResult> AddComment(Comment comment)
         {
-            _service.AddComment(comment);
+            await _service.AddComment(comment);
             return Ok();
         }
 
         [HttpPost("comment_liked/{commentId}")]
-        public IActionResult IncreaseCommentRockOns(Guid commentId)
+        public async Task<IActionResult> IncreaseCommentRockOns(Guid commentId)
         {
-            _service.ComputeRockOns(commentId, true);
+            await _service.ComputeRockOns(commentId, true);
             return Ok();
         }
 
         [HttpPost("comment_disliked/{commentId}")]
-        public IActionResult DecreaseCommentRockOns(Guid commentId)
+        public async Task<IActionResult> DecreaseCommentRockOns(Guid commentId)
         {
-            _service.ComputeRockOns(commentId, false);
+            await _service.ComputeRockOns(commentId, false);
             return Ok();
         }
     }

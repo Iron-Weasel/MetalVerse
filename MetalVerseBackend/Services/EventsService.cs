@@ -13,12 +13,12 @@ namespace MetalVerseBackend.Services
             _repository = repository;
         }
         
-        public void AddEvent(FutureEvent concert)
+        public async Task AddEvent(FutureEvent concert)
         {
             concert.Id = Guid.NewGuid();
 
             _repository.FutureEvents.CreateFutureEvent(concert);
-            _repository.Save();
+            await _repository.Save();
         }
 
         public FutureEvent GetEvent(Guid eventId)

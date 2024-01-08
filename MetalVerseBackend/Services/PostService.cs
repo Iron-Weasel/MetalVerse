@@ -20,7 +20,7 @@ namespace MetalVerseBackend.Services
             _repository = repository;
         }
 
-        public void AddPost(Post post)
+        public async Task AddPost(Post post)
         {
             post.Id = Guid.NewGuid();
             post.Views = 0;
@@ -29,31 +29,31 @@ namespace MetalVerseBackend.Services
             post.CreatedDate = DateTime.UtcNow;
 
             _repository.Posts.CreatePost(post);
-            _repository.Save();
+            await _repository.Save();
         }
 
-        public void ComputeViews(Guid postId)
+        public async Task ComputeViews(Guid postId)
         {
             var _post = _repository.Posts.GetPost(postId);
             if (_post != null)
             {
                 _post.Views += 1;
-                _repository.Save();
+                await _repository.Save();
             }
         }
 
-        public void ComputeRockOns(Guid postId, bool toIncrease)
+        public async Task ComputeRockOns(Guid postId, bool toIncrease)
         {
             var _post = _repository.Posts.GetPost(postId);
             if (_post != null)
             {
                 if (toIncrease == true) _post.RockOns += 1;
                 else _post.RockOns -= 1;
-                _repository.Save();
+                await _repository.Save();
             };
         }
 
-        public PostWithCommentsDto GetPost(Guid postId)
+        public async Task<PostWithCommentsDto> GetPost(Guid postId)
         {
             var _post = _repository.Posts.GetPost(postId);
             var _comments = _repository.Comments.GetCommentsByPost(postId, false);
@@ -63,13 +63,13 @@ namespace MetalVerseBackend.Services
             return postWithCommentsDto;
         }
 
-        public List<Post> GetPosts()
+        public async Task<List<Post>> GetPosts()
         {
             var _posts = _repository.Posts.GetPosts(false).ToList();
             return _posts;
         }
 
-        public List<Post> GetPostsBySearch(string search)
+        public async Task<List<Post>> GetPostsBySearch(string search)
         {
             return _repository.Posts.GetPostsByString(search, false).ToList();
         }

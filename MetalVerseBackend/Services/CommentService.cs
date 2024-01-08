@@ -12,24 +12,24 @@ namespace MetalVerseBackend.Services
             _repository = repository;
         }
 
-        public void AddComment(Comment comment)
+        public async Task AddComment(Comment comment)
         {
             comment.Id = Guid.NewGuid();
             comment.RockOns = 0;
             comment.PostedDate= DateTime.UtcNow;
 
             _repository.Comments.CreateComment(comment);
-            _repository.Save();
+            await _repository.Save();
         }
 
-        public void ComputeRockOns(Guid commentId, bool toIncrease)
+        public async Task ComputeRockOns(Guid commentId, bool toIncrease)
         {
             var _comment = _repository.Comments.GetComment(commentId);
             if (_comment != null)
             {
                 if (toIncrease == true) _comment.RockOns += 1;
                 else _comment.RockOns -= 1;
-                _repository.Save();
+                await _repository.Save();
             };
         }
     }
