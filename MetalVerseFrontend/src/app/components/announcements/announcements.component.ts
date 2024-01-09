@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { ReplaySubject } from 'rxjs';
 import { Announcement } from 'src/app/models/announcement';
 import { BackendHttpService } from 'src/app/services/backend.service';
@@ -17,15 +18,28 @@ export class AnnouncementsComponent {
     public announcementsObs$ = this.announcementsObs.asObservable();  // receive data
 
     @ViewChild('searchInput') searchInputRef: ElementRef;
+    enabled: boolean = false;
     
 
-    constructor(httpService: BackendHttpService) { 
+    constructor(httpService: BackendHttpService, private jwtHelper: JwtHelperService) { 
       this.httpService = httpService;
       this.loadAnnouncements();
 
       this.httpService.announcementCreated$.subscribe(() => {
           this.loadAnnouncements();
       });
+      this.getUserLoggedIn();
+    }
+
+    private getUserLoggedIn() {
+      const token = localStorage.getItem("jwt");
+      if(token) {
+        var decodedToken = this.jwtHelper.decodeToken(token);
+        if(decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] == 'Band Member' || 
+           decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] == 'Studio Manager')  {
+               this.enabled = true;
+           }
+      }
     }
 
     loadAnnouncements(): void {

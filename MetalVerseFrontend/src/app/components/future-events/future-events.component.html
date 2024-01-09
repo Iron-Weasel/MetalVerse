@@ -4,7 +4,7 @@
   
 <div class="content">
       <h2 class="content-text">Future Events</h2>
-      <img class="event-button" src="../../../assets/icons/Post new event.png" [routerLink]="['/create-event']">
+      <img class="event-button" *ngIf="enabled" src="../../../assets/icons/Post new event.png" [routerLink]="['/create-event']">
       <input class="search-bar" placeholder="Search by country..." #searchInput (keyup.enter)="searchEvent()">
       <div *ngIf="eventsObs$ | async as events">
         <div *ngFor="let event of events">

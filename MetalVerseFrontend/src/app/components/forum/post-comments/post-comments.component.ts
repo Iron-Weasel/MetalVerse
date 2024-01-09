@@ -53,7 +53,6 @@ export class PostCommentsComponent{
       });
 
       this.httpService.rockedOnState$.subscribe(state => {
-        //if(state[this.idPost] == true) this.rockedOnPost = true;
         this.rockedOnMap = state;
       });
 

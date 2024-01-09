@@ -1,5 +1,4 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { ReplaySubject } from 'rxjs';
 import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
@@ -28,7 +27,7 @@ export class ForumComponent {
     commentsNumberMap: { [postId: string]: number } = {};
     
 
-    constructor(httpService: BackendHttpService, private jwtHelper: JwtHelperService) { 
+    constructor(httpService: BackendHttpService) { 
       this.httpService = httpService;
       this.loadPosts();
 
