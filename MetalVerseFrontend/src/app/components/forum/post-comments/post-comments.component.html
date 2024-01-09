@@ -4,8 +4,8 @@
   
   <div class="content">
     <div class="cardPost" *ngIf="post">
-      <img class="rock-on" *ngIf="idPost && !rockedOnPost" src="../../../assets/icons/unrocked.png" (click)="increaseRockOnPost()">
-      <img class="rock-on" *ngIf="idPost && rockedOnPost" src="../../../assets/icons/rocked.png" (click)="decreaseRockOnPost()">
+      <img class="rock-on" *ngIf="idPost && !rockedOnMap[idPost]" src="../../../assets/icons/unrocked.png" (click)="increaseRockOnPost()">
+      <img class="rock-on" *ngIf="idPost && rockedOnMap[idPost]" src="../../../assets/icons/rocked.png" (click)="decreaseRockOnPost()">
       <p class="username"> @{{usernamePost }} </p>
       <h2 class="postTitle"> {{ post.title }} </h2>
       <p class="createdDate"> {{ dateCreatedPostText }} </p>

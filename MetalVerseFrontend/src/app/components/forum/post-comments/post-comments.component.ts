@@ -33,10 +33,10 @@ export class PostCommentsComponent{
 
     @ViewChild('commentInput') commentInputRef: ElementRef;
     // variables related to the post itself
-    rockedOnPost: boolean = false;
+    rockedOnPost: boolean;
     dateCreatedPostText: string;
     // variables related to the comments
-    rockedOnMap: { [commentId: string]: boolean } = {};
+    rockedOnMap: { [id: string]: boolean } = {};
     dateCreatedMapText: { [commentId: string]: string} = {};
     usernamePost: string;
 
@@ -51,6 +51,12 @@ export class PostCommentsComponent{
       this.httpService.commentCreated$.subscribe(() => {
         this.loadComments();
       });
+
+      this.httpService.rockedOnState$.subscribe(state => {
+        //if(state[this.idPost] == true) this.rockedOnPost = true;
+        this.rockedOnMap = state;
+      });
+
       this.getUserLoggedIn();
     }
 
@@ -75,7 +81,6 @@ export class PostCommentsComponent{
         
         data.comments.forEach((comment: Comment) => {
           if(comment.id != undefined) {
-            this.rockedOnMap[comment.id] = false;
             if(comment.postedDate != undefined) {
               this.dateCreatedMapText[comment.id] = this.getTimeDifference(comment.postedDate);
             }
@@ -135,7 +140,8 @@ export class PostCommentsComponent{
 
     increaseRockOnPost(): void {
       if(this.idPost) {
-        this.rockedOnPost = true;
+        this.rockedOnMap[this.idPost] = true;
+        this.httpService.rockedOnState.next(this.rockedOnMap);
         this.httpService.increasePostRockOns(this.idPost).subscribe();
         this.httpService.postUpdatedSource$.subscribe(() => {
           this.updatePost();
@@ -145,7 +151,8 @@ export class PostCommentsComponent{
 
     decreaseRockOnPost(): void {
       if(this.idPost) {
-        this.rockedOnPost = false;
+        this.rockedOnMap[this.idPost] = false;
+        this.httpService.rockedOnState.next(this.rockedOnMap);
         this.httpService.decreasePostRockOns(this.idPost).subscribe();
         this.httpService.postUpdatedSource$.subscribe(() => {
           this.updatePost();
@@ -156,6 +163,7 @@ export class PostCommentsComponent{
     increaseRockOnComments(commentId: string): void {
       if(commentId) {
         this.rockedOnMap[commentId] = true;
+        this.httpService.rockedOnState.next(this.rockedOnMap);
         this.httpService.increaseCommentRockOns(this.idPost, commentId).subscribe();
         this.httpService.commentUpdatedSource$.subscribe(() => {
           this.updateComment(commentId);
@@ -166,6 +174,7 @@ export class PostCommentsComponent{
     decreaseRockOnComments(commentId: string): void {
       if(commentId) {
         this.rockedOnMap[commentId] = false;
+        this.httpService.rockedOnState.next(this.rockedOnMap);
         this.httpService.decreaseCommentRockOns(this.idPost, commentId).subscribe();
         this.httpService.commentUpdatedSource$.subscribe(() => {
           this.updateComment(commentId);

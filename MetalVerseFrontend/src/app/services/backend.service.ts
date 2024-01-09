@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Post } from "../models/post";
-import { Observable, ReplaySubject, Subject, tap } from "rxjs";
+import { BehaviorSubject, Observable, ReplaySubject, Subject, tap } from "rxjs";
 import { Announcement } from "../models/announcement";
 import { FutureEvent } from "../models/future-event";
 import { RockStream } from "../models/rock-stream";
@@ -44,6 +44,9 @@ export class BackendHttpService {
     private postUpdatedSource = new Subject<void>();
     postUpdatedSource$ = this.postUpdatedSource.asObservable();
 
+    // maintain rocked-on posts (forum) and comments through one session
+    rockedOnState = new BehaviorSubject<{ [id: string]: boolean }>({});
+    rockedOnState$ = this.rockedOnState.asObservable();
 
 
     // USER
