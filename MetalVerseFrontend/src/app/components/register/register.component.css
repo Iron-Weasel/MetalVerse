@@ -62,8 +62,11 @@ option {
 }
 
 .error {
+    margin-left: 2em;
+    margin-bottom: -1.1em;
     color:#740000;
-    height: 5px;
+    font-size: 12px;
+    height: 1px;
 }
 
 .checkbox {
@@ -76,7 +79,7 @@ option {
     margin-top: -1.5em;
 }
 .register-button {
-    margin-top: 5em;
+    margin-top: 6em;
     margin-left: 7.5em;
 }
 

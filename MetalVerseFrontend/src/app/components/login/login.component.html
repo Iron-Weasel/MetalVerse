@@ -2,12 +2,16 @@
 <div class="content">
     <img class="logo" src="../../../assets/icons/Metalverse11.png">
     <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
-        <input class="credential-bar" type="email" id="username" name="username" [(ngModel)]="credentials.username" placeholder="Username" required>
-        <input class="credential-bar" type="password" id="password" name="password" [(ngModel)]="credentials.password"  placeholder="Password" required>
+        <input class="credential-bar" type="text" id="username" name="username" #username="ngModel" [(ngModel)]="credentials.username" placeholder="Username" required>
+        <input class="credential-bar" type="password" id="password"  #password="ngModel" name="password" [(ngModel)]="credentials.password"  placeholder="Password" required>
+        <div class="error" *ngIf="loginForm.submitted && (username.invalid || password.invalid)">
+            All fields are required!
+        </div>
+        <div *ngIf="invalidLogin" class="error">Invalid username or password!</div>
         <p class="register-text">Don't have an account?</p>
         <p class="register-route" [routerLink]="['/register']">Register now</p>
         <div class="login-button">
-            <button style="border: none; background-color: transparent" type="submit" [disabled]="!loginForm.valid">
+            <button style="border: none; background-color: transparent" type="submit">
                 <img src="../../../assets/icons/Login button.png">
             </button>
         </div>
