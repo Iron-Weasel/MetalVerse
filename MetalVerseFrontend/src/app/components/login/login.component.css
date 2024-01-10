@@ -42,7 +42,7 @@ input:focus {
 .login-button {
     width: 40%;
     margin-top: 3em;
-    margin-left: 9em;
+    margin-left: 9.5em;
 }
 
 .register-text {
@@ -52,8 +52,8 @@ input:focus {
 }
 
 .register-route {
-    margin-top: -2em;
-    margin-left: 13em;
+    margin-top: -1.9em;
+    margin-left: 13.4em;
     font-size: 18px;
     color: blue;
 }
