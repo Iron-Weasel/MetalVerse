@@ -11,7 +11,7 @@ import { BackendHttpService } from 'src/app/services/backend.service';
 })
 
 export class ForumComponent {
-    private httpService: BackendHttpService;
+    httpService: BackendHttpService;
     public posts: Post[];
     
     private postsObs: ReplaySubject<Post[]> = new ReplaySubject<Post[]>(1);  // send data
@@ -34,7 +34,12 @@ export class ForumComponent {
       this.httpService.postCreated$.subscribe(() => {
         this.loadPosts();
       });
+
+      this.httpService.rockedOnState$.subscribe(state => {
+        this.rockedOnMap = state;
+      });
     }
+
 
     loadPosts(): void {
       this.httpService.getPosts().subscribe((data:Post[]) => {
@@ -42,11 +47,11 @@ export class ForumComponent {
         this.posts = data;
         this.posts.forEach((post:Post) => {
           if(post.id != undefined) {
-            this.rockedOnMap[post.id] = false;
+            const postId = post.id;
             if(post.createdDate != undefined) {
-              this.dateCreatedMapText[post.id] = this.getTimeDifference(post.createdDate);
+              this.dateCreatedMapText[postId] = this.getTimeDifference(post.createdDate);
             }
-            this.getCommentsNumber(post.id);
+            this.getCommentsNumber(postId);
           }
           this.httpService.getUser(post.userId).subscribe((data: User) => {
               this.usernameMap[post.userId] = data.username;
@@ -131,6 +136,7 @@ export class ForumComponent {
     increaseRockOn(postId: string): void {
       if(postId) {
         this.rockedOnMap[postId] = true;
+        this.httpService.rockedOnState.next(this.rockedOnMap);
         this.httpService.increasePostRockOns(postId).subscribe();
         this.httpService.postUpdatedSource$.subscribe(() => {
           this.updatePost(postId);
@@ -141,6 +147,7 @@ export class ForumComponent {
     decreaseRockOn(postId: string): void {
       if(postId) {
         this.rockedOnMap[postId] = false;
+        this.httpService.rockedOnState.next(this.rockedOnMap);
         this.httpService.decreasePostRockOns(postId).subscribe();
         this.httpService.postUpdatedSource$.subscribe(() => {
           this.updatePost(postId);

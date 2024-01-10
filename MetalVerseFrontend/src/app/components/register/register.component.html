@@ -1,30 +1,40 @@
 <div class="content">
     <img style="width:10%; margin: 1em 0 0 1em" src="../../../assets/icons/back-arrow.png" [routerLink]="['/login']">
     <h1 class="text">Sign up</h1>
-    <input class="credential-bar" placeholder="First Name" #firstNameInput>
-    <input class="credential-bar" placeholder="Last Name" #lastNameInput>
-    <input class="credential-bar" placeholder="Email" #emailInput>
-    <input class="credential-bar" placeholder="Your new username" #usernameInput>
-    <input class="credential-bar" placeholder="New password" #passwordInput>
-    <input class="credential-bar" placeholder="Confirm new password">
-    <div class="dropdown">
-        <p>Select your role</p>
-        <div class="dropdown-component">
-            <select name="roles" class="options">
-                <option value="Regular user">Regular user</option>
-                <option value="Event Organizer">Event Organizer</option>
-                <option value="Band Member">Band Member</option>
-                <option value="Studio Manager">Studio Manager</option>
-            </select>
+    <form #registerForm="ngForm" (ngSubmit)="onSaveUser(registerForm)">
+        <input class="credential-bar" type="text" id="firstname" name="firstname" #firstname="ngModel" [(ngModel)]="credentials.firstName" placeholder="First Name" required>
+        <input class="credential-bar" type="text" id="lastname" name="lastname" #lastname="ngModel" [(ngModel)]="credentials.lastName" placeholder="Last Name" required>
+        <input class="credential-bar" type="email" id="email" name="email" #email="ngModel" [(ngModel)]="credentials.email" placeholder="E-mail address" required>
+        <input class="credential-bar" type="text" id="username" name="username" #firstname="ngModel" [(ngModel)]="credentials.username" placeholder="Your new username" required>
+        <input class="credential-bar" type="password" id="password"  #password="ngModel" name="password" [(ngModel)]="credentials.password"  placeholder="Password" required>
+        <input class="credential-bar" type="password" id="password"  #confirmPassword="ngModel" name="confirmPassword" [(ngModel)]="credentials.confirmPassword"  placeholder="Password" required>
+        <div class="dropdown">
+            <p>Select your role</p>
+            <div class="dropdown-component">
+                <select #roles="ngModel" (change)="onSelected(roles.value)" [(ngModel)]="credentials.userRole" name="roles" class="options" required>
+                    <option value="">Choose a role</option>
+                    <option>Regular User</option>
+                    <option>Event Organizer</option>
+                    <option>Band Member</option>
+                    <option>Studio Manager</option>
+                </select>
+            </div>
         </div>
-    </div>
-    <div class="terms">
-        <input type="checkbox" class="checkbox" name="terms-of-service" value="">
-        <p class="terms-text">I agree with the Terms of Service and Privacy policy</p>
-    </div>
-    <div class="register-button">
-        <img src="../../../assets/icons/Register button.png" [routerLink]="['/register-success']" (click)="onSaveUser()">
-    </div>
+       <div class="terms">
+            <input type="checkbox" class="checkbox" name="terms-of-service" value="" (click)="acceptTerms()">
+            <p class="terms-text">I agree with the Terms of Service and Privacy policy</p>
+        </div>
+        <div class="error" *ngIf="registerForm.submitted">
+            <p *ngIf="registerForm.invalid">All fields are required!</p>
+            <p *ngIf="!isTermsSelected">The checkbox is required!</p>
+            <p *ngIf="!isPasswordMatching">The passwords do not match!</p>
+        </div>
+        <div class="register-button" type="submit">
+            <button style="border: none; background-color: transparent" type="submit">
+                <img src="../../../assets/icons/Register button.png">
+            </button>
+        </div>
+    </form>
     <div>
         <img class="kitty-img" src="../../../assets/images/hihi1.PNG">
     </div>

@@ -71,7 +71,7 @@ namespace MetalVerseBackend.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromForm] LoginUser user)
+        public IActionResult Login(LoginUser user)
         {
             if (user is null)
             {
@@ -84,6 +84,7 @@ namespace MetalVerseBackend.Controllers
                 {
                     new Claim(JwtRegisteredClaimNames.UniqueName, _secret.Username),
                     new Claim(JwtRegisteredClaimNames.NameId , _secret.Id.ToString()),
+                    new Claim(ClaimTypes.Role, _secret.UserRole),
                 };
 
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

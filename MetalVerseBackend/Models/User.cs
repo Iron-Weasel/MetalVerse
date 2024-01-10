@@ -10,6 +10,6 @@ namespace MetalVerseBackend.Models
         public required string LastName { get; set; }
         public required string Email { get; set; }
         public required string Password { get; set; }
-        public required string UserRole; 
+        public required string UserRole { get; set; }
     }
 }

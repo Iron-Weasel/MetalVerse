@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { ReplaySubject } from 'rxjs';
 import { FutureEvent } from 'src/app/models/future-event';
 import { BackendHttpService } from 'src/app/services/backend.service';
@@ -18,15 +19,25 @@ export class FutureEventsComponent {
 
     @ViewChild('searchInput') searchInputRef: ElementRef;
     dateEventMapText: { [eventId: string]: string} = {};
+    enabled: boolean = false;
     
     
-    constructor(httpService: BackendHttpService) { 
+    constructor(httpService: BackendHttpService, private jwtHelper: JwtHelperService) { 
       this.httpService = httpService;
       this.loadEvents();
 
       this.httpService.eventCreated$.subscribe(() => {
           this.loadEvents();
       });
+      this.getUserLoggedIn();
+    }
+
+    private getUserLoggedIn() {
+      const token = localStorage.getItem("jwt");
+      if(token) {
+        var decodedToken = this.jwtHelper.decodeToken(token);
+        if(decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] == 'Event Organizer')  this.enabled = true;
+      }
     }
 
     loadEvents(): void {

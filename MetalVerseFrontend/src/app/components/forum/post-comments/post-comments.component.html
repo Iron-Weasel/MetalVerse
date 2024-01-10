@@ -1,11 +1,12 @@
 <div class="header">
     <img class="logo" src="../../../assets/icons/Metalverse2.png">
   </div>
-  
+
   <div class="content">
+    <img style="width:10%; margin: 1em 0 0 1em" src="../../../assets/icons/back-arrow.png" [routerLink]="['/forum']">
     <div class="cardPost" *ngIf="post">
-      <img class="rock-on" *ngIf="idPost && !rockedOnPost" src="../../../assets/icons/unrocked.png" (click)="increaseRockOnPost()">
-      <img class="rock-on" *ngIf="idPost && rockedOnPost" src="../../../assets/icons/rocked.png" (click)="decreaseRockOnPost()">
+      <img class="rock-on" *ngIf="idPost && !rockedOnMap[idPost]" src="../../../assets/icons/unrocked.png" (click)="increaseRockOnPost()">
+      <img class="rock-on" *ngIf="idPost && rockedOnMap[idPost]" src="../../../assets/icons/rocked.png" (click)="decreaseRockOnPost()">
       <p class="username"> @{{usernamePost }} </p>
       <h2 class="postTitle"> {{ post.title }} </h2>
       <p class="createdDate"> {{ dateCreatedPostText }} </p>

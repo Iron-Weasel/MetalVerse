@@ -1,4 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { BackendHttpService } from 'src/app/services/backend.service';
 
@@ -8,29 +10,46 @@ import { BackendHttpService } from 'src/app/services/backend.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-    //TODO: would be nicer to use FormsModel next time
-    @ViewChild('usernameInput') usernameInputRef: ElementRef;
-    @ViewChild('firstNameInput') firstNameInputRef: ElementRef;
-    @ViewChild('lastNameInput') lastNameInputRef: ElementRef;
-    @ViewChild('emailInput') emailInputRef: ElementRef;
-    @ViewChild('passwordInput') passwordInputRef: ElementRef;
+    selectedRole: string;
+    isTermsSelected: boolean = false;
+    isPasswordMatching: boolean = false;
+    credentials: User = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      username:'', 
+      password:'',
+      confirmPassword: '',
+      userRole: ''
+    };
 
     private httpService: BackendHttpService;
 
-    constructor(httpService: BackendHttpService) { 
+    constructor(httpService: BackendHttpService, private router: Router) { 
       this.httpService  = httpService;
     }
 
+    onSelected(value: string) {
+      this.selectedRole = value;
+    }
+
     // clicking on "Register" will create a new user
-    onSaveUser(): void {
-        //there is an issue with the model on BE (user role)
-        const user: User = {
-          username: this.usernameInputRef.nativeElement.value,
-          firstName: this.firstNameInputRef.nativeElement.value,
-          lastName: this.lastNameInputRef.nativeElement.value,
-          email: this.emailInputRef.nativeElement.value,
-          password: this.passwordInputRef.nativeElement.value,
+    public onSaveUser(form: NgForm): void {
+      this.isPasswordMatching = this.checkPasswordsMatch();
+      if(form.valid) {
+        if(this.isTermsSelected && this.isPasswordMatching) {
+          this.router.navigate(["/register-success"]);
+          this.httpService.saveUser(this.credentials).subscribe((data:User) => { });
         }
-        this.httpService.saveUser(user).subscribe((data:User) => { });
+        else this.router.navigate(["/register"]);
+      }
+    }
+
+    acceptTerms(): void {
+      this.isTermsSelected = true;
+    }
+
+    private checkPasswordsMatch(): boolean {
+      return this.credentials.password === this.credentials.confirmPassword;
     }
   }

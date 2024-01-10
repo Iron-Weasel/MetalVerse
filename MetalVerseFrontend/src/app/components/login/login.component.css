@@ -46,14 +46,22 @@ input:focus {
 }
 
 .register-text {
-    margin-top: 3em;
-    margin-left: 3.5em;
+    margin-top: 4.9em;
+    margin-left: 4em;
     font-size: 15px;
 }
 
 .register-route {
     margin-top: -2em;
-    margin-left: 13.5em;
+    margin-left: 13.2em;
     font-size: 15px;
     color: blue;
+}
+
+.error {
+    margin-top: 1em;
+    margin-left: 4.7em;
+    margin-bottom: -1em;
+    color:#740000;
+    height: 1px;
 }
