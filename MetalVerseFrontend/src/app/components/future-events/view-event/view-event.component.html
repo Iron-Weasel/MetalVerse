@@ -13,15 +13,15 @@
             <p>Country of origin: {{event.bandCountry}}</p>
             <p class="genre">Genre: {{event.bandGenre}}</p>
           </div>
-          <div class="usefulLinks" *ngIf="event.wikiPage != '-'">
+          <div class="usefulLinks" *ngIf="event.wikiPage != '' || !event.wikiPage">
             <img class="icon" src="../../../assets/icons/6063242.png">
             <a [href]="event.wikiPage"><p class="linkTitle">Band wiki</p></a>
           </div>
           <div class="usefulLinks">
             <img class="icon" src="../../../assets/icons/1200px-Facebook_icon_(black).png">
-            <a [href]="event.facebookPage"><p class="linkTitle">Facebook</p></a>
+            <a [href]="event.facebookPage" (click)="openLink(event.facebookPage)"><p class="linkTitle">Facebook</p></a>
           </div>
-          <div class="usefulLinks" *ngIf="event.bandPage != '-'">
+          <div class="usefulLinks" *ngIf="event.bandPage != '' || !event.wikiPage">
             <img class="icon" src="../../../assets/icons/fdb01354a7f787c8d3191c8759c7d4281.png">
             <a [href]="event.bandPage"><p class="linkTitle">Band Homepage</p></a>
           </div>

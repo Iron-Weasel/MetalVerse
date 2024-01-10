@@ -35,6 +35,10 @@ export class ForumComponent {
         this.loadPosts();
       });
 
+      this.httpService.postUpdatedSource$.subscribe(() => {
+        this.loadPosts();
+      });
+
       this.httpService.rockedOnState$.subscribe(state => {
         this.rockedOnMap = state;
       });

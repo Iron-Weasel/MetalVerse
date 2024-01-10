@@ -34,4 +34,9 @@ export class ViewEventComponent {
     const text = `${date[2]}.${date[1]}.${date[0]}, ${time[0]}:${time[1]}`;
     return text;
   }
+
+  openLink(url: string | undefined) {
+    console.log(url);
+    if(url != undefined) window.open(url, '_system');
+  }
 }
