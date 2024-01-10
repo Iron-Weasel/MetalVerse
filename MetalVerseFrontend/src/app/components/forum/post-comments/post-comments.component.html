@@ -19,7 +19,7 @@
     </div>
     <div class="bar">
       <p class="commentText">Comments</p>
-      <textarea class="post-bar" placeholder="Add comment..." #commentInput></textarea>
+      <textarea class="post-bar" #commentInput></textarea>
     </div>
     <img class="post-button" src="../../../assets/icons/Post button 2.png" (click)="postComment()">
       <div *ngIf="commentsObs$ | async as comments" class="commentSection">

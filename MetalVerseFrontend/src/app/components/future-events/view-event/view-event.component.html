@@ -34,8 +34,8 @@
               <img class="iconLocation" src="../../../assets/icons/istockphoto-1307260371-1706671.jpg.png">
               <div class="locationText">
                 <p> {{ event.venueName }}, {{ event.city }} </p>
-                <p *ngIf="event.county != '-'">, {{ event.county }}</p>
-                <p *ngIf="event.state != '-'">, {{ event.state }} </p>
+                <p *ngIf="event.county != '' || !event.county">, {{ event.county }}</p>
+                <p *ngIf="event.state != '' || !event.state">, {{ event.state }} </p>
               </div>
             </div>
             <div class="time">

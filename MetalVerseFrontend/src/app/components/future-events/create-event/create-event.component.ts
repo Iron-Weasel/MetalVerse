@@ -31,10 +31,10 @@ export class CreateEventComponent {
   // clicking on "Post" will create a new event
   onSaveEvent(): void {
       const newEventTime = this.eventTimeToBeSent(this.timeInputRef.nativeElement.value); 
-      const stateValue = this.stateInputRef.nativeElement.value ? this.stateInputRef.nativeElement.value : "-";
-      const countyValue = this.countyInputRef.nativeElement.value ? this.countyInputRef.nativeElement.value : "-";
-      const wikiValue = this.wikiInputRef.nativeElement.value ? this.wikiInputRef.nativeElement.value : "-";
-      const bandPageValue = this.bandPageInputRef.nativeElement.value ? this.bandPageInputRef.nativeElement.value : "-";
+      const stateValue = this.stateInputRef.nativeElement.value ? this.stateInputRef.nativeElement.value : "";
+      const countyValue = this.countyInputRef.nativeElement.value ? this.countyInputRef.nativeElement.value : "";
+      const wikiValue = this.wikiInputRef.nativeElement.value ? this.wikiInputRef.nativeElement.value : "";
+      const bandPageValue = this.bandPageInputRef.nativeElement.value ? this.bandPageInputRef.nativeElement.value : "";
 
       const futureEvent: FutureEvent = {
         title: this.titleInputRef.nativeElement.value,
