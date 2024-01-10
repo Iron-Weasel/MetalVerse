@@ -8,7 +8,6 @@
       <div *ngIf="streamsObs$ | async as streams">
         <div *ngFor="let stream of streams">
           <div class="card" (click)="playStream(stream.id)">
-            <h4 class="streamId"> stream ID: {{ stream.id }} </h4>
             <h2 class="name"> {{ stream.name }}   </h2>
           </div>
         </div>

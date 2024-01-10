@@ -13,7 +13,7 @@ import { RockStreamsComponent } from './components/rock-streams/rock-streams.com
 import { FutureEventsComponent } from './components/future-events/future-events.component';
 import { InboxComponent } from './components/inbox/inbox.component';
 import { BackendHttpService } from './services/backend.service';
-import { RouterModule } from '@angular/router';
+import { PreloadAllModules, RouteReuseStrategy, RouterModule } from '@angular/router';
 import { RegistrationSucessComponent } from './components/register/register-success/registration-success.component';
 import { CreateAnnouncementsComponent } from './components/announcements/create-announcement/create-announcement.component';
 import { PostCommentsComponent } from './components/forum/post-comments/post-comments.component';
@@ -22,6 +22,7 @@ import { CreatePostComponent } from './components/forum/create-post/create-post.
 import { ViewEventComponent } from './components/future-events/view-event/view-event.component';
 import { CreateEventComponent } from './components/future-events/create-event/create-event.component';
 import { AuthGuard } from './guard/auth.guard';
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 
 export function tokenGetter() { 
@@ -72,9 +73,10 @@ export function tokenGetter() {
       { path: 'stream', component: RockStreamsComponent, canActivate: [AuthGuard]},
       { path: 'inbox', component: InboxComponent, canActivate: [AuthGuard]},
       { path: '', redirectTo: 'login', pathMatch: 'full'}
-  ])
+  ], { preloadingStrategy: PreloadAllModules }),
+    IonicModule.forRoot({})
   ],
-  providers: [BackendHttpService],
+  providers: [BackendHttpService, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
