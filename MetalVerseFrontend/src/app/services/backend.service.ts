@@ -52,15 +52,15 @@ export class BackendHttpService {
     // USER
     // register user
     saveUser(userData: User): Observable<User> {
-        return this.httpService.post<User>('https://localhost:7206/users/add_user', userData);
+        return this.httpService.post<User>('https://metalverseapidemo.azurewebsites.net/users/add_user', userData);
     }
     //get a specific user
     getUser(userId: string): Observable<User> {
-        return this.httpService.get<User>('https://localhost:7206/users/' + userId);
+        return this.httpService.get<User>('https://metalverseapidemo.azurewebsites.net/users/' + userId);
     }
     //authenticate a user and obtain token
     authUser(userLogin: User): Observable<AuthenticatedResponse> {
-        return this.httpService.post<AuthenticatedResponse>('https://localhost:7206/users/login', userLogin, 
+        return this.httpService.post<AuthenticatedResponse>('https://metalverseapidemo.azurewebsites.net/users/login', userLogin, 
                { headers: new HttpHeaders({ "Content-Type": "application/json"}) });
     }
 
@@ -68,32 +68,32 @@ export class BackendHttpService {
     // FORUM
     // get all posts from BE
     getPosts(): Observable<Post[]> {
-        return this.httpService.get<Post[]>('https://localhost:7206/posts');
+        return this.httpService.get<Post[]>('https://metalverseapidemo.azurewebsites.net/posts');
     }
 
     // sort by newest posts
     getNewestPosts(): Observable<Post[]> {
-        return this.httpService.get<Post[]>('https://localhost:7206/posts/sort_newest');
+        return this.httpService.get<Post[]>('https://metalverseapidemo.azurewebsites.net/posts/sort_newest');
     }
 
     // sort by most popular posts
     getPopularPosts(): Observable<Post[]> {
-        return this.httpService.get<Post[]>('https://localhost:7206/posts/sort_popular');
+        return this.httpService.get<Post[]>('https://metalverseapidemo.azurewebsites.net/posts/sort_popular');
     }
 
     // get a post by its Id from BE
     getPost(postId: string): Observable<Post> {
-        return this.httpService.get<Post>('https://localhost:7206/posts/' + postId);
+        return this.httpService.get<Post>('https://metalverseapidemo.azurewebsites.net/posts/' + postId);
     }
 
     // search a post by a string from BE
     searchPost(keyword: string): Observable<Post[]> {
-        return this.httpService.get<Post[]>('https://localhost:7206/posts/search_result?search=' + keyword);
+        return this.httpService.get<Post[]>('https://metalverseapidemo.azurewebsites.net/posts/search_result?search=' + keyword);
     }
 
     // write a new post and send data to BE
     savePost(postData: Post): Observable<Post> {
-        return this.httpService.post<Post>('https://localhost:7206/posts/add_post', postData).pipe(
+        return this.httpService.post<Post>('https://metalverseapidemo.azurewebsites.net/posts/add_post', postData).pipe(
             tap(() => {
                 this.postCreatedSource.next();
             })
@@ -102,7 +102,7 @@ export class BackendHttpService {
 
     // increment number of views each time a post is visited
     increasePostViews(postId: string): Observable<Post> {
-        return this.httpService.post<Post>('https://localhost:7206/posts/post_visited/' + postId, postId).pipe(
+        return this.httpService.post<Post>('https://metalverseapidemo.azurewebsites.net/posts/post_visited/' + postId, postId).pipe(
             tap(() => {
                 this.postUpdatedSource.next();
             })
@@ -111,7 +111,7 @@ export class BackendHttpService {
 
     // increment number of rock-ons for a post
     increasePostRockOns(postId: string): Observable<Post> {
-        return this.httpService.post<Post>('https://localhost:7206/posts/post_liked/' + postId, postId).pipe(
+        return this.httpService.post<Post>('https://metalverseapidemo.azurewebsites.net/posts/post_liked/' + postId, postId).pipe(
             tap(() => {
                 this.postUpdatedSource.next();
             })
@@ -120,7 +120,7 @@ export class BackendHttpService {
 
     // decrement number of rock-ons for a post
     decreasePostRockOns(postId: string): Observable<Post> {
-        return this.httpService.post<Post>('https://localhost:7206/posts/post_disliked/' + postId, postId).pipe(
+        return this.httpService.post<Post>('https://metalverseapidemo.azurewebsites.net/posts/post_disliked/' + postId, postId).pipe(
             tap(() => {
                 this.postUpdatedSource.next();
             })
@@ -129,7 +129,7 @@ export class BackendHttpService {
 
     // post a comment to a post and send data to BE
     postComment(postId: string, commentData: Comment): Observable<Comment> {
-        return this.httpService.post<Comment>('https://localhost:7206/posts/' + postId + '/comments/add_comment', commentData).pipe(
+        return this.httpService.post<Comment>('https://metalverseapidemo.azurewebsites.net/posts/' + postId + '/comments/add_comment', commentData).pipe(
             tap(() => {
                 this.commentCreatedSource.next();
             })
@@ -138,7 +138,7 @@ export class BackendHttpService {
 
     // increment number of rock-ons for a comment
     increaseCommentRockOns(postId: string, commentId: string): Observable<Comment> {
-        return this.httpService.post<Comment>('https://localhost:7206/posts/' + postId + '/comment_liked/' + commentId, commentId).pipe(
+        return this.httpService.post<Comment>('https://metalverseapidemo.azurewebsites.net/posts/' + postId + '/comment_liked/' + commentId, commentId).pipe(
             tap(() => {
                 this.commentUpdatedSource.next();
             })
@@ -147,7 +147,7 @@ export class BackendHttpService {
 
     // decrement number of rock-ons for a comment
     decreaseCommentRockOns(postId: string, commentId: string): Observable<Comment> {
-        return this.httpService.post<Comment>('https://localhost:7206/posts/' + postId + '/comment_disliked/' + commentId, commentId).pipe(
+        return this.httpService.post<Comment>('https://metalverseapidemo.azurewebsites.net/posts/' + postId + '/comment_disliked/' + commentId, commentId).pipe(
             tap(() => {
                 this.commentUpdatedSource.next();
             })
@@ -158,22 +158,22 @@ export class BackendHttpService {
     // ANNOUCEMENTS
     // get all announcements from BE
     getAnnouncements(): Observable<Announcement[]> {
-        return this.httpService.get<Announcement[]>('https://localhost:7206/announcements');
+        return this.httpService.get<Announcement[]>('https://metalverseapidemo.azurewebsites.net/announcements');
     }
 
     // get an announcement by its Id from BE
     getAnnouncement(announcementId: string): Observable<Announcement> {
-        return this.httpService.get<Announcement>('https://localhost:7206/announcements/' + announcementId);
+        return this.httpService.get<Announcement>('https://metalverseapidemo.azurewebsites.net/announcements/' + announcementId);
     }
 
     // search an announcement by a string from BE
     searchAnnouncement(keyword: string): Observable<Announcement[]> {
-        return this.httpService.get<Announcement[]>('https://localhost:7206/announcements/search_result?search=' + keyword);
+        return this.httpService.get<Announcement[]>('https://metalverseapidemo.azurewebsites.net/announcements/search_result?search=' + keyword);
     }
 
     // create a new announcement and send data to BE
     saveAnnouncement(announcementData: Announcement): Observable<Announcement> {
-        return this.httpService.post<Announcement>('https://localhost:7206/announcements/add_announcement', announcementData).pipe(
+        return this.httpService.post<Announcement>('https://metalverseapidemo.azurewebsites.net/announcements/add_announcement', announcementData).pipe(
             tap(() => {
                 this.announcementCreatedSource.next();
             })
@@ -185,22 +185,22 @@ export class BackendHttpService {
     //FUTURE EVENTS
     // get all events from BE
     getEvents(): Observable<FutureEvent[]> {
-        return this.httpService.get<FutureEvent[]>('https://localhost:7206/events');
+        return this.httpService.get<FutureEvent[]>('https://metalverseapidemo.azurewebsites.net/events');
     }
 
     // get an event by its Id from BE
     getEvent(eventId: string): Observable<FutureEvent> {
-        return this.httpService.get<FutureEvent>('https://localhost:7206/events/' + eventId);
+        return this.httpService.get<FutureEvent>('https://metalverseapidemo.azurewebsites.net/events/' + eventId);
     }
 
     // search an event by a string from BE
     searchEvent(keyword: string): Observable<FutureEvent[]> {
-        return this.httpService.get<FutureEvent[]>('https://localhost:7206/events/search_result?search=' + keyword);
+        return this.httpService.get<FutureEvent[]>('https://metalverseapidemo.azurewebsites.net/events/search_result?search=' + keyword);
     }
 
     // create a new event and send data to BE
     saveEvent(eventData: FutureEvent): Observable<FutureEvent> {
-        return this.httpService.post<FutureEvent>('https://localhost:7206/events/add_event', eventData).pipe(
+        return this.httpService.post<FutureEvent>('https://metalverseapidemo.azurewebsites.net/events/add_event', eventData).pipe(
             tap(() => {
                 this.eventCreatedSource.next();
             })
@@ -211,20 +211,20 @@ export class BackendHttpService {
     // STREAM
     // get all streams from BE
     getStreams(): Observable<RockStream[]> {
-        return this.httpService.get<RockStream[]>('https://localhost:7206/stream');
+        return this.httpService.get<RockStream[]>('https://metalverseapidemo.azurewebsites.net/stream');
     }
 
     getStream(streamId: string): Observable<RockStream> {
-        return this.httpService.get<RockStream>('https://localhost:7206/stream/' + streamId);
+        return this.httpService.get<RockStream>('https://metalverseapidemo.azurewebsites.net/stream/' + streamId);
     }
 
     // search a stream by a string from BE
     searchStream(keyword: string): Observable<RockStream[]> {
-        return this.httpService.get<RockStream[]>('https://localhost:7206/stream/search_result?search=' + keyword);
+        return this.httpService.get<RockStream[]>('https://metalverseapidemo.azurewebsites.net/stream/search_result?search=' + keyword);
     }
 
     getStreamMetadata(streamId: string): Observable<StreamMetadata> {
-        return this.httpService.get<StreamMetadata>('https://localhost:7206/stream/metadata?streamId=' + streamId);
+        return this.httpService.get<StreamMetadata>('https://metalverseapidemo.azurewebsites.net/stream/metadata?streamId=' + streamId);
     }
  
 }

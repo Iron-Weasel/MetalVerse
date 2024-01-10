@@ -52,7 +52,7 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["localhost:7206"],
+        allowedDomains: ["https://metalverseapidemo.azurewebsites.net"],
         disallowedRoutes: []
       }
     }),
