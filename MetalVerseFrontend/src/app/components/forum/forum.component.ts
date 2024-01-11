@@ -22,9 +22,10 @@ export class ForumComponent {
 
     @ViewChild('searchInput') searchInputRef: ElementRef;
     rockedOnMap: { [postId: string]: boolean } = {};
+    viewsCountMap: { [postId: string]: number | undefined} = {};
     dateCreatedMapText: { [commentId: string]: string} = {};
     usernameMap: { [userId: string]: string } = {};
-    commentsNumberMap: { [postId: string]: number } = {};
+    commentsNumberMap: { [postId: string]: number | undefined} = {};
     
 
     constructor(httpService: BackendHttpService) { 
@@ -38,6 +39,18 @@ export class ForumComponent {
       this.httpService.rockedOnState$.subscribe(state => {
         this.rockedOnMap = state;
       });
+
+      this.httpService.viewsCount$.subscribe((count) => {
+        for (let postId in count) {
+          this.viewsCountMap[postId] = count[postId];
+        }
+      });
+
+      this.httpService.commsCount$.subscribe((count) => {
+        for (let postId in count) {
+          this.commentsNumberMap[postId] = count[postId];
+        }
+      });
     }
 
 
@@ -48,6 +61,7 @@ export class ForumComponent {
         this.posts.forEach((post:Post) => {
           if(post.id != undefined) {
             const postId = post.id;
+            this.viewsCountMap[postId] = post.views;
             if(post.createdDate != undefined) {
               this.dateCreatedMapText[postId] = this.getTimeDifference(post.createdDate);
             }
@@ -75,7 +89,10 @@ export class ForumComponent {
       var dateCreatedString = '';
 
       switch(true) {
-        case (differenceInSeconds < 60): 
+        case (differenceInSeconds <= -1): 
+              dateCreatedString =  differenceInSeconds + 1 + ' seconds ago';
+              break;
+        case (differenceInSeconds > -1 && differenceInSeconds < 60): 
               dateCreatedString =  differenceInSeconds + ' seconds ago';
               break;
         case (differenceInSeconds >= 60 && differenceInSeconds < 120): 

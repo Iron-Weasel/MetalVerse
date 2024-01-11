@@ -48,7 +48,16 @@ export class BackendHttpService {
     rockedOnState = new BehaviorSubject<{ [id: string]: boolean }>({});
     rockedOnState$ = this.rockedOnState.asObservable();
 
+    // change views count in real time across components
+    viewsCount = new BehaviorSubject<{ [id: string]: number | undefined}>({});
+    viewsCount$ = this.viewsCount.asObservable();
 
+    // change comments count in real time across components
+    commsCount = new BehaviorSubject<{ [id: string]: number | undefined}>({});
+    commsCount$ = this.commsCount.asObservable();
+
+
+    
     // USER
     // register user
     saveUser(userData: User): Observable<User> {

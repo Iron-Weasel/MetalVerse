@@ -35,10 +35,12 @@ export class PostCommentsComponent{
     // variables related to the post itself
     rockedOnPost: boolean;
     dateCreatedPostText: string;
+    usernamePost: string;
+    viewsCountMap: { [id: string]: number | undefined } = {};
+    commentsCountMap: { [id: string]: number | undefined } = {};
     // variables related to the comments
     rockedOnMap: { [id: string]: boolean } = {};
     dateCreatedMapText: { [commentId: string]: string} = {};
-    usernamePost: string;
 
     
     constructor(private route: ActivatedRoute, httpService: BackendHttpService, private jwtHelper: JwtHelperService) {
@@ -97,7 +99,10 @@ export class PostCommentsComponent{
       var dateCreatedString = '';
 
       switch(true) {
-        case (differenceInSeconds < 60): 
+        case (differenceInSeconds <= -1): 
+              dateCreatedString =  differenceInSeconds + 1 + ' seconds ago';
+              break;
+        case (differenceInSeconds > -1 && differenceInSeconds < 60): 
               dateCreatedString =  differenceInSeconds + ' seconds ago';
               break;
         case (differenceInSeconds >= 60 && differenceInSeconds < 120): 
@@ -185,6 +190,10 @@ export class PostCommentsComponent{
       this.httpService.getPost(this.idPost).subscribe((data:Post) => {
           this.rockOnsPost.next(data);
           this.viewsPost.next(data);
+          if(this.idPost != undefined) this.viewsCountMap[this.idPost] = data.views;
+          this.httpService.viewsCount.next(this.viewsCountMap);
+          this.commentsCountMap[this.idPost] = data.comments.length;
+          this.httpService.commsCount.next(this.commentsCountMap);
           this.post = data;
       });
     }
