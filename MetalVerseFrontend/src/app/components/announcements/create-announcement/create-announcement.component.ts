@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Announcement } from 'src/app/models/announcement';
+import { AzureStorageService } from 'src/app/services/azure-storage.service';
 import { BackendHttpService } from 'src/app/services/backend.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class CreateAnnouncementsComponent {
   private httpService: BackendHttpService;
   userIdLoggedIn: string;
 
-  constructor(httpService: BackendHttpService, private jwtHelper: JwtHelperService) { 
+  constructor(httpService: BackendHttpService, private jwtHelper: JwtHelperService, private azureService: AzureStorageService) { 
     this.httpService  = httpService;
     this.getUserLoggedIn();
   }
@@ -33,8 +34,15 @@ export class CreateAnnouncementsComponent {
         userId: this.userIdLoggedIn,
         title: this.titleInputRef.nativeElement.value,
         description: this.descriptionInputRef.nativeElement.value,
-        image: "some image"
+        image: this.azureService.imageUrl
       }
       this.httpService.saveAnnouncement(announcement).subscribe((data:Announcement) => { });
+  }
+
+  onFileSelected(e: any): void {
+    const file = e.target.files[0];
+    if (file) {
+      this.azureService.uploadImageToAzureBlob(file);
+    }
   }
 }

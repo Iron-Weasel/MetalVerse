@@ -33,7 +33,6 @@ export class PostCommentsComponent{
 
     @ViewChild('commentInput') commentInputRef: ElementRef;
     // variables related to the post itself
-    rockedOnPost: boolean;
     dateCreatedPostText: string;
     usernamePost: string;
     viewsCountMap: { [id: string]: number | undefined } = {};
@@ -79,6 +78,9 @@ export class PostCommentsComponent{
         if(data.createdDate != undefined) {
           this.dateCreatedPostText = this.getTimeDifference(data.createdDate);
         }
+
+        this.commentsCountMap[this.idPost] = data.comments.length;
+        this.httpService.commsCount.next(this.commentsCountMap);
         
         data.comments.forEach((comment: Comment) => {
           if(comment.id != undefined) {
@@ -190,10 +192,10 @@ export class PostCommentsComponent{
       this.httpService.getPost(this.idPost).subscribe((data:Post) => {
           this.rockOnsPost.next(data);
           this.viewsPost.next(data);
-          if(this.idPost != undefined) this.viewsCountMap[this.idPost] = data.views;
-          this.httpService.viewsCount.next(this.viewsCountMap);
-          this.commentsCountMap[this.idPost] = data.comments.length;
-          this.httpService.commsCount.next(this.commentsCountMap);
+          if(this.idPost != undefined) {
+            this.viewsCountMap[this.idPost] = data.views;
+            this.httpService.viewsCount.next(this.viewsCountMap);
+          }
           this.post = data;
       });
     }

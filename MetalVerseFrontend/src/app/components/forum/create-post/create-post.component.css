@@ -74,6 +74,10 @@ textarea:focus {
     margin-left: 1.2em;
 }
 
+.image-upload>input {
+    display: none;
+  }
+
 .post {
     width: 20%;
     float: left;

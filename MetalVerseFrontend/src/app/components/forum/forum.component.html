@@ -22,9 +22,8 @@
                 <p class="views" *ngIf="post.id"> {{ viewsCountMap[post.id] }} views</p>  
                 <p class="rockOnNumbers"> {{ post.rockOns }} rock-ons </p>
                 <div class="commentNumbers" *ngIf="post.id"> 
-                  <p *ngIf="commentsNumberMap[post.id] == 0"> 0 comments </p>
                   <p *ngIf="commentsNumberMap[post.id] == 1"> {{ commentsNumberMap[post.id] }} comment </p>
-                  <p *ngIf="(commentsNumberMap[post.id] ?? 0) > 1"> {{ commentsNumberMap[post.id] }} comments </p>
+                  <p *ngIf="commentsNumberMap[post.id] == 0 || (commentsNumberMap[post.id] ?? 0) > 1"> {{ commentsNumberMap[post.id] }} comments </p>
                 </div>
             </div>
           </div>

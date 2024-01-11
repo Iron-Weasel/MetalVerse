@@ -7,7 +7,12 @@
     <h2 class="content-text">Create new announcement</h2>
     <input class="title" placeholder="Announcement title" #titleInput>
     <textarea class="description" placeholder="Description" #descriptionInput></textarea>
-    <img class="add-img" src="../../../assets/icons/Add image button.png">
+    <div class="image-upload" align="right">
+      <label for="img-upload">
+        <img class="add-img" src="../../../assets/icons/Add image button.png">
+      </label>
+      <input id="img-upload" type="file" (change)="onFileSelected($event)"/>    
+    </div>
     <img class="post" src="../../../assets/icons/Post button.png" [routerLink]="['/announcements']" (click)="onSaveAnnouncement()">
 </div>
 

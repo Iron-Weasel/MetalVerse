@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { FutureEvent } from 'src/app/models/future-event';
+import { AzureStorageService } from 'src/app/services/azure-storage.service';
 import { BackendHttpService } from 'src/app/services/backend.service';
 
 @Component({
@@ -24,7 +25,7 @@ export class CreateEventComponent {
 
   private httpService: BackendHttpService;
 
-  constructor(httpService: BackendHttpService) { 
+  constructor(httpService: BackendHttpService, private azureService: AzureStorageService) { 
     this.httpService  = httpService;
   }
 
@@ -49,9 +50,17 @@ export class CreateEventComponent {
         facebookPage: this.fbInputRef.nativeElement.value,
         wikiPage: wikiValue,
         bandPage: bandPageValue,
-        ticketPurchasePage: this.ticketInputRef.nativeElement.value
+        ticketPurchasePage: this.ticketInputRef.nativeElement.value,
+        imageURL: this.azureService.imageUrl
       }
       this.httpService.saveEvent(futureEvent).subscribe((data:FutureEvent) => { });
+  }
+
+  onFileSelected(e: any): void {
+    const file = e.target.files[0];
+    if (file) {
+      this.azureService.uploadImageToAzureBlob(file);
+    }
   }
 
   // format the eventTime string, so it can be stored and processed on backend & database

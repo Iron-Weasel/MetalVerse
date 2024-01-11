@@ -7,7 +7,7 @@
     <div *ngIf="event">
       <div class="card">
           <!-- to be replaced when storing images in DB in the near future -->
-          <img class="eventImage" src="https://fastly.picsum.photos/id/6/300/150.jpg?hmac=c914-eRIjIpx5sAwpgtoqE7GHJcrgVi9wGZV58c_N0o">
+          <img class="eventImage" [src]="event.imageURL">
           <h2 class="title"> {{event.title}} @{{ event.city }}, {{ event. country }} </h2>
           <div class="bandInfo">
             <p>Country of origin: {{event.bandCountry}}</p>

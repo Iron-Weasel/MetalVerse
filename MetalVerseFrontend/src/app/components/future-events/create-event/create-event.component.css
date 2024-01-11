@@ -83,6 +83,10 @@ input:focus {
     margin-left: 2em;
 }
 
+.image-upload>input {
+    display: none;
+  }
+
 .post {
     width: 20%;
     float: left;

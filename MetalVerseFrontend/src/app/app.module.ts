@@ -23,6 +23,8 @@ import { ViewEventComponent } from './components/future-events/view-event/view-e
 import { CreateEventComponent } from './components/future-events/create-event/create-event.component';
 import { AuthGuard } from './guard/auth.guard';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { AzureStorageService } from './services/azure-storage.service';
+import { PlayerService } from './services/player.service';
 
 
 export function tokenGetter() { 
@@ -76,7 +78,7 @@ export function tokenGetter() {
   ], { preloadingStrategy: PreloadAllModules }),
     IonicModule.forRoot({})
   ],
-  providers: [BackendHttpService, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [BackendHttpService, AzureStorageService, PlayerService, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

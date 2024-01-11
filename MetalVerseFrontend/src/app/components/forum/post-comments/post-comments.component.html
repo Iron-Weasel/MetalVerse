@@ -11,10 +11,12 @@
       <h2 class="postTitle"> {{ post.title }} </h2>
       <p class="createdDate"> {{ dateCreatedPostText }} </p>
       <p class="description"> {{ post.description }} </p>
+      <img *ngIf="post.imageURL" [src]="post.imageURL">
       <div class="postInfo">  
         <p class="views"> {{ post.views }} views</p>  
         <p class="rockOnNumbers"> {{ post.rockOns }} rock-ons </p>
-        <p class="commentNumbers"> {{ post.comments.length }} comment </p>
+        <p class="commentNumbers" *ngIf="post.comments.length == 1"> {{ post.comments.length }} comment </p>
+        <p class="commentNumbers" *ngIf="post.comments.length == 0 || post.comments.length > 1"> {{ post.comments.length }} comments </p>
     </div>
     </div>
     <div class="bar">
