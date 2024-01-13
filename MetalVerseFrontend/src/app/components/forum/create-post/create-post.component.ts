@@ -1,7 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Post } from 'src/app/models/post';
-import { AzureStorageService } from 'src/app/services/azure-storage.service';
 import { BackendHttpService } from 'src/app/services/backend.service';
 
 @Component({
@@ -15,8 +14,9 @@ export class CreatePostComponent {
 
   private httpService: BackendHttpService;
   userIdLoggedIn: string;
+  imageURLFromAzure: string;
 
-  constructor(httpService: BackendHttpService, private jwtHelper: JwtHelperService, private azureService: AzureStorageService) { 
+  constructor(httpService: BackendHttpService, private jwtHelper: JwtHelperService) { 
     this.httpService  = httpService;
     this.getUserLoggedIn();
   }
@@ -33,7 +33,7 @@ export class CreatePostComponent {
         userId: this.userIdLoggedIn,
         title: this.titleInputRef.nativeElement.value,
         description: this.descriptionInputRef.nativeElement.value,
-        imageURL: this.azureService.imageUrl,
+        imageURL: this.imageURLFromAzure,
         comments: []
       }
       this.httpService.savePost(post).subscribe((data:Post) => { });
@@ -42,7 +42,12 @@ export class CreatePostComponent {
   onFileSelected(e: any): void {
     const file = e.target.files[0];
     if (file) {
-      this.azureService.uploadImageToAzureBlob(file);
+      const formData = new FormData();
+      formData.append('imageFile', file);
+      this.httpService.uploadImage(formData).subscribe((response: any) => {
+        console.log(response.imageURL);
+        this.imageURLFromAzure = response.imageURL;
+      });
     }
   }
 }

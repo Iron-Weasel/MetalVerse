@@ -235,5 +235,12 @@ export class BackendHttpService {
     getStreamMetadata(streamId: string): Observable<StreamMetadata> {
         return this.httpService.get<StreamMetadata>('https://metalverseapidemo.azurewebsites.net/stream/metadata?streamId=' + streamId);
     }
+
+    
+    // UPLOAD IMAGE
+    // upload an image to Azure Blob Storage
+    uploadImage(image: FormData): Observable<string> {
+        return this.httpService.post<string>('https://localhost:7206/upload-image', image);
+    }
  
 }

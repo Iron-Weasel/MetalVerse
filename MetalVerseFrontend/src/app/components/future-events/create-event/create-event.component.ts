@@ -24,8 +24,9 @@ export class CreateEventComponent {
   @ViewChild('timeInput') timeInputRef: ElementRef;
 
   private httpService: BackendHttpService;
+  imageURLFromAzure: string;
 
-  constructor(httpService: BackendHttpService, private azureService: AzureStorageService) { 
+  constructor(httpService: BackendHttpService) { 
     this.httpService  = httpService;
   }
 
@@ -51,7 +52,7 @@ export class CreateEventComponent {
         wikiPage: wikiValue,
         bandPage: bandPageValue,
         ticketPurchasePage: this.ticketInputRef.nativeElement.value,
-        imageURL: this.azureService.imageUrl
+        imageURL: this.imageURLFromAzure
       }
       this.httpService.saveEvent(futureEvent).subscribe((data:FutureEvent) => { });
   }
@@ -59,7 +60,12 @@ export class CreateEventComponent {
   onFileSelected(e: any): void {
     const file = e.target.files[0];
     if (file) {
-      this.azureService.uploadImageToAzureBlob(file);
+      const formData = new FormData();
+      formData.append('imageFile', file);
+      this.httpService.uploadImage(formData).subscribe((response: any) => {
+        console.log(response.imageURL);
+        this.imageURLFromAzure = response.imageURL;
+      });
     }
   }
 

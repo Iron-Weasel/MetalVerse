@@ -9,7 +9,6 @@
       <div *ngIf="eventsObs$ | async as events">
         <div *ngFor="let event of events">
           <div class="card" [routerLink]="['/events', event.id]">
-            <!-- to be replaced when storing images in DB in the near future -->
             <img class="eventImage" [src]="event.imageURL">
             <h2 class="title"> {{ event.title }} @{{ event.city }}, {{ event. country }}  </h2>
             <p class="eventDate" *ngIf="event.id">  {{ dateEventMapText[event.id] }} </p>

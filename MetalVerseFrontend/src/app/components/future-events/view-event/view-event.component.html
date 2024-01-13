@@ -6,7 +6,6 @@
     <img style="width:10%; margin: 1em 0 0 1em" src="../../../assets/icons/back-arrow.png" [routerLink]="['/events']">
     <div *ngIf="event">
       <div class="card">
-          <!-- to be replaced when storing images in DB in the near future -->
           <img class="eventImage" [src]="event.imageURL">
           <h2 class="title"> {{event.title}} @{{ event.city }}, {{ event. country }} </h2>
           <div class="bandInfo">

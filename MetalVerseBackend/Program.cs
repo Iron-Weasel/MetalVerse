@@ -53,6 +53,7 @@ builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IStreamService, StreamService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ISigningService, SigningService>();
+builder.Services.AddScoped<IUploadService, UploadService>();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
