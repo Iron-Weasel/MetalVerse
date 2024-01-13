@@ -60,6 +60,9 @@
     font-size: 12px;
     color: rgb(127, 127, 127);
 }
+.postImage {
+    margin-left: -0.5em;
+}
 .postInfo {
     display: flex;
     color: #4C4C4C;

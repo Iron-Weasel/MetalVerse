@@ -69,7 +69,7 @@ input:focus {
     box-shadow: 2px 2px 4px 0 #353535;
     border-radius: 3px;
     width: 36em;
-    height: 15em;
+    height: auto;
     padding: 0 1em 3em 2em;
     margin: 3em 5em 5em 2em;
     background-color: #E3E3E3;
@@ -112,6 +112,7 @@ input:focus {
     color: #4C4C4C;
     margin-top: -2em;
     margin-left: -0.3em;
+    margin-bottom: -1.7em;
     font-family: 'Balthazar', serif;
     font-size: 14px;
 }

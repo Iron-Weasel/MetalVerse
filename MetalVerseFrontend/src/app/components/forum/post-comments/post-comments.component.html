@@ -11,7 +11,7 @@
       <h2 class="postTitle"> {{ post.title }} </h2>
       <p class="createdDate"> {{ dateCreatedPostText }} </p>
       <p class="description"> {{ post.description }} </p>
-      <img *ngIf="post.imageURL" [src]="post.imageURL">
+      <img class="postImage" *ngIf="post.imageURL" [src]="post.imageURL">
       <div class="postInfo">  
         <p class="views"> {{ post.views }} views</p>  
         <p class="rockOnNumbers"> {{ post.rockOns }} rock-ons </p>

@@ -1,4 +1,5 @@
 ﻿using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using MetalVerseBackend.Interfaces;
 
 namespace MetalVerseBackend.Services
@@ -14,6 +15,7 @@ namespace MetalVerseBackend.Services
         {
             var container = new BlobContainerClient(_storageConnectionString, "metalverse");
             var blob = container.GetBlobClient(fileName);
+            await blob.DeleteIfExistsAsync(DeleteSnapshotsOption.IncludeSnapshots);
             await blob.UploadAsync(fileStream); 
             return blob.Uri.ToString();
         }
