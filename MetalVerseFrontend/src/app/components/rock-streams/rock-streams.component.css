@@ -48,16 +48,17 @@ input:focus {
 }
 
    
-.card {
-    box-shadow: 2px 2px 4px 0 #353535;
-    border-radius: 3px;
-    width: 36em;
-    height: auto;
-    padding: 0 1em 3em 2em;
-    margin: 3em 5em 5em 2em;
-    background-color: #E3E3E3;
-    font-family: 'Balthazar', serif;
-    font-size: 10px;
+.imageLeft {
+    width: 30%;
+    margin-left: 2.5em;
+    margin-top: 2em;
+}
+
+.imageRight {
+    float: right;
+    width: 30%;
+    margin-right: 2.5em;
+    margin-top: -6.2em;
 }
 
 .player {
