@@ -40,7 +40,7 @@
             <div class="time">
               <img class="iconTime" src="../../../assets/icons/1096132.png">
               <div class="timeText">
-                <p *ngIf="event.id">  Show starts on {{ dateEventMapText[event.id] }} </p>
+                <p *ngIf="event.eventTime">  Show starts on {{ event.eventTime | dateTimeFormat }} </p>
               </div>
             </div>
           </div>

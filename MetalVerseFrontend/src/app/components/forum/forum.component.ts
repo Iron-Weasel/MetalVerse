@@ -11,7 +11,7 @@ import { BackendHttpService } from 'src/app/services/backend.service';
 })
 
 export class ForumComponent {
-    httpService: BackendHttpService;
+    private httpService: BackendHttpService;
     public posts: Post[];
     
     private postsObs: ReplaySubject<Post[]> = new ReplaySubject<Post[]>(1);  // send data
@@ -23,7 +23,6 @@ export class ForumComponent {
     @ViewChild('searchInput') searchInputRef: ElementRef;
     rockedOnMap: { [postId: string]: boolean } = {};
     viewsCountMap: { [postId: string]: number | undefined} = {};
-    dateCreatedMapText: { [commentId: string]: string} = {};
     usernameMap: { [userId: string]: string } = {};
     commentsNumberMap: { [postId: string]: number | undefined} = {};
     
@@ -54,7 +53,7 @@ export class ForumComponent {
     }
 
 
-    loadPosts(): void {
+    private loadPosts(): void {
       this.httpService.getPosts().subscribe((data:Post[]) => {
         this.postsObs.next(data);
         this.posts = data;
@@ -62,9 +61,6 @@ export class ForumComponent {
           if(post.id != undefined) {
             const postId = post.id;
             this.viewsCountMap[postId] = post.views;
-            if(post.createdDate != undefined) {
-              this.dateCreatedMapText[postId] = this.getTimeDifference(post.createdDate);
-            }
             this.getCommentsNumber(postId);
           }
           this.httpService.getUser(post.userId).subscribe((data: User) => {
@@ -78,51 +74,6 @@ export class ForumComponent {
       this.httpService.getPost(postId).subscribe((data: Post) => {
         this.commentsNumberMap[postId] = data.comments.length;
       });
-    }
-
-    private getTimeDifference(dateTimeComment: string): string {
-      const dateTime = new Date(dateTimeComment);
-      const now = new Date();
-      const difference = now.getTime() - dateTime.getTime();
-      const differenceInSeconds = Math.floor(difference / 1000);
-
-      var dateCreatedString = '';
-
-      switch(true) {
-        case (differenceInSeconds <= -1): 
-              dateCreatedString =  differenceInSeconds + 1 + ' seconds ago';
-              break;
-        case (differenceInSeconds > -1 && differenceInSeconds < 60): 
-              dateCreatedString =  differenceInSeconds + ' seconds ago';
-              break;
-        case (differenceInSeconds >= 60 && differenceInSeconds < 120): 
-              dateCreatedString =  Math.floor(differenceInSeconds / 60) + ' minute ago';
-              break;
-        case (differenceInSeconds >= 120 && differenceInSeconds < 3600): 
-              dateCreatedString =  Math.floor(differenceInSeconds / 60) + ' minutes ago';
-              break;
-        case (differenceInSeconds >= 3600 && differenceInSeconds < 7200): 
-              dateCreatedString =  Math.floor(differenceInSeconds / 3600) + ' hour ago';
-              break;
-        case (differenceInSeconds >= 7200 && differenceInSeconds < 84000): 
-              dateCreatedString =  Math.floor(differenceInSeconds / 3600) + ' hours ago';
-              break;
-        case (differenceInSeconds >= 84000 && differenceInSeconds < 168000): 
-              dateCreatedString =  Math.floor(differenceInSeconds / 84000) + ' day ago';
-              break;
-        case (differenceInSeconds >= 168000 && differenceInSeconds < 588000): 
-              dateCreatedString =  Math.floor(differenceInSeconds / 84000) + ' days ago';
-              break;
-        case (differenceInSeconds >= 588000 && differenceInSeconds < 1176000): 
-              dateCreatedString =  Math.floor(differenceInSeconds / 588000) + ' week ago';
-              break;
-        case (differenceInSeconds >= 1176000 && differenceInSeconds <= 31622400): 
-              dateCreatedString =  Math.floor(differenceInSeconds / 588000) + ' weeks ago';
-              break;
-        default: dateCreatedString = 'Time format is not right';
-      }
-
-      return dateCreatedString;
     }
 
     searchPost(): void {

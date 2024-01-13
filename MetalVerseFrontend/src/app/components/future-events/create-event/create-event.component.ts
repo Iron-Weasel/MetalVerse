@@ -1,6 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { FutureEvent } from 'src/app/models/future-event';
-import { AzureStorageService } from 'src/app/services/azure-storage.service';
 import { BackendHttpService } from 'src/app/services/backend.service';
 
 @Component({
@@ -24,7 +23,7 @@ export class CreateEventComponent {
   @ViewChild('timeInput') timeInputRef: ElementRef;
 
   private httpService: BackendHttpService;
-  imageURLFromAzure: string;
+  private imageURLFromAzure: string;
 
   constructor(httpService: BackendHttpService) { 
     this.httpService  = httpService;

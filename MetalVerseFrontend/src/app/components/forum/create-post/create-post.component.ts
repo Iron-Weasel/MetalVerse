@@ -13,15 +13,15 @@ export class CreatePostComponent {
   @ViewChild('descriptionInput') descriptionInputRef: ElementRef;
 
   private httpService: BackendHttpService;
-  userIdLoggedIn: string;
-  imageURLFromAzure: string;
+  private userIdLoggedIn: string;
+  private imageURLFromAzure: string;
 
   constructor(httpService: BackendHttpService, private jwtHelper: JwtHelperService) { 
     this.httpService  = httpService;
     this.getUserLoggedIn();
   }
 
-  getUserLoggedIn() {
+  private getUserLoggedIn() {
     const token = localStorage.getItem("jwt");
     if(token) var decodedToken = this.jwtHelper.decodeToken(token);
     this.userIdLoggedIn = decodedToken['nameid'];

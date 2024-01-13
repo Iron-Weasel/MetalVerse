@@ -41,7 +41,7 @@
 .description {
     margin-left: 0.1em;
     width: 17em;
-    word-break: break-all;
+    word-break: normal;
     font-family: 'Balthazar', serif;
     font-size: 17px;
     color: rgb(106, 106, 106);

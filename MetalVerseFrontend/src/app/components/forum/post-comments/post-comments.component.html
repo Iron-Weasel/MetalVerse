@@ -7,9 +7,9 @@
     <div class="cardPost" *ngIf="post">
       <img class="rock-on" *ngIf="idPost && !rockedOnMap[idPost]" src="../../../assets/icons/unrocked.png" (click)="increaseRockOnPost()">
       <img class="rock-on" *ngIf="idPost && rockedOnMap[idPost]" src="../../../assets/icons/rocked.png" (click)="decreaseRockOnPost()">
-      <p class="username"> @{{usernamePost }} </p>
+      <p class="username"> @{{ usernamePost }} </p>
       <h2 class="postTitle"> {{ post.title }} </h2>
-      <p class="createdDate"> {{ dateCreatedPostText }} </p>
+      <p class="createdDate" *ngIf="post.createdDate"> {{ post.createdDate | timeDifference }} </p>
       <p class="description"> {{ post.description }} </p>
       <img class="postImage" *ngIf="post.imageURL" [src]="post.imageURL">
       <div class="postInfo">  
@@ -31,7 +31,7 @@
               <img class="rock-on" *ngIf="comment.id && rockedOnMap[comment.id]" src="../../../assets/icons/rocked.png" (click)="decreaseRockOnComments(comment.id)">
               <p class="username"> @{{ comment.userName }} </p>
               <div *ngIf="comment.id">
-                <p class="postedDate" *ngIf="dateCreatedMapText[comment.id]"> {{ dateCreatedMapText[comment.id] }} </p>
+                <p class="postedDate" *ngIf="comment.postedDate"> {{ comment.postedDate | timeDifference }} </p>
               </div>
               <p class="text"> {{ comment.text }} </p>
               <p class="commRockOn"> {{ comment.rockOns }} rock-ons </p>

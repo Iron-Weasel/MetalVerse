@@ -23,8 +23,9 @@ import { ViewEventComponent } from './components/future-events/view-event/view-e
 import { CreateEventComponent } from './components/future-events/create-event/create-event.component';
 import { AuthGuard } from './guard/auth.guard';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { AzureStorageService } from './services/azure-storage.service';
 import { PlayerService } from './services/player.service';
+import { TimeDifferencePipe } from './pipes/time-difference.pipe';
+import { DateTimeFormatPipe } from './pipes/date-time.pipe';
 
 
 export function tokenGetter() { 
@@ -48,7 +49,9 @@ export function tokenGetter() {
     ViewAnnouncementComponent,
     CreatePostComponent,
     ViewEventComponent,
-    CreateEventComponent
+    CreateEventComponent,
+    TimeDifferencePipe,
+    DateTimeFormatPipe
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule,
@@ -78,7 +81,7 @@ export function tokenGetter() {
   ], { preloadingStrategy: PreloadAllModules }),
     IonicModule.forRoot({})
   ],
-  providers: [BackendHttpService, AzureStorageService, PlayerService, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [BackendHttpService, PlayerService, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

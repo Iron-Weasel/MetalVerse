@@ -11,7 +11,7 @@
           <div class="card" [routerLink]="['/events', event.id]">
             <img class="eventImage" [src]="event.imageURL">
             <h2 class="title"> {{ event.title }} @{{ event.city }}, {{ event. country }}  </h2>
-            <p class="eventDate" *ngIf="event.id">  {{ dateEventMapText[event.id] }} </p>
+            <p class="eventDate" *ngIf="event.eventTime">  {{ event.eventTime | dateTimeFormat }} </p>
           </div>
         </div>
       </div> 
