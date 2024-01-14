@@ -240,7 +240,7 @@ export class BackendHttpService {
     // UPLOAD IMAGE
     // upload an image to Azure Blob Storage
     uploadImage(image: FormData): Observable<string> {
-        return this.httpService.post<string>('https://localhost:7206/upload-image', image);
+        return this.httpService.post<string>('https://metalverseapidemo.azurewebsites.net/upload-image', image);
     }
  
 }
