@@ -13,14 +13,15 @@ export class CreateAnnouncementsComponent {
   @ViewChild('descriptionInput') descriptionInputRef: ElementRef;
 
   private httpService: BackendHttpService;
-  userIdLoggedIn: string;
+  private userIdLoggedIn: string;
+  private imageURLFromAzure: string;
 
   constructor(httpService: BackendHttpService, private jwtHelper: JwtHelperService) { 
     this.httpService  = httpService;
     this.getUserLoggedIn();
   }
 
-  getUserLoggedIn() {
+  private getUserLoggedIn() {
     const token = localStorage.getItem("jwt");
     if(token) var decodedToken = this.jwtHelper.decodeToken(token);
     this.userIdLoggedIn = decodedToken['nameid'];
@@ -33,8 +34,20 @@ export class CreateAnnouncementsComponent {
         userId: this.userIdLoggedIn,
         title: this.titleInputRef.nativeElement.value,
         description: this.descriptionInputRef.nativeElement.value,
-        image: "some image"
+        image: this.imageURLFromAzure
       }
       this.httpService.saveAnnouncement(announcement).subscribe((data:Announcement) => { });
+  }
+
+  onFileSelected(e: any): void {
+    const file = e.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append('imageFile', file);
+      this.httpService.uploadImage(formData).subscribe((response: any) => {
+        console.log(response.imageURL);
+        this.imageURLFromAzure = response.imageURL;
+      });
+    }
   }
 }

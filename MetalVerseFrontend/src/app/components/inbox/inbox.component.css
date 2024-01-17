@@ -5,32 +5,46 @@
 }
 .logo {
     width: 30%;
-    margin-left: 7em;
+    margin-left: 8em;
 }
 
 .content {
+    background-color: #CDCDCD;
     line-height: 2rem;
     font-size: 1.2em;
     overflow-x: hidden;
+    height: 720px;
 }
 
 .content-text {
     margin-left: 0.6em;
     color: #4C4C4C;
+    font-family: 'Balthazar', serif;
+    font-size: 2em;
 }
 
 .search-bar {
-    margin-left: 1.5em;
+    margin-left: 1.3em;
     margin-top: 0.9em;
-    width: 15em;
-    height: 1em;
+    width: 17em;
+    height: 1.7em;
     background-color: #2F2F2f;
+    border: solid 2px #2F2F2f;
     border-radius: 4px;
+    color: #A8A8A8;
+    font-size: 17px;
+    font-family: 'Balthazar', serif;
 }
 
 ::placeholder {
     color: #A8A8A8;
-    font-size: 10px;
+    font-size: 15px;
+    font-family: 'Balthazar', serif;
+}
+
+input:focus {
+    outline: none !important;
+    border: solid 2px #740000;
 }
 
 .post-button {
@@ -74,7 +88,7 @@
 
 .footer {
     background-color: #740000;
-    padding-bottom: 1.5em;
+    padding-bottom: 1.7em;
     position: sticky;
     bottom: 0;
 }
@@ -83,31 +97,31 @@
     color: white;
     text-decoration: none;
     font-size: 17px;
-    margin-left: 20px;
+    margin-left: 26px;
 }
 
 .events-button {
     width: 8%;
-    margin-bottom: -1.2em;
+    margin-bottom: -1.4em;
     margin-left: 0.7em;
 }
 .streams-button {
     width: 8%;
-    margin-bottom: -1.1em;
+    margin-bottom: -1.3em;
     margin-left: 0.7em;
 }
 .inbox-button {
     width: 10%;
-    margin-bottom: -1.4em;
+    margin-bottom: -1.7em;
     margin-left: 0.7em;
 }
 .forum-button {
     width: 8%;
-    margin-bottom: -1.2em;
+    margin-bottom: -1.4em;
     margin-left: 0.7em;
 }
 .announcements-button {
     width: 8%;
-    margin-bottom: -1.2em;
+    margin-bottom: -1.4em;
     margin-left: 0.7em;
 }

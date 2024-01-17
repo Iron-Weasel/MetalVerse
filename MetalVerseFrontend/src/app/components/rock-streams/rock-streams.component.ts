@@ -29,7 +29,7 @@ export class RockStreamsComponent {
     this.loadStreams();
   }
   
-  loadStreams(): void {
+  private loadStreams(): void {
     this.httpService.getStreams().subscribe((data:RockStream[]) => {
         this.streamsObs.next(data);
         this.streams= data;

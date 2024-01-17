@@ -1,28 +1,30 @@
 .content {
-    height: 740px;
+    background-color: #CDCDCD;
+    height: 800px;
 }
 
 .text {
-    padding-left: 3.5em;
+    font-size: 35px;
+    padding-left: 4em;
 }
 
 .credential-bar {
     margin-top: 1em;
     width: 18em;
-    height: 1em;
+    height: 1.7em;
     background-color: #2F2F2F;
     border: solid 2px #2F2F2f;
     border-radius: 4px;
     font-family: 'Balthazar', serif;
-    font-size: 15px;
+    font-size: 17px;
     color: #A8A8A8;
-    margin-left: 2em;
+    margin-left: 2.5em;
 }
 
 ::placeholder {
     display: block;
     color: #A8A8A8;
-    font-size: 12px;
+    font-size: 15px;
     margin-top: -10em;
     font-family: 'Balthazar', serif;
 }
@@ -33,7 +35,7 @@ input:focus {
 }
 
 .dropdown {
-    margin-left: 2.5em;
+    margin-left: 2.9em;
 }
 
 .dropdown-component {
@@ -47,7 +49,7 @@ input:focus {
     font-family: 'Balthazar', serif;
     background-color: #2F2F2F;
     color: #A8A8A8;
-    font-size: 13px;
+    font-size: 15px;
     width: 12em;
 }
 
@@ -57,16 +59,17 @@ option {
 }
 
 .terms {
-    margin-left: 2.5em; 
+    margin-left: 3.1em; 
     margin-top: 2.5em;
+    width: 20em;
 }
 
 .error {
-    margin-left: 2em;
-    margin-bottom: -1.1em;
+    margin-left: 3.2em;
     color:#740000;
-    font-size: 12px;
-    height: 1px;
+    font-size: 15px;
+    height: 0.1px;
+    margin-bottom: -1.05em;
 }
 
 .checkbox {
@@ -79,11 +82,12 @@ option {
     margin-top: -1.5em;
 }
 .register-button {
-    margin-top: 6em;
-    margin-left: 7.5em;
+    margin-top: 7em;
+    margin-left: 8.5em;
+    width: 40%;
 }
 
 .kitty-img {
-    margin-top: 1em;
-    width: 40%;
+    margin-top: -5em;
+    width: 35%;
 }

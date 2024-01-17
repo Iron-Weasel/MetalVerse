@@ -7,19 +7,21 @@
     <div class="cardPost" *ngIf="post">
       <img class="rock-on" *ngIf="idPost && !rockedOnMap[idPost]" src="../../../assets/icons/unrocked.png" (click)="increaseRockOnPost()">
       <img class="rock-on" *ngIf="idPost && rockedOnMap[idPost]" src="../../../assets/icons/rocked.png" (click)="decreaseRockOnPost()">
-      <p class="username"> @{{usernamePost }} </p>
+      <p class="username"> @{{ usernamePost }} </p>
       <h2 class="postTitle"> {{ post.title }} </h2>
-      <p class="createdDate"> {{ dateCreatedPostText }} </p>
+      <p class="createdDate" *ngIf="post.createdDate"> {{ post.createdDate | timeDifference }} </p>
       <p class="description"> {{ post.description }} </p>
+      <img class="postImage" *ngIf="post.imageURL" [src]="post.imageURL">
       <div class="postInfo">  
         <p class="views"> {{ post.views }} views</p>  
         <p class="rockOnNumbers"> {{ post.rockOns }} rock-ons </p>
-        <p class="commentNumbers"> {{ post.comments.length }} comment </p>
+        <p class="commentNumbers" *ngIf="post.comments.length == 1"> {{ post.comments.length }} comment </p>
+        <p class="commentNumbers" *ngIf="post.comments.length == 0 || post.comments.length > 1"> {{ post.comments.length }} comments </p>
     </div>
     </div>
     <div class="bar">
       <p class="commentText">Comments</p>
-      <textarea class="post-bar" placeholder="Add comment..." #commentInput></textarea>
+      <textarea class="post-bar" #commentInput></textarea>
     </div>
     <img class="post-button" src="../../../assets/icons/Post button 2.png" (click)="postComment()">
       <div *ngIf="commentsObs$ | async as comments" class="commentSection">
@@ -29,7 +31,7 @@
               <img class="rock-on" *ngIf="comment.id && rockedOnMap[comment.id]" src="../../../assets/icons/rocked.png" (click)="decreaseRockOnComments(comment.id)">
               <p class="username"> @{{ comment.userName }} </p>
               <div *ngIf="comment.id">
-                <p class="postedDate" *ngIf="dateCreatedMapText[comment.id]"> {{ dateCreatedMapText[comment.id] }} </p>
+                <p class="postedDate" *ngIf="comment.postedDate"> {{ comment.postedDate | timeDifference }} </p>
               </div>
               <p class="text"> {{ comment.text }} </p>
               <p class="commRockOn"> {{ comment.rockOns }} rock-ons </p>

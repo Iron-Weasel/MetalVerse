@@ -5,39 +5,40 @@
 }
 .logo {
     width: 30%;
-    margin-left: 7em;
+    margin-left: 8em;
 }
 
 .content {
+    background-color: #CDCDCD;
     line-height: 2rem;
     font-size: 1.2em;
     overflow-x: hidden;
-    height: 655px;
+    height: 720px;
 }
 
 .content-text {
     margin-left: 0.7em;
-    font-size: 25px;
     color: #4C4C4C;
+    font-size: 2em;
 }
 
 .title {
-    margin-left: 1.3em;
+    margin-left: 1.5em;
     margin-top: 0.9em;
-    width: 18em;
-    height: 1em;
+    width: 17em;
+    height: 1.7em;
     background-color: #2F2F2f;
     border: solid 2px #2F2F2f;
     border-radius: 4px;
-    font-family: 'Balthazar', serif;
-    font-size: 15px;
     color: #A8A8A8;
+    font-size: 17px;
+    font-family: 'Balthazar', serif;
 }
 
 ::placeholder {
     display: block;
     color: #A8A8A8;
-    font-size: 12px;
+    font-size: 15px;
     margin-top: -10em;
     font-family: 'Balthazar', serif;
 }
@@ -53,9 +54,9 @@ textarea:focus {
 }
 
 .description {
-    margin-left: 1.3em;
+    margin-left: 1.7em;
     margin-top: 0.9em;
-    width: 18em;
+    width: 19.2em;
     height: 8em;
     resize: none;
     background-color: #2F2F2f;
@@ -70,19 +71,23 @@ textarea:focus {
     width: 30%;
     float: left;
     margin-top: 3em;
-    margin-left: 1em;
+    margin-left: 1.2em;
 }
+
+.image-upload>input {
+    display: none;
+  }
 
 .post {
     width: 20%;
     float: left;
     margin-top: 9em;
-    margin-left: -5.2em;
+    margin-left: -6.5em;
 }
 
 .footer {
     background-color: #740000;
-    padding-bottom: 1.5em;
+    padding-bottom: 1.7em;
     position: sticky;
     bottom: 0;
 }
@@ -91,34 +96,31 @@ textarea:focus {
     color: white;
     text-decoration: none;
     font-size: 17px;
-    margin-left: 20px;
+    margin-left: 26px;
 }
 
 .events-button {
     width: 8%;
-    margin-bottom: -1.2em;
+    margin-bottom: -1.4em;
     margin-left: 0.7em;
 }
 .streams-button {
     width: 8%;
-    margin-bottom: -1.1em;
+    margin-bottom: -1.3em;
     margin-left: 0.7em;
 }
-
 .inbox-button {
     width: 10%;
+    margin-bottom: -1.7em;
+    margin-left: 0.7em;
+}
+.forum-button {
+    width: 8%;
     margin-bottom: -1.4em;
     margin-left: 0.7em;
 }
-
-.forum-button {
-    width: 8%;
-    margin-bottom: -1.2em;
-    margin-left: 0.7em;
-}
-
 .announcements-button {
     width: 8%;
-    margin-bottom: -1.2em;
+    margin-bottom: -1.4em;
     margin-left: 0.7em;
 }

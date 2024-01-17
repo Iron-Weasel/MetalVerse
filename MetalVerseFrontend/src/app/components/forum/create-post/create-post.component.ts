@@ -13,14 +13,15 @@ export class CreatePostComponent {
   @ViewChild('descriptionInput') descriptionInputRef: ElementRef;
 
   private httpService: BackendHttpService;
-  userIdLoggedIn: string;
+  private userIdLoggedIn: string;
+  private imageURLFromAzure: string;
 
   constructor(httpService: BackendHttpService, private jwtHelper: JwtHelperService) { 
     this.httpService  = httpService;
     this.getUserLoggedIn();
   }
 
-  getUserLoggedIn() {
+  private getUserLoggedIn() {
     const token = localStorage.getItem("jwt");
     if(token) var decodedToken = this.jwtHelper.decodeToken(token);
     this.userIdLoggedIn = decodedToken['nameid'];
@@ -32,9 +33,21 @@ export class CreatePostComponent {
         userId: this.userIdLoggedIn,
         title: this.titleInputRef.nativeElement.value,
         description: this.descriptionInputRef.nativeElement.value,
-        imageURL: "some image",
+        imageURL: this.imageURLFromAzure,
         comments: []
       }
       this.httpService.savePost(post).subscribe((data:Post) => { });
+  }
+
+  onFileSelected(e: any): void {
+    const file = e.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append('imageFile', file);
+      this.httpService.uploadImage(formData).subscribe((response: any) => {
+        console.log(response.imageURL);
+        this.imageURLFromAzure = response.imageURL;
+      });
+    }
   }
 }

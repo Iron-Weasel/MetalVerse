@@ -23,6 +23,7 @@ export class CreateEventComponent {
   @ViewChild('timeInput') timeInputRef: ElementRef;
 
   private httpService: BackendHttpService;
+  private imageURLFromAzure: string;
 
   constructor(httpService: BackendHttpService) { 
     this.httpService  = httpService;
@@ -31,10 +32,10 @@ export class CreateEventComponent {
   // clicking on "Post" will create a new event
   onSaveEvent(): void {
       const newEventTime = this.eventTimeToBeSent(this.timeInputRef.nativeElement.value); 
-      const stateValue = this.stateInputRef.nativeElement.value ? this.stateInputRef.nativeElement.value : "-";
-      const countyValue = this.countyInputRef.nativeElement.value ? this.countyInputRef.nativeElement.value : "-";
-      const wikiValue = this.wikiInputRef.nativeElement.value ? this.wikiInputRef.nativeElement.value : "-";
-      const bandPageValue = this.bandPageInputRef.nativeElement.value ? this.bandPageInputRef.nativeElement.value : "-";
+      const stateValue = this.stateInputRef.nativeElement.value ? this.stateInputRef.nativeElement.value : "";
+      const countyValue = this.countyInputRef.nativeElement.value ? this.countyInputRef.nativeElement.value : "";
+      const wikiValue = this.wikiInputRef.nativeElement.value ? this.wikiInputRef.nativeElement.value : "";
+      const bandPageValue = this.bandPageInputRef.nativeElement.value ? this.bandPageInputRef.nativeElement.value : "";
 
       const futureEvent: FutureEvent = {
         title: this.titleInputRef.nativeElement.value,
@@ -49,9 +50,22 @@ export class CreateEventComponent {
         facebookPage: this.fbInputRef.nativeElement.value,
         wikiPage: wikiValue,
         bandPage: bandPageValue,
-        ticketPurchasePage: this.ticketInputRef.nativeElement.value
+        ticketPurchasePage: this.ticketInputRef.nativeElement.value,
+        imageURL: this.imageURLFromAzure
       }
       this.httpService.saveEvent(futureEvent).subscribe((data:FutureEvent) => { });
+  }
+
+  onFileSelected(e: any): void {
+    const file = e.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append('imageFile', file);
+      this.httpService.uploadImage(formData).subscribe((response: any) => {
+        console.log(response.imageURL);
+        this.imageURLFromAzure = response.imageURL;
+      });
+    }
   }
 
   // format the eventTime string, so it can be stored and processed on backend & database

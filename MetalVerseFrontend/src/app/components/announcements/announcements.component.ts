@@ -42,7 +42,7 @@ export class AnnouncementsComponent {
       }
     }
 
-    loadAnnouncements(): void {
+    private loadAnnouncements(): void {
       this.httpService.getAnnouncements().subscribe((data:Announcement[]) => {
           this.announcementsObs.next(data);
           this.announcements = data;

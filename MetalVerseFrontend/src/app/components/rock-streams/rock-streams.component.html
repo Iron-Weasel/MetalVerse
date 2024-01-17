@@ -6,10 +6,9 @@
       <h2 class="content-text">Rock & Metal Streams</h2>
       <input class="search-bar" placeholder="Search..." #searchInput (keyup.enter)="searchStream()">
       <div *ngIf="streamsObs$ | async as streams">
-        <div *ngFor="let stream of streams">
-          <div class="card" (click)="playStream(stream.id)">
-            <h4 class="streamId"> stream ID: {{ stream.id }} </h4>
-            <h2 class="name"> {{ stream.name }}   </h2>
+        <div *ngFor="let stream of streams; let i=index">
+          <div (click)="playStream(stream.id)">
+            <img [ngClass]="i % 2 == 0 ? 'imageLeft' : 'imageRight'" [src]="stream.image">
           </div>
         </div>
       </div>

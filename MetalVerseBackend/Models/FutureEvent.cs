@@ -4,7 +4,7 @@
     {
         public Guid Id { get; set; }  
         public required string Title { get; set; }
-        public required string ImageURL;
+        public required string ImageURL { get; set; }
         public required string BandCountry { get; set; }
         public required string BandGenre { get; set; }
         public required string Country { get; set; }

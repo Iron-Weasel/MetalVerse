@@ -39,7 +39,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var connectionString = builder.Configuration.GetValue<string>("ConnectionStrings:local");
+var connectionString = builder.Configuration.GetValue<string>("ConnectionStrings:cloud");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseNpgsql(connectionString);
@@ -53,6 +53,7 @@ builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IStreamService, StreamService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ISigningService, SigningService>();
+builder.Services.AddScoped<IUploadService, UploadService>();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 

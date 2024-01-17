@@ -18,7 +18,12 @@
     <input class="inputFieldRight" placeholder="City" #cityInput>
     <input class="inputField" placeholder="Venue name" #venueInput>
     <input class="inputField" placeholder="Time of the event" #timeInput>
-    <img class="add-img" src="../../../assets/icons/Add image button.png">
+    <div class="image-upload" align="right">
+      <label for="img-upload">
+        <img class="add-img" src="../../../assets/icons/Add image button.png">
+      </label>
+      <input id="img-upload" type="file" (change)="onFileSelected($event)"/>    
+    </div>
     <img class="post" src="../../../assets/icons/Post button.png" [routerLink]="['/events']" (click)="onSaveEvent()">
     
 </div>

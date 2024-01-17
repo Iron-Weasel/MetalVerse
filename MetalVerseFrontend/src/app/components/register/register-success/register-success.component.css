@@ -4,17 +4,17 @@
 
 .content {
     background-color: #CDCDCD;
-    height: 430px;
+    height: 800px;
 }
 
 .text {
     margin-top: 3em;
     margin-left: 3em; 
-    font-size: 20px;
+    font-size: 25px;
 }
 
 .login-route {
     margin-left: 3em;
-    font-size: 20px;
+    font-size: 25px;
     color: blue;
 }

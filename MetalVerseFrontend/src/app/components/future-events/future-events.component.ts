@@ -18,7 +18,6 @@ export class FutureEventsComponent {
     public eventsObs$ = this.eventsObs.asObservable();  // receive data
 
     @ViewChild('searchInput') searchInputRef: ElementRef;
-    dateEventMapText: { [eventId: string]: string} = {};
     enabled: boolean = false;
     
     
@@ -40,27 +39,11 @@ export class FutureEventsComponent {
       }
     }
 
-    loadEvents(): void {
+    private loadEvents(): void {
       this.httpService.getEvents().subscribe((data:FutureEvent[]) => {
         this.eventsObs.next(data);
         this.events= data;
-        this.events.forEach((event: FutureEvent) => {
-          if(event.id != undefined) {
-            if(event.eventTime != undefined) {
-              this.dateEventMapText[event.id] = this.getDateTimeOfEvent(event.eventTime);
-            }
-          }
-        });
       });
-    }
-
-    private getDateTimeOfEvent(dateTime: string): string {
-      const formatString = dateTime.split("T");
-      const date = formatString[0].split("-");
-      const time = formatString[1].split(":", 2);
-      
-      const text = `${date[2]}.${date[1]}.${date[0]}, ${time[0]}:${time[1]}`;
-      return text;
     }
 
     searchEvent(): void {

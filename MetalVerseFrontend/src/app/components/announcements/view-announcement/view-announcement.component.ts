@@ -12,7 +12,7 @@ import { BackendHttpService } from 'src/app/services/backend.service';
 export class ViewAnnouncementComponent { 
   private httpService: BackendHttpService;
   public announcement: Announcement;
-  public idAnnouncement: string;
+  private idAnnouncement: string;
 
   usernameMap: { [userId: string]: string } = {};
 
