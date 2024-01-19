@@ -1,4 +1,4 @@
-MIT License
+Custom License with Restrictions
 
 Copyright (c) 2024 Mălina Pavel, Simion-Gheorghe-Leontino Inișconi
 
@@ -11,6 +11,14 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
+
+Restrictions:
+
+1. Commercial Use Restriction:
+   The Software may not be used for commercial purposes without the express written permission of the copyright holder.
+
+2. Tutorial Use Restriction:
+   The Software may not be used in tutorials or educational materials without the express written permission of the copyright holder.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
