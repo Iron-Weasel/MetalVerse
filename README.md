@@ -18,4 +18,4 @@ This application is composed of the following pages:
 ## 📝 License
 
 Copyright (c) 2024 [Mălina Pavel](https://github.com/malinapavel), [Simion-Gheorghe-Leontino Inișconi](https://github.com/sinisconi2002). <br />
-This project is [MIT](https://github.com/Iron-Weasel/MetalVerse/blob/main/LICENSE) licensed.
+This project is [licensed.](https://github.com/Iron-Weasel/MetalVerse/blob/main/LICENSE)
