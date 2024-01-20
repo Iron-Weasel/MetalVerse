@@ -8,6 +8,7 @@ using MetalVerseBackend.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using MetalVerseBackend.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,7 +34,7 @@ builder.Services.AddAuthentication(opt => {
             ClockSkew = TimeSpan.Zero
         };
     });
-
+builder.Services.AddSignalR();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -56,8 +57,12 @@ builder.Services.AddScoped<ISigningService, SigningService>();
 builder.Services.AddScoped<IUploadService, UploadService>();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddCors(x => x.AddPolicy("AllowAll", p =>
+{ p.SetIsOriginAllowed(_ => true).AllowAnyHeader().AllowAnyMethod().AllowCredentials(); }));
 
 var app = builder.Build();
+
+app.MapHub<CommunicationHub>("/hub");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -68,8 +73,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-
+//app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials());
+app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
 
