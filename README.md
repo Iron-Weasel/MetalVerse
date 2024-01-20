@@ -14,3 +14,8 @@ This application is composed of the following pages:
 5. **Streams page**, with an extensive list of live playlists for every subgenre
     
 6. **Instant messaging**
+
+## 📝 License
+
+Copyright (c) 2024 [Mălina Pavel](https://github.com/malinapavel), [Simion-Gheorghe-Leontino Inișconi](https://github.com/sinisconi2002). <br />
+This project is [licensed.](https://github.com/Iron-Weasel/MetalVerse/blob/main/LICENSE)
