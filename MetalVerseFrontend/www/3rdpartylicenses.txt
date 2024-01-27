@@ -96,6 +96,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 @ionic/core/components
 
+@microsoft/signalr
+MIT
+
 ionic-loader
 
 rxjs
