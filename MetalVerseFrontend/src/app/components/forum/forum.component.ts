@@ -21,6 +21,7 @@ export class ForumComponent {
     public rockOnsPost$ = this.rockOnsPost.asObservable();  // receive data
 
     @ViewChild('searchInput') searchInputRef: ElementRef;
+    keyword: string;
     rockedOnMap: { [postId: string]: boolean } = {};
     viewsCountMap: { [postId: string]: number | undefined} = {};
     usernameMap: { [userId: string]: string } = {};
@@ -79,6 +80,7 @@ export class ForumComponent {
     searchPost(): void {
       if(this.searchInputRef.nativeElement.value == '') this.loadPosts();
       else {
+         this.keyword = this.searchInputRef.nativeElement.value;
          this.httpService.searchPost(this.searchInputRef.nativeElement.value).subscribe((data:Post[]) => {
             this.postsObs.next(data);
             this.posts = data;

@@ -10,7 +10,7 @@
           <h2 class="title"> {{ announcement.title }} </h2>
           <i *ngIf="usernameMap[announcement.userId]"class="username"> Posted by @{{ usernameMap[announcement.userId] }} </i>
           <p class="description"> {{ announcement.description }} </p>
-          <img class="button" src="../../../assets/icons/message OP.png">
+          <!-- <img class="button" src="../../../assets/icons/message OP.png"> -->
       </div>
     </div>
 </div>
@@ -23,9 +23,9 @@
         <a class="link-text" [routerLink]="['/stream']">
           <img class="streams-button" src="../../../assets/icons/Streams.png">
         </a>
-        <a class="link-text" [routerLink]="['/inbox']">
+        <!-- <a class="link-text" [routerLink]="['/inbox']">
           <img class="inbox-button" src="../../../assets/icons/Inbox.png">
-        </a>
+        </a> -->
         <a class="link-text" [routerLink]="['/forum']">
           <img class="forum-button" src="../../../assets/icons/Forum.png">
         </a>

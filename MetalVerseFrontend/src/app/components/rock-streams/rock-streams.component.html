@@ -5,6 +5,7 @@
 <div class="content">
       <h2 class="content-text">Rock & Metal Streams</h2>
       <input class="search-bar" placeholder="Search..." #searchInput (keyup.enter)="searchStream()">
+      <i class="notFound" *ngIf="keyword && !streams">No results for "{{ keyword }}"</i>
       <div *ngIf="streamsObs$ | async as streams">
         <div *ngFor="let stream of streams; let i=index">
           <div (click)="playStream(stream.id)">
@@ -20,7 +21,7 @@
 
     <div>
       <div class="info">
-        <p>  {{ currentStream.name }} </p>
+        <i><p>  {{ currentStream.name }} </p></i>
         <p class="songDetails"> {{ metadata.artist }} - {{ metadata.songTitle }} </p>
       </div>
   
@@ -50,9 +51,9 @@
       <a class="link-text" [routerLink]="['/stream']">
         <img class="streams-button" src="../../../assets/icons/Streams.png">
       </a>
-      <a class="link-text" [routerLink]="['/inbox']">
+      <!-- <a class="link-text" [routerLink]="['/inbox']">
         <img class="inbox-button" src="../../../assets/icons/Inbox.png">
-      </a>
+      </a> -->
       <a class="link-text" [routerLink]="['/forum']">
         <img class="forum-button" src="../../../assets/icons/Forum.png">
       </a>

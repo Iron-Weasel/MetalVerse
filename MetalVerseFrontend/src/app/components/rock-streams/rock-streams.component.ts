@@ -21,6 +21,7 @@ export class RockStreamsComponent {
   public streamsObs$ = this.streamsObs.asObservable();  // receive data
 
   @ViewChild('searchInput') searchInputRef: ElementRef;
+  keyword: string;
   
 
   constructor(httpService: BackendHttpService, playerService: PlayerService) { 
@@ -39,6 +40,7 @@ export class RockStreamsComponent {
   searchStream(): void {
     if(this.searchInputRef.nativeElement.value == '') this.loadStreams();
     else {
+      this.keyword = this.searchInputRef.nativeElement.value;
       this.httpService.searchStream(this.searchInputRef.nativeElement.value).subscribe((data:RockStream[]) => {
         this.streamsObs.next(data);
         this.streams = data;

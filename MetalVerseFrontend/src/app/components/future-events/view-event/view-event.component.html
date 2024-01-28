@@ -12,7 +12,7 @@
             <p>Country of origin: {{event.bandCountry}}</p>
             <p class="genre">Genre: {{event.bandGenre}}</p>
           </div>
-          <div class="usefulLinks" *ngIf="event.wikiPage != '' || !event.wikiPage">
+          <div class="usefulLinks" *ngIf="event.wikiPage">
             <img class="icon" src="../../../assets/icons/6063242.png">
             <a [href]="event.wikiPage"><p class="linkTitle">Band wiki</p></a>
           </div>
@@ -20,7 +20,7 @@
             <img class="icon" src="../../../assets/icons/1200px-Facebook_icon_(black).png">
             <a [href]="event.facebookPage" (click)="openLink(event.facebookPage)"><p class="linkTitle">Facebook</p></a>
           </div>
-          <div class="usefulLinks" *ngIf="event.bandPage != '' || !event.wikiPage">
+          <div class="usefulLinks" *ngIf="event.bandPage">
             <img class="icon" src="../../../assets/icons/fdb01354a7f787c8d3191c8759c7d4281.png">
             <a [href]="event.bandPage"><p class="linkTitle">Band Homepage</p></a>
           </div>
@@ -33,8 +33,8 @@
               <img class="iconLocation" src="../../../assets/icons/istockphoto-1307260371-1706671.jpg.png">
               <div class="locationText">
                 <p> {{ event.venueName }}, {{ event.city }} </p>
-                <p *ngIf="event.county != '' || !event.county">, {{ event.county }}</p>
-                <p *ngIf="event.state != '' || !event.state">, {{ event.state }} </p>
+                <p *ngIf="event.county">, {{ event.county }}</p>
+                <p *ngIf="event.state">, {{ event.state }} </p>
               </div>
             </div>
             <div class="time">
@@ -56,9 +56,9 @@
         <a class="link-text" [routerLink]="['/stream']">
           <img class="streams-button" src="../../../assets/icons/Streams.png">
         </a>
-        <a class="link-text" [routerLink]="['/inbox']">
+        <!-- <a class="link-text" [routerLink]="['/inbox']">
           <img class="inbox-button" src="../../../assets/icons/Inbox.png">
-        </a>
+        </a> -->
         <a class="link-text" [routerLink]="['/forum']">
           <img class="forum-button" src="../../../assets/icons/Forum.png">
         </a>

@@ -18,6 +18,7 @@ export class AnnouncementsComponent {
     public announcementsObs$ = this.announcementsObs.asObservable();  // receive data
 
     @ViewChild('searchInput') searchInputRef: ElementRef;
+    keyword: string;
     enabled: boolean = false;
     
 
@@ -52,6 +53,7 @@ export class AnnouncementsComponent {
     searchAnnouncement(): void {
       if(this.searchInputRef.nativeElement.value == '') this.loadAnnouncements();
       else {
+        this.keyword = this.searchInputRef.nativeElement.value;
         this.httpService.searchAnnouncement(this.searchInputRef.nativeElement.value).subscribe((data:Announcement[]) => {
             this.announcementsObs.next(data);
             this.announcements = data;

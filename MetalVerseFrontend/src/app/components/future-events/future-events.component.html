@@ -6,6 +6,7 @@
       <h2 class="content-text">Future Events</h2>
       <img class="event-button" *ngIf="enabled" src="../../../assets/icons/Post new event.png" [routerLink]="['/create-event']">
       <input class="search-bar" placeholder="Search..." #searchInput (keyup.enter)="searchEvent()">
+      <i class="notFound" *ngIf="keyword && !events">No results for "{{ keyword }}"</i>
       <div *ngIf="eventsObs$ | async as events">
         <div *ngFor="let event of events">
           <div class="card" [routerLink]="['/events', event.id]">
@@ -25,9 +26,9 @@
       <a class="link-text" [routerLink]="['/stream']">
         <img class="streams-button" src="../../../assets/icons/Streams.png">
       </a>
-      <a class="link-text" [routerLink]="['/inbox']">
+      <!-- <a class="link-text" [routerLink]="['/inbox']">
         <img class="inbox-button" src="../../../assets/icons/Inbox.png">
-      </a>
+      </a> -->
       <a class="link-text" [routerLink]="['/forum']">
         <img class="forum-button" src="../../../assets/icons/Forum.png">
       </a>

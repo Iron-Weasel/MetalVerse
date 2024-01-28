@@ -36,6 +36,13 @@
     font-family: 'Balthazar', serif;
 }
 
+.notFound {
+    float: left;
+    margin-top: 1em;
+    margin-left: 1.3em;
+    width: 17em;
+}
+
 ::placeholder {
     color: #A8A8A8;
     font-size: 15px;
@@ -160,7 +167,7 @@ input:focus {
 .events-button {
     width: 8%;
     margin-bottom: -1.4em;
-    margin-left: 0.7em;
+    margin-left: 3.1em;
 }
 .streams-button {
     width: 8%;

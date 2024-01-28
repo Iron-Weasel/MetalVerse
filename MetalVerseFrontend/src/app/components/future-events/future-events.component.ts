@@ -18,6 +18,7 @@ export class FutureEventsComponent {
     public eventsObs$ = this.eventsObs.asObservable();  // receive data
 
     @ViewChild('searchInput') searchInputRef: ElementRef;
+    keyword: string;
     enabled: boolean = false;
     
     
@@ -49,6 +50,7 @@ export class FutureEventsComponent {
     searchEvent(): void {
       if(this.searchInputRef.nativeElement.value == '') this.loadEvents();
       else {
+        this.keyword = this.searchInputRef.nativeElement.value;
         this.httpService.searchEvent(this.searchInputRef.nativeElement.value).subscribe((data:FutureEvent[]) => {
           this.eventsObs.next(data);
           this.events = data;
